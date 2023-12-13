@@ -1,0 +1,80 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.btn-circle {
+  display: inline-block;
+  padding: .75rem 1.25rem;
+  border-radius: 10rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: .15rem;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-circle:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #258cfb; 
+  border-radius: 10rem;
+  z-index: -2;
+}
+
+.btn-circle:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: darken(#258cfb, 15%);
+  transition: all .3s;
+  border-radius: 10rem;
+  z-index: -1;
+}
+
+.btn-circle:hover {
+  color: #fff;
+}
+
+.btn-circle:hover:before {
+  width: 100%;
+  background-color: #1a6fc1;
+}
+
+.btn {
+  padding: 10px 15px; 
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+  margin-right: 10px;/
+}

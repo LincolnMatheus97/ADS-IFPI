@@ -1,0 +1,73 @@
+@model Lincoln_MatheusAPS.Models.Produto
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Deletar</h1>
+
+<div class="row">
+    <div class = "col-md-4">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class = "alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+        else if (TempData["ErrorMessage"] != null)
+        {
+            <div class = "alert alert-danger">@TempData["ErrorMessage"]</div>
+        }
+        <h3>Você tem certeza que deseja excluir ?</h3>
+        <div>
+            <h4>Produto</h4>
+            <hr />
+            <dl class="row">
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.NomeId)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.NomeId)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Descricao)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Quantidade)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Quantidade)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Preco)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Preco)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Marca)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Marca.IdM)
+                </dd>
+            </dl>
+    
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="IdPd" />
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                <a asp-action="Index">Volte a Lista</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        setTimeout(function() {
+            $('.alert').fadeOut('fast');
+        }, 5000);
+    </script>
+}

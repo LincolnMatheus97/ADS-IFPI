@@ -1,0 +1,76 @@
+@model IEnumerable<Lincoln_MatheusAPS.Models.PagamentoComCartao>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class= "alert alert-success">@TempData["SuccessMessage"]</div>
+}
+else if (TempData["ErrorMessage"] !=null)
+{
+    <div class= "alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<p>
+    <a asp-action="Create">Criar Novo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroDoCartao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bandeira)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeDoCobrador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InformacoesAdicionais)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discriminator)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroDoCartao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bandeira)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeDoCobrador)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InformacoesAdicionais)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discriminator)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Idtp">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Idtp">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Idtp">Deletar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        setTimeout(function () {
+            $('.alert').fadeOut('fast');
+        }, 5000);
+    </script>
+}
