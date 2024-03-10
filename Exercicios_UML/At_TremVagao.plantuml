@@ -1,0 +1,46 @@
+@startuml model
+Class Trem{
+Tipo: string
+CapacidadeDePassageiros: int
+Velociadade: float 
+
+
+}
+Class Vagao{
+Tipo: string
+CapacidadeDeCarga: int
+DataInicioDeTrabalho: date
+
+
+
+}
+Class Motor{
+Tipo: string
+PotenciaEspecifica: double
+
+}
+Class Portas{
+Modo: string
+
+Aberto(): void
+Feichado():void
+
+}
+Class Rota{
+
+}
+Class SegmentoDeTrilho{
+    KmInicial: float 
+    KmFinal: float
+}
+Class Localizacao{
+    localizacao: localizacao
+}
+
+Trem "1"-- "1..*" Vagao 
+Vagao "1" -- "1" Motor
+Vagao "1" -- "1..*" Portas 
+Vagao "1" -- "1" SegmentoDeTrilho
+Trem "1" -- "1" Localizacao
+Trem "1" -- "1" Rota
+@enduaml

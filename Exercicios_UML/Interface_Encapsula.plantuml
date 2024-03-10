@@ -1,0 +1,17 @@
+@startuml Interface do Controle Remoto
+   interface Controlador{
+    
+    + {abstract} : ligar()
+    + {abstract} : desligar()
+    + {abstract} : abrirMenu()
+    + {abstract} : fecharMenu()
+    + {abstract} : maisVolume()
+    + {abstract} : menosVolume()
+    + {abstract} : ligarMudo()
+    + {abstract} : desligarMudo()
+    + {abstract} : play()
+    + {abstract} : pause()
+
+   }  
+    
+@enduml

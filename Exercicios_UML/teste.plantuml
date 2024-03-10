@@ -1,0 +1,23 @@
+@startuml Atividade de Sala
+title __Atividade__\n Diagrama de Sequencia de Sistema 
+
+actor Funcionario
+participant Sistema
+
+activate Funcionario
+activate Sistema
+
+Funcionario -> Sistema : Manter Dados do Ponto()
+Sistema --> Funcionario : Lista Ultimo Regristro do Ponto "Alterar" "Remover" "Inserir"
+|||
+Funcionario -> Sistema : Seleciona(Inserir)
+Sistema --> Funcionario : Campos do Ponto "Hora Inicio" "Hora Termino" "Data" "Numero Projeto"
+|||
+Funcionario -> Sistema : Preencher Campos ("Hora Inicio" "Hora Termino" "Data" "Numero Projeto")
+Sistema --> Funcionario : Dados Preenchidos "Pedido de Confirmação"
+|||
+Funcionario -> Sistema : Realizar(Confirmação)
+Sistema --> Funcionario : "Sucesso"
+Sistema --> Funcionario : Tela de Inicio
+
+@enduml

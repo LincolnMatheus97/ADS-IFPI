@@ -1,0 +1,31 @@
+@startuml Biblioteca
+
+Class Biblioteca{
+
+}
+Class Leitor{
+
+}
+Class Funcionario{
+
+}
+Class Reserva{
+
+}
+Class Publicacao{
+
+}
+Class Emprestimo{
+
+}
+Biblioteca o-- Leitor
+Biblioteca o-- Funcionario
+Biblioteca o-- Publicacao
+Publicacao --* Reserva
+Publicacao --* Emprestimo
+Funcionario --* Reserva
+Funcionario --* Emprestimo
+Leitor --* Reserva
+Leitor --* Emprestimo
+
+@enduml

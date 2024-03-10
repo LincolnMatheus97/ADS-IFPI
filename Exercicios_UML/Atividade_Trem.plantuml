@@ -1,0 +1,57 @@
+@startuml atividade Trem
+
+class Trem {
+  + tipo: String
+  + vagoes: Vagao[]
+  + capacidadeDePassageiros: int
+  + capacidadeDeCarga: double
+  + rota: Rota
+  + velocidadeAtual: double
+  + localizacao: Localizacao
+
+  + iniciarViagem(): void
+  + parar(): void
+  + reduzirVelocidade(distanciaDaEstacao: double): void
+}
+
+class Vagao {
+  + tipo: String
+  + motor: Motor
+  + portas: Porta[]
+  + capacidadeDeCarga: double
+  + dataInicioTrabalho: Date
+}
+
+class Motor {
+  + tipo: String
+  + potenciaEspecifica: double
+}
+
+class Porta {
+  + estado: String
+
+  + abrir(): void
+  + fechar(): void
+}
+
+class Rota {
+  + segmentosDeTrilho: SegmentoTrilho[]
+}
+
+class SegmentoTrilho {
+  + inicioKm: double
+  + fimKm: double
+}
+
+class Localizacao {
+  + kmAtual: double
+}
+
+Trem -- Vagao : possui
+Trem "1" -- "1" Rota : segue
+Vagao -- Motor : possui
+Vagao -- Porta : possui
+Vagao -- SegmentoTrilho : passaPor
+Trem -- Localizacao : localizado
+
+@enduml

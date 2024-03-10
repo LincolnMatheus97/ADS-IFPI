@@ -1,0 +1,99 @@
+@startuml Atividade 3 classes 
+
+class TremCarga {
+  - tipo: String
+  - vagoes: VagaoCarga[]
+  - capacidadeDeCarga: double
+  - rota: Rota
+  - velocidadeAtual: double
+  - localizacao: Localizacao
+
+  + iniciarViagem(): void
+  + parar(): void
+  + reduzirVelocidade(distanciaDaEstacao: double): void
+}
+
+class TremPassageiros {
+  - tipo: String
+  - vagoes: VagaoPassageiros[]
+  - capacidadeDePassageiros: int
+  - rota: Rota
+  - velocidadeAtual: double
+  - localizacao: Localizacao
+
+  + iniciarViagem(): void
+  + parar(): void
+  + reduzirVelocidade(distanciaDaEstacao: double): void
+  + abrirPortas(): void
+  + fecharPortas(): void
+}
+
+class TremAmbos {
+  - tipo: String
+  - vagoesCarga: VagaoCarga[]
+  - vagoesPassageiros: VagaoPassageiros[]
+  - capacidadeDeCarga: double
+  - capacidadeDePassageiros: int
+  - rota: Rota
+  - velocidadeAtual: double
+  - localizacao: Localizacao
+
+  + iniciarViagem(): void
+  + parar(): void
+  + reduzirVelocidade(distanciaDaEstacao: double): void
+  + abrirPortas(): void
+  + fecharPortas(): void
+}
+
+class VagaoCarga {
+  - tipo: String
+  - motor: Motor
+  - capacidadeDeCarga: double
+  - dataInicioTrabalho: Date
+}
+
+class VagaoPassageiros {
+  - tipo: String
+  - motor: Motor
+  - portas: Porta[]
+  - capacidadeDePassageiros: int
+  - dataInicioTrabalho: Date
+}
+
+class Motor {
+  - tipo: String
+  - potenciaEspecifica: double
+}
+
+class Porta {
+  - estado: String
+
+  + abrir(): void
+  + fechar(): void
+}
+
+class Rota {
+  - segmentosDeTrilho: SegmentoTrilho[]
+}
+
+class SegmentoTrilho {
+  - inicioKm: double
+  - fimKm: double
+}
+
+class Localizacao {
+  - kmAtual: double
+}
+
+TremCarga -- VagaoCarga : possui
+TremPassageiros -- VagaoPassageiros : possui
+TremAmbos -- VagaoCarga : possui
+TremAmbos -- VagaoPassageiros : possui
+TremCarga "1" -- "1" Rota : segue
+TremPassageiros "1" -- "1" Rota : segue
+TremAmbos "1" -- "1" Rota : segue
+TremCarga -- Localizacao : localizado
+TremPassageiros -- Localizacao : localizado
+TremAmbos -- Localizacao : localizado
+
+@enduml

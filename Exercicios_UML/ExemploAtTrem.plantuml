@@ -1,0 +1,67 @@
+@startuml Model
+
+Class Trem_carga {
+    qtdVagao : Integer
+    rota : string
+    velocidade : Float
+    localização : string
+    
+}
+
+Class Trem_passageiro{
+    qtdVagao : Interger
+    qtdPortas : Boolean 
+    qtdPassageiros : Interger
+    rota : string
+    velocidade : Float
+    localização :  string
+
+}
+
+Class Trem_ambos{
+    qtdVagao : Integer
+    qtdPassageiros : Interger
+    rota : string
+    velocidade : Float
+    localização : string
+}
+
+Class Vagao_passageiro {
+    qtdPassageiros : Integer
+    dtInicio : Date
+    forcaMotriz : Float
+
+}
+
+Class Vagao_carga {
+    qtdCarga : Float
+    dtInicio : Date
+    forcaMotriz : Float
+
+}
+
+Class Vagao_ambos {
+    qtdPassageiros : Integer
+    qtdCarga : Float
+    dtInicio : Date
+    forcaMotriz : Float
+    
+}
+
+Class motor_vagao{
+    potencia : Float
+}
+
+Trem_carga "1"-- "1..*" Vagao_carga
+Trem_passageiro "1" -- "1..*" Vagao_passageiro
+Trem_ambos "1" -- "1..*" Vagao_ambos
+motor_vagao -- Vagao_carga
+motor_vagao -- Vagao_ambos
+motor_vagao -- Vagao_passageiro
+
+
+
+@enduml
+
+'2021111TADS0189 Rafael Ribeiro da Silva
+'2023211TADS0008 Sabrina Maria Silva Oliveira

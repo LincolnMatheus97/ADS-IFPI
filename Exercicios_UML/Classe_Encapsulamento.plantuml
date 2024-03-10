@@ -1,0 +1,25 @@
+@startuml Classe Controle Remoto
+   Interface Controlador{
+    'Métodos Abstratos'
+
+    + {abstract} : ligar()
+    + {abstract} : desligar()
+    + {abstract} : abrirMenu()
+    + {abstract} : fecharMenu()
+    + {abstract} : maisVolume()
+    + {abstract} : menosVolume()
+    + {abstract} : ligarMudo()
+    + {abstract} : desligarMudo()
+    + {abstract} : play()
+    + {abstract} : pause()
+
+   }
+   Class ControleRemoto{
+    
+    - int  Volume
+    - boolean  Ligado 
+    - boolean Tocando
+    
+    + Controlador() : Volume 
+    }  
+@enduml
