@@ -104,7 +104,7 @@ function embaralharLista(lista) {
 }                                                       //no sentindo de que, quando os elementos são comparados se retornar numero 
                                                         //positivo ele troca de lugar os elementos se for negativo ele mantem no lugar.
                                                         //Isso para todos os elementos da lista.
-                                                        //Uso metodo sort(), para quando for retornar os elementes. Retorne em ordem Alfabética.
+                                                        //Uso metodo sort(), para quando for comparado ao número aleatorio retorne em ordem alfabetica.
 
 function exibirGrupos(grupos) {
     grupos.forEach((grupo, index) => {                  //Uso novamente o forEach para iterar e exibir, agora a lista dos grupos com cada aluno.
