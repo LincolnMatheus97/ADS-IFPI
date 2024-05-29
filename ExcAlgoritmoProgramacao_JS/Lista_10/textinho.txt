@@ -1,0 +1,2 @@
+Até agora aprendemos como mexer com variáveis na memória do computador. No entanto a memória é volátil, isto é, não retém informações após o fim da execução do programa.
+Para que possamos guardar informações após a execução do programa, e mesmo que o computador seja desligado, utilizamos arquivos.
