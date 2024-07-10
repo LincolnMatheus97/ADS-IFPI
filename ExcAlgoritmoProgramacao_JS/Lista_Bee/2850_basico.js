@@ -9,7 +9,7 @@ function main() {
 
         } else if (casos === `direita`) {
             print(`frances`);
-
+            
         } else if (casos === `nenhuma`){
             print(`portugues`);
 
