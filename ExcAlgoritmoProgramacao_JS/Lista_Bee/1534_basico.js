@@ -32,6 +32,7 @@ function main() {
         
             }
             console.log(mensagem.trim());
+            console.log(``);
             
         }
         m = question();

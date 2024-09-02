@@ -28,7 +28,7 @@ function main() {
     let m = s / ordem;
     
     if(operacao === `S`) {
-        print(`${s.toFixed(1)}`);
+        console.log(`${s.toFixed(1)}`);
 
     }else if(operacao === `M`) {
         print(`${m.toFixed(1)}`);

@@ -30,7 +30,6 @@ function main() {
 
     } else if (operacao === `M`) {
         print(`${m.toFixed(1)}`);
-
     }
 
 }

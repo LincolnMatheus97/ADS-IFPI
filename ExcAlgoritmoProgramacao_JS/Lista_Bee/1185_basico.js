@@ -23,12 +23,13 @@ function main() {
         matriz.push(linha);
 
     }
-    let mensagem = ``;
-    for (let m = 0; m < matriz.length; m++) {
-        mensagem += `\n\t\t${matriz[m].join(` `)}`;
+    // let mensagem = ``;
+    // for (let m = 0; m < matriz.length; m++) {
+    //     mensagem += `\n\t\t${matriz[m].join(` `)}`;
 
-    }
-    print(mensagem)
+    // }
+    // print(mensagem)
+
     let m = s / count;
 
     if (operacao === `S`) {
@@ -36,7 +37,6 @@ function main() {
 
     } else if (operacao === `M`) {
         print(`${m.toFixed(1)}`);
-
     }
 
 }
