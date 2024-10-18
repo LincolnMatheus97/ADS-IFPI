@@ -1,0 +1,18 @@
+@startuml Ativida Extra P.O.O.
+
+class Circulo {
+    - raio: number = 0
+    - pi: number = 3.14
+
+    + calcular_Area(): number
+    + calcular_Perimetro(): number
+}
+
+class SituacaoBancaria {
+    - valorCredito:  number = 0
+    - valorDebito: number = 0
+
+    + calcular_Saldo(): number
+}
+
+@enduml
