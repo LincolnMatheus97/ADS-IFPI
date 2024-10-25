@@ -28,7 +28,7 @@ void append(Node** head_ref, int new_data) {
     p->next = new_node; 
     return; 
 } 
-
+// Função para adicionar um novo nó no inicio da lista
 void prepend (Node ** head_ref, int new_data) {
     Node* new_node = (Node*)malloc(sizeof(Node));
     new_node -> data = new_data;
