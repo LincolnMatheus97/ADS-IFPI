@@ -1,0 +1,1 @@
+SELECT TO_CHAR(AVG(price), 'FM999999999.00') FROM products;
