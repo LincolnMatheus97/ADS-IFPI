@@ -37,6 +37,5 @@ int main() {
     ALUNO *aluno_1 = cria_Aluno(1, "Lincoln");
     mostrar_Aluno(aluno_1);
     free(aluno_1);
-
     return 0;
 }

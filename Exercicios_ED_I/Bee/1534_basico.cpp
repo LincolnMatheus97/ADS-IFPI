@@ -13,7 +13,6 @@ main() {
         if (n == 0) {
             break;
         }
-
         vector<vector<int>> matriz;
         int i, j;
 

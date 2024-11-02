@@ -1,6 +1,5 @@
 --UNION ALL uso para combinar os resultados de cada pesquisa em uma unica saida
 --CAST para tranformar o resultar float -> int
-
 SELECT 
 (SELECT name FROM lawyers WHERE customers_number = 
 (SELECT max(customers_number) FROM lawyers)) AS name_Lawyer,

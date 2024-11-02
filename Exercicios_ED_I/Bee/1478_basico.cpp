@@ -13,7 +13,6 @@ main() {
     while (n != 0) {
         vector<vector<int>> matriz;
         int i, j;
-
         for (i = 0; i < n; i++) {
             vector<int> linha;
 

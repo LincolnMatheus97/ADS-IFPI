@@ -9,7 +9,6 @@ main() {
     while (i < j) {
         int r1, r2;
         cin >> r1 >> r2;
-
         int soma = r1 + r2;
         cout << soma << endl;
         i++;
