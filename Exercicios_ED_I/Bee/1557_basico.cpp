@@ -7,16 +7,7 @@
 using namespace std;
 
 int maxLength(vector<vector<int>>& matriz) {
-    int maxLength = 0;
 
-     // Encontrar o maior elemento em termos de número de dígitos
-    for (const auto& row : matriz) {
-        for (int num : row) {
-            int length = to_string(num).length();
-            maxLength = max(maxLength, length);
-        }
-    }
-    return maxLength;
 }
 
 
