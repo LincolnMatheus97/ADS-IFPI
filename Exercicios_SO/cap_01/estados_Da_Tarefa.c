@@ -1,37 +1,29 @@
 #include <stdio.h>
 #include <Windows.h>
-
-void inicializando_Tarefa() {
-    printf(">>>>>> INICIANDO TAREFA\n");
-    printf("\n");
-    Sleep(4500);
-
-    printf(">>>>>> EM EXECUCAO\n");
-    printf("\n");
-    Sleep(5000);
-
-    printf(">>>>>> PAUSADA\n");
-    printf("\n");
-}
-
-void finzalizando_Tarefa() {
-    printf(">>>>>> RETOMANDO TAREFA\n");
-    printf("\n");
-    Sleep(4500);
-
-    printf(">>>>>> EM EXECUCAO\n");
-    printf("\n");
-    Sleep(5000);
-
-    printf(">>>>>> ENCERRADA\n");
-}
+#include <stdlib.h>
 
 int main() {
-    inicializando_Tarefa();
+    printf(">>>>>> INICIANDO TAREFA\n");
+    printf("\n");
 
-    Sleep(8000);
+    Sleep(2000);
 
-    finzalizando_Tarefa();
+    printf(">>>>>> EM EXECUCAO\n");
+    printf("\n");
+
+    Sleep(4000);
+    
+    printf(">>>>> PAUSADA...");
+    system("pause");
+
+    Sleep(2000);
+
+    printf(">>>>>> RETOMANDO TAREFA\n");
+    printf("\n");
+
+    Sleep(4000);
+
+    printf(">>>>>> FINALIZANDO\n");
 
     return 0;
 }
