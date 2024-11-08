@@ -18,7 +18,7 @@ typedef struct elemento* Lista;
 Lista* criar_Lista() {
     Lista* list;
     list = (Lista*)malloc(sizeof(Lista));
-    if (list!= NULL) {
+    if (list != NULL) {
         *list = NULL;
     }
     return list;
