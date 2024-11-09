@@ -1,10 +1,11 @@
 1.  
-    Diferenças entre os tipos:                              |
-    Estatica:                                               |   Dinamica:
-    - Verificaçao de Tipo -> Em tempo de compilação;        |   - Verificaçao de Tipo -> Em tempo de execução;
-    - Flexibidadede -> Menos flexivel, mas mais segura;     |   - Flexibidadede -> Mais flexivel, mas pode ter mais erros;
-    - Performace -> Em geral, mais rapida em execução;      |   - Performace -> Pode ser mais lento devido a verificação;
-    - Erros de Tipo -> Detectados antes da execução;        |    Erros de Tipo -> Detectados apenas durante a execução;
+    Diferenças entre os tipos:
+
+    Estatica:                                                       |       Dinamica:
+    - Verificaçao de Tipo -> Em tempo de compilação;                |       - Verificaçao de Tipo -> Em tempo de execução;
+    - Flexibidadede -> Menos flexivel, mas mais segura;             |       - Flexibidadede -> Mais flexivel, mas pode ter mais erros;
+    - Performace -> Em geral, mais rapida em execução;              |       - Performace -> Pode ser mais lento devido a verificação;
+    - Erros de Tipo -> Detectados antes da execução;                |       Erros de Tipo -> Detectados apenas durante a execução;
 
 2. 
 Erros de runtime.
