@@ -1,8 +1,5 @@
-function exibir() {
-    var argumentos = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        argumentos[_i] = arguments[_i];
-    }
+"use strict";
+function exibir(...argumentos) {
     console.log(argumentos);
 }
 function main() {
@@ -11,3 +8,4 @@ function main() {
     exibir("a", "b", "c", "d");
 }
 main();
+//# sourceMappingURL=Atv03_Q05.js.map

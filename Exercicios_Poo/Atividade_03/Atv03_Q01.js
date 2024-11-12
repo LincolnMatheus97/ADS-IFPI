@@ -1,9 +1,11 @@
+"use strict";
 function eh_Par(num) {
     return (num % 2 == 0);
 }
 function main() {
-    var numero = 11;
-    var variavel = eh_Par(numero);
-    console.log("\u00C9 ".concat(variavel, " que numero \u00E9 Par!"));
+    const numero = 10;
+    const variavel = eh_Par(numero);
+    console.log(`É ${variavel} que numero é Par!`);
 }
 main();
+//# sourceMappingURL=Atv03_Q01.js.map

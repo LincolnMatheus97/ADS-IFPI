@@ -1,7 +1,9 @@
+"use strict";
 function main() {
-    var saudacao = (function () {
+    const saudacao = (() => {
         console.log("Ola");
     });
     saudacao();
 }
 main();
+//# sourceMappingURL=Atv03_Q06.js.map

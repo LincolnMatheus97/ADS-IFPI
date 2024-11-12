@@ -1,18 +1,20 @@
+"use strict";
 function numeros_Array(numeros) {
-    var mensagem = "";
-    numeros.forEach(function (element) {
+    let mensagem = "";
+    numeros.forEach(element => {
         if (element === numeros[0]) {
-            mensagem += "".concat(element);
+            mensagem += `${element}`;
         }
         else {
-            mensagem += "-".concat(element);
+            mensagem += `-${element}`;
         }
     });
     return mensagem;
 }
 function main() {
-    var numeros = [1, 2, 3, 4];
-    var texto = numeros_Array(numeros);
+    const numeros = [1, 2, 3, 4];
+    const texto = numeros_Array(numeros);
     console.log(texto);
 }
 main();
+//# sourceMappingURL=Atv03_Q03.js.map
