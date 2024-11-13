@@ -9,18 +9,22 @@ struct no {
 };
 
 typedef struct no* Lista;
+typedef struct no  Elemento;
+typedef struct no* Pilha;
 
-Lista no(item x, Lista ponteiro) {
-    Lista list = (Lista)malloc(sizeof(struct no));
-    list->valor = x;
-    list->prox = ponteiro;
-    return list;
-}
+Lista* criarLista() {
+    Lista* li = (Lista*)malloc(sizeof(Lista));
+    if (li != NULL) {
+        *li = NULL;
+    }
+    return li;
+} 
 
-void exibir_Lista(Lista list) {
-    while (list != NULL) {
-        printf("%d ", list->valor);
-        list = list->prox;
+void exibir_Lista(Lista* list) {
+    Elemento* nozinho = *list;
+    while (nozinho != NULL) {
+        printf("%d ", nozinho->valor);
+        nozinho = nozinho->prox;
     }
 }
 
@@ -59,19 +63,20 @@ int consultar_Lista(item x, Lista list) {
     return consultar_Lista(x, list->prox);
 }
 
-Lista clone(Lista list) {
-    if (list == NULL) {
-        return NULL;
-    }
-    return no(list->valor, clone(list->prox));
-}
+// Lista clone(Lista list) {
+//     if (list == NULL) {
+//         return NULL;
+//     }
+//     return no(list->valor, clone(list->prox));
+// }
 
-void inverter_Lista(Lista list) {
-    if (list == NULL) {
+void inverter_Lista(Lista* list) {
+    Elemento* nozinho = *list;
+    if (nozinho == NULL) {
         return;
     }
-    inverter_Lista(list->prox);
-    printf("%d ", list->valor);
+    inverter_Lista(&(nozinho->prox));
+    printf("%d ", nozinho->valor);
 }
 
 int ocorrencias(item x, Lista list) {
@@ -140,10 +145,8 @@ int enesimo(int x, Lista list) {
     return enesimo(x - 1, list->prox);
 }
 
-typedef struct no* Pilha;
-
-void empilhar(item x, Pilha *pilha) {
-    struct no *nozinho = (struct no*)malloc(sizeof(struct no));
+void empilhar(item x, Pilha* pilha) {
+    Elemento* nozinho = (Elemento*)malloc(sizeof(Elemento));
     if (nozinho != NULL) {
         nozinho->valor = x;
         nozinho->prox = *pilha;
@@ -151,40 +154,13 @@ void empilhar(item x, Pilha *pilha) {
     }
 }
 
-void desempilhar(Pilha *pilha) {
+int desempilhar(Pilha* pilha) {
     if (*pilha != NULL) {
-        struct no *nozinho = *pilha;
+        Elemento* nozinho = *pilha;
+        int valor = nozinho->valor; //Valor do Nó nozinho topo
         *pilha = nozinho->prox;      //O proximo nó se torna o topo
         free(nozinho);               //libera o nó que estava no topo
-
+        return valor;
     }
-
-}
-
-typedef struct no* Fila;
-
-void enfileira(item x, Fila *fila) {
-    struct no *nozinho = (struct no*)malloc(sizeof(struct no));
-    if (nozinho != NULL) {
-        nozinho->valor = x;
-        nozinho->prox = NULL;
-
-        if (*fila == NULL) {
-            *fila = nozinho;
-        } else {
-            struct no *aux = *fila;
-            while (aux->prox != NULL) {
-                aux = aux->prox;
-            }
-            aux->prox = nozinho;
-        }
-    }
-}
-
-void desenfileira(Fila *fila) {
-    if (*fila != NULL) {
-        struct no *nozinho = *fila;
-        *fila = nozinho->prox;
-        free(nozinho);
-    }
+    exit(1);
 }
