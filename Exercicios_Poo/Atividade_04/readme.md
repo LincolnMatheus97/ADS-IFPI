@@ -17,3 +17,10 @@
     Para resolver isso, passamos o argumento, um valor esperado para o volume, depois printamos o valor do
     volume.
 
+5.
+    a) O resultado dos prints é 90. Pois todas os objetos estao apontando para as mesmas referencias, qualquer
+    que seja o metodo aplicado em alguma dos objetos, sera feita a alteração para todos.
+    b) O objeto c1 agora passa a apontar para a referencia do objeto c2.
+
+11. 
+    Acho mais correto, desconsiderar a alteração. Isso poupa vericaçoes extras que os comportamentos iriam fazer.
