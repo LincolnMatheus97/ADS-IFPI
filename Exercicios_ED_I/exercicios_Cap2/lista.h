@@ -24,7 +24,7 @@ void exibir_Lista(Lista list) {
     }
 }
 
-void inserir_FinalLista(Lista *A, Lista B) {
+void concatnarListas(Lista *A, Lista B) {
     if (B == NULL) {
         return;
     } 
@@ -75,10 +75,10 @@ void inverter_Lista(Lista list) {
 }
 
 int ocorrencias(item x, Lista list) {
-    int contador = 0, comparador = x;
+    int contador = 0;
 
     while (list != NULL) {
-        if (list->valor == comparador) {
+        if (list->valor == x) {
             contador++;
         }
         list = list->prox;
@@ -123,8 +123,8 @@ int listas_Iguais(Lista listA, Lista listB) {
     if (tamanho_Lista(listA) != tamanho_Lista(listB)) {
         return 0;
     }
-    if (listA->valor != listB->valor) {
-        return 0;
+    if (listA->valor == listB->valor) {
+        return 1;
     }
     return listas_Iguais(listA->prox, listB->prox);
 }
@@ -164,21 +164,30 @@ void desempilhar(Pilha *pilha) {
 typedef struct no* Fila;
 
 void enfileira(item x, Fila *fila) {
-    struct no *nozinho = (struct no*)malloc(sizeof(struct no));
+    struct no* nozinho = (struct no*)malloc(sizeof(struct no));
     if (nozinho != NULL) {
         nozinho->valor = x;
-        nozinho->prox = NULL;
 
         if (*fila == NULL) {
             *fila = nozinho;
+            nozinho->prox = nozinho;
         } else {
-            struct no *aux = *fila;
-            while (aux->prox != NULL) {
+            struct no* aux = *fila;
+            while (aux->prox != *fila) {
                 aux = aux->prox;
             }
             aux->prox = nozinho;
+            nozinho->prox = *fila;
         }
     }
+}
+
+void exibir_Fila(Fila fila) {
+    struct no* atual = fila;
+    do {
+        printf("%d ", atual->valor);
+        atual = atual->prox;
+    } while (atual != fila);
 }
 
 void desenfileira(Fila *fila) {
