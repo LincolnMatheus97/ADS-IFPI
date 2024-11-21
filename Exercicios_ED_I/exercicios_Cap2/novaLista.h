@@ -162,9 +162,16 @@ void enfileirar(Item x, Fila *fila) {
 }
 
 void desenfileira(Fila *fila) {
-    if (*fila != NULL) {
-        Elemento* nozinho = *fila;
-        *fila = nozinho->prox;
-        free(nozinho);
+    if (*fila == (*fila)->prox) {
+        free(*fila);
+        *fila = NULL;
     }
+    struct no *atual = *fila;
+    while (atual->prox != *fila) {
+        atual = atual->prox;
+    }
+    struct no *nozinho = *fila;
+    atual->prox = nozinho->prox;
+    *fila = nozinho->prox;
+    free(nozinho);
 }

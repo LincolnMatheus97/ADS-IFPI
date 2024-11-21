@@ -16,6 +16,7 @@ main(){
     int tamanho_V = strlen(v.valor);
     
     while (i < tamanho_V){ 
+        cout<< i << "--" << v.valor[i] << endl;
         i++; 
     } 
     
@@ -23,6 +24,7 @@ main(){
     
     int j = 0; 
     while (valor[j] != '\0'){    
+        cout<< "j = " << j <<" - "<< valor[j] << endl;
         j++; 
     }
 

@@ -8,11 +8,22 @@ typedef struct no {
     struct no *prox;
 } *NO;
 
-NO no (int x, NO p) {
-    NO n = (struct no*)malloc(sizeof(struct no));
-    n -> item = x;
-    n -> prox = p;
-    return n;
+void criar_Lista(int x, NO *p) {
+    struct no* nozinho = (struct no*)malloc(sizeof(struct no));
+    if (nozinho != NULL) {
+        nozinho->item = x;
+        nozinho->prox = NULL;
+
+        if (*p == NULL) {
+            *p = nozinho;
+        } else {
+            struct no* aux = *p;
+            while (aux->prox != NULL) {
+                aux = aux->prox;
+            }
+            aux->prox = nozinho;
+        }
+    }
 }
 
 main() {
@@ -22,20 +33,13 @@ main() {
     cin >> quantidade_No;
 
     NO primeiro_No = NULL;
-    NO ultimo_No = NULL;
 
     for (int i = 0; i < quantidade_No; i++) {
         int valor;
         cout << "Digite o valor para o no: ";
         cin >> valor;
   
-        NO novo_NO = no(valor, NULL);
-        if (primeiro_No == NULL) {
-            primeiro_No = novo_NO;
-        } else {
-            ultimo_No -> prox = novo_NO; 
-        }
-        ultimo_No = novo_NO;
+        criar_Lista(valor, &primeiro_No);
     }
 
     NO p = primeiro_No;

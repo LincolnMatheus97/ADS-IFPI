@@ -156,9 +156,7 @@ void desempilhar(Pilha *pilha) {
         struct no *nozinho = *pilha;
         *pilha = nozinho->prox;      //O proximo nó se torna o topo
         free(nozinho);               //libera o nó que estava no topo
-
     }
-
 }
 
 typedef struct no* Fila;
@@ -191,9 +189,16 @@ void exibir_Fila(Fila fila) {
 }
 
 void desenfileira(Fila *fila) {
-    if (*fila != NULL) {
-        struct no *nozinho = *fila;
-        *fila = nozinho->prox;
-        free(nozinho);
+    if (*fila == (*fila)->prox) {
+        free(*fila);
+        *fila = NULL;
     }
+    struct no *atual = *fila;
+    while (atual->prox != *fila) {
+        atual = atual->prox;
+    }
+    struct no *nozinho = *fila;
+    atual->prox = nozinho->prox;
+    *fila = nozinho->prox;
+    free(nozinho);
 }

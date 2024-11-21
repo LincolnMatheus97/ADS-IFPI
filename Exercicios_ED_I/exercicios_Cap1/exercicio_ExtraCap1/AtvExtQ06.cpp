@@ -5,7 +5,35 @@ using namespace std;
 typedef struct no { 
     int item; 
     struct no *prox; 
-}No; 
+}*NO;
+
+typedef NO Lista;
+
+void criar_Lista(int x, Lista *p) {
+    struct no* nozinho = (struct no*)malloc(sizeof(struct no));
+    if (nozinho != NULL) {
+        nozinho->item = x;
+        nozinho->prox = NULL;
+
+        if (*p == NULL) {
+            *p = nozinho;
+        } else {
+            struct no* aux = *p;
+            while (aux->prox != NULL) {
+                aux = aux->prox;
+            }
+            aux->prox = nozinho;
+        }
+    }
+}
+
+void exibir_Lista(Lista list) {
+    if (list == NULL) {
+        return;
+    }
+    cout << list->item << endl;
+    return exibir_Lista(list->prox);
+}
 
 main() {
     int quantidade_Vetor;
@@ -13,25 +41,13 @@ main() {
     cout << "Digite a quantidede de dados no vetor: ";
     cin >> quantidade_Vetor;
 
-    No *v = new No [quantidade_Vetor];
-
-    for (int i = 0; i < quantidade_Vetor; i++) {
+    int i;
+    Lista list = NULL;
+    for (i = 0; i < quantidade_Vetor; i++) {
         int valor;
-        cout << "Digite o valor: ";
+        cout << "Digite um valor" <<endl;
         cin >> valor;
-
-        v[i].item = valor;
-
-        i < quantidade_Vetor - 1 ? v[i].prox = &v[i + 1] : v[i].prox = NULL;
+        criar_Lista(valor, &list);
     }
-
-    No *p = v;
-
-    while (p != NULL) {
-        cout << "Valor: " << p -> item << "\n";
-        cout << "Aponta: "<< p -> prox << endl;
-
-        p = p -> prox;
-    }
-
+    exibir_Lista(list);
 }

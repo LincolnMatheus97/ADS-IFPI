@@ -5,8 +5,9 @@ int main() {
     Pilha pilha = NULL;
 
     empilhar(1, &pilha);
-    empilhar(2, &pilha);
-    empilhar(3, &pilha);
+    // empilhar(2, &pilha);
+    // empilhar(3, &pilha);
+    exibir_Lista(pilha);
     desempilhar(&pilha);
     
     exibir_Lista(pilha);
