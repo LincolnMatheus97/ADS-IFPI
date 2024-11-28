@@ -29,10 +29,10 @@ class ContaModificada {
         return false;
     }
 }
-let conta1 = new ContaModificada("1", 50);
-let conta2 = new ContaModificada("2", 150);
-conta1.sacarValor(50);
-if (conta1.transferirValor(conta2, 10)) {
+let conta11 = new ContaModificada("1", 50);
+let conta22 = new ContaModificada("2", 150);
+conta11.sacarValor(50);
+if (conta11.transferirValor(conta22, 10)) {
     console.log(`A transferencia falhou, Saldo Insuficiente!`);
 }
 else {

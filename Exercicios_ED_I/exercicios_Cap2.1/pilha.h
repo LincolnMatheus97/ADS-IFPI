@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef char ITEM;
+typedef float ITEM;
 
 struct pilha {
     int max;
@@ -62,4 +62,34 @@ void destruirP(PILHA *p) {
     free((*p)->itemzinho);
     free(*p);
     *p = NULL;
+}
+
+int ehBalanceado(PILHA p) {
+    PILHA pilhaAux = criar_Pilha(p->max);
+    int balanceado = 1;
+
+    while(!vaziaP(p)) {
+        char atual = desempilhar(p);
+
+        if (atual == ']' || atual == '}' || atual == ')') {
+            empilhar(atual, pilhaAux);
+        } else if (atual == '[' || atual == '{' || atual == '(') {
+            if(vaziaP(pilhaAux)) {
+                balanceado = 0;
+                break;
+            }
+            char topo = desempilhar(pilhaAux);
+            if((atual == '[' && topo != ']') || (atual == '{' && topo != '}') || (atual == '(' && atual != ')')) {
+                balanceado = 0;
+                break;
+            }
+        }
+    }
+
+    if(!vaziaP(pilhaAux)) {
+        balanceado = 0;
+    }
+
+    destruirP(&pilhaAux);
+    return balanceado;
 }

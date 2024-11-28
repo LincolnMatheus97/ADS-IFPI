@@ -1,4 +1,4 @@
-class Conta {
+class Continha {
     num_Conta: string;
     saldo_Conta: number;
 
@@ -19,15 +19,15 @@ class Conta {
         return this.saldo_Conta;
     }
 
-    transferir(contaDestino: Conta, valor: number): void {
+    transferir(contaDestino: Continha, valor: number): void {
         this.sacar(valor);
         contaDestino.depositar(valor);
     }
 }
 
-let c1 = new Conta("1", 100);
-let c2 = new Conta("2", 100);
-let c3: Conta;
+let c1 = new Continha("1", 100);
+let c2 = new Continha("2", 100);
+let c3: Continha;
 c1 = c2;
 c3 = c1;
 c1.sacar(10);

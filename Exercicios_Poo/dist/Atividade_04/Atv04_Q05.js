@@ -1,5 +1,5 @@
 "use strict";
-class Conta {
+class Continha {
     constructor(num, saldo) {
         this.num_Conta = num;
         this.saldo_Conta = saldo;
@@ -18,8 +18,8 @@ class Conta {
         contaDestino.depositar(valor);
     }
 }
-let c1 = new Conta("1", 100);
-let c2 = new Conta("2", 100);
+let c1 = new Continha("1", 100);
+let c2 = new Continha("2", 100);
 let c3;
 c1 = c2;
 c3 = c1;
