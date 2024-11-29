@@ -4,7 +4,7 @@
 typedef char ITEM;
 
 struct fila {
-    int max;
+    int maximo;
     int total;
     int inicio;
     int final;
@@ -13,11 +13,11 @@ struct fila {
 
 typedef struct fila *FILA;
 
-#define avanca(i) (i = (i + 1));
+#define avanca(i, maximo) (i = (i + 1) % maximo);
 
 FILA criarFila(int m) {
     FILA filinha = (FILA)malloc(sizeof(struct fila));
-    filinha->max = m;
+    filinha->maximo = m;
     filinha->total = 0;
     filinha->inicio = 0;
     filinha->final = 0;
@@ -32,7 +32,7 @@ int vaziaF(FILA f) {
 }
 
 int cheiaF(FILA f) {
-    if(f->total == f->max) {
+    if(f->total == f->maximo) {
         return 1;
     } else return 0;
 }
@@ -40,14 +40,14 @@ int cheiaF(FILA f) {
 void enfileirar(ITEM x, FILA f) {
     if (cheiaF(f)) abort();
     f->item[f->final] = x;
-    avanca(f->final);
+    avanca(f->final, f->maximo);
     f->total++;
 }
 
 ITEM desenfileirar(FILA f) {
     if (vaziaF(f)) abort();
     ITEM x = f->item[f->inicio];
-    avanca(f->inicio);
+    avanca(f->inicio, f->maximo);
     f->total--;
     return x;
 }
