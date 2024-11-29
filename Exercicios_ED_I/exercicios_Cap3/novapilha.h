@@ -20,7 +20,7 @@ PILHAO criarPilha(int maximo) {
 }
 
 int cheiaP(PILHAO pilhazinha) {
-    if(pilhazinha->topo == pilhazinha->max -1) {
+    if(pilhazinha->topo == pilhazinha->max - 1) {
         return 1;
     } else return 0;
 }
