@@ -79,7 +79,7 @@ int ehBalanceado(PILHA p) {
                 break;
             }
             char topo = desempilhar(pilhaAux);
-            if((atual == '[' && topo != ']') || (atual == '{' && topo != '}') || (atual == '(' && atual != ')')) {
+            if((atual == '[' && topo != ']') || (atual == '{' && topo != '}') || (atual == '(' && topo != ')')) {
                 balanceado = 0;
                 break;
             }
