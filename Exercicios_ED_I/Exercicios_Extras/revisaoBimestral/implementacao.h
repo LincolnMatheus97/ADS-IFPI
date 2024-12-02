@@ -236,3 +236,32 @@ void destruirF(FILA *f) {
     free(*f);
     *f = NULL;
 }
+
+//Sobre Lista Estatica
+
+typedef int Item;
+
+struct lista {
+    Item valor;
+    char nome[30];
+};
+
+typedef struct lista LISTAO;
+LISTAO listinha[2];
+int ultimoInserido = 0;
+
+void inserirListao(LISTAO lista) {
+    if (ultimoInserido < 2) {
+        listinha[ultimoInserido] = lista;
+        ultimoInserido++;
+    } else {
+        printf("Lista cheia...\n");
+    }
+}
+
+void mostrarListao() {
+    for (int i = 0; i < 2; i++) {
+        printf("%d\n", listinha[i].valor);
+        printf("%s\n", listinha[i].nome);
+    }
+}

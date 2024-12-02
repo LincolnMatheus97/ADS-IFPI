@@ -1,3 +1,7 @@
+/*Usando Pilha, crie uma função para verificar se uma expressão composta apenas por chaves, colchetes e parênteses,
+representada por uma cadeia está ou não balanceada. Por exemplo, as expressões [{()()}{}] e {[([{}])]} estão balanceadas,
+mas as expressões {[(}]) e {[)()(]} não estão*/
+
 #include <stdio.h>
 #include <string.h>
 #include "pilha.h"
@@ -25,9 +29,9 @@ int main() {
         int balanceado = ehBalanceado(pilha);
 
         if (balanceado) {
-            printf("A expressao esta Balanceada\n");
+            printf("A expressao esta Balanceada...\n");
         } else {
-            printf("A expressao nao esta Balanceada\n");
+            printf("A expressao nao esta Balanceada...\n");
         }
     } else {
         printf("Digite uma expressao valida...\n");
