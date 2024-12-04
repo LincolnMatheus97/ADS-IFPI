@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef float ITEM;
+typedef char* ITEM;
 
 struct pilha {
     int max;

@@ -4,12 +4,10 @@
 
 int main() {
     PILHA pilha = criar_Pilha(5);
-    char s[11];
 
     for (int i = 0; i < 3; i++) {
-        printf("? ");
-        gets(s);
-        char* str = _strdup(s);
+        char s[3] = "um";
+        char *str = _strdup(s);
         empilhar(str, pilha);
     }
 

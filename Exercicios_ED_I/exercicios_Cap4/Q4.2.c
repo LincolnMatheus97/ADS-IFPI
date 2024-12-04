@@ -5,7 +5,7 @@
 int main() {
     FILA f = criarFila(5);
     for (int i = 0; i <= 3; i++) {
-        enfileirar('A' + 1, f);
+        enfileirar('A' + i, f);
     }
 
     while (!vaziaF(f)) {
@@ -15,4 +15,4 @@ int main() {
     return 0;
 }
 
-//Imprimira 4 vezes o caracter 'B'.
+//Imprimira A B C D.
