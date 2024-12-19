@@ -121,7 +121,7 @@ class App {
                 (0, utils_1.print)(`${contaProcurada.toString()}`);
                 let escolha = (0, utils_1.get_number)(`\n\rDeseja alterar o titular da Conta? (1) - SIM, (2) - NAO: `);
                 if (escolha === 1) {
-                    let numeroCpf = (0, utils_1.get_text)(`\n\rDigite o numero de CPF do Cliente: `);
+                    let numeroCpf = (0, utils_1.get_text)(`\n\rDigite o numero de CPF do novo Cliente Titular: `);
                     let clienteProcurado = this.banco.consultarCliente(numeroCpf);
                     if (clienteProcurado) {
                         contaProcurada.cliente.contas = this.listaContas(contaProcurada);
