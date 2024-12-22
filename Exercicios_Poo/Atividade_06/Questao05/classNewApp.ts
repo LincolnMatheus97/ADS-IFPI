@@ -81,14 +81,13 @@ export class App {
         }
     }
     
-    public totalizarSaldos(): void {
-        let numeroCpf = get_text(`\n\rDigite o numero de CPF do Cliente: `);
-        let clienteProcurado = this._banco.consultarCliente(numeroCpf);
+    public totalizarSaldos(cpf: string): string {
+        let clienteProcurado = this._banco.consultarCliente(cpf);
         if (clienteProcurado) {
-            let saldoTotal = this._banco.totalizarSaldoCliente(clienteProcurado.cpf);
-            print(`\n\rO cliente possui um total em suas contas de R$: ${saldoTotal.toFixed(2)}.`);
+            let saldoTotal: number = this._banco.totalizarSaldoCliente(clienteProcurado.cpf);
+            return `\n\rO cliente possui um total em suas contas de R$: ${saldoTotal.toFixed(2)}.`;
         } else {
-            print(`\n\rO cliente de CPF: ${numeroCpf} não foi encontrado...`);
+            return `\n\rO cliente de CPF: ${cpf} não foi encontrado...`;
         }
     }
 
@@ -112,7 +111,9 @@ export class App {
                     } else {
                         print(`\n\rCliente não encontrado...`);
                         contaProcurada.cliente.contas = this.listaContas(numeroCpf);
-                        let novoCliente = this.inserirCliente();
+                        let nomeCliente = get_text(`\n\rDigite o nome do cliente: `);
+                        let dataNasci = get_date(`\n\rDigite a data de aniversario do cliente. EX: (ano, mes, dia): `);
+                        let novoCliente = this.inserirCliente(nomeCliente, numeroCpf, dataNasci);
                         novoCliente.contas.push(contaProcurada);
                         contaProcurada.cliente = novoCliente;
                         print(`\n\rMudança realizada com sucesso...`);
@@ -135,12 +136,7 @@ export class App {
         }
     }
 
-    public inserirCliente(): Client {
-        let idCliente = get_number(`\n\rDigite o numero de identificacao(ID) do cliente: `);
-        let nomeCliente = get_text(`\n\rDigite o nome do cliente: `);
-        let numeroCpf = get_text(`\n\rDigite o numero de CPF do cliente: `);
-        let dataNasci = get_date(`\n\rDigite a data de aniversario do cliente. EX: (ano, mes, dia): `);
-    
+    public inserirCliente(nomeCliente: string, numeroCpf: string, dataNasci: Date): Client {
         let cliente: Client = new Client(nomeCliente, numeroCpf, dataNasci);
         if(cliente) {
             this._banco.inserirCliente(cliente);
