@@ -19,59 +19,62 @@ LISTA criarLista(intItem x) {
     return listinha;
 }
 
+// Função para inserir um novo nó no início da lista
 void inserirNoInicio(intItem x, LISTA *l) {
-    LISTA novoNo = (LISTA)malloc(sizeof(struct noDuplo));
-    novoNo->valor = x;
-    novoNo->prox = *l;
-    novoNo->ant = NULL;
-    if (*l != NULL) {
-        (*l)->ant = novoNo;
+    LISTA novoNo = (LISTA)malloc(sizeof(struct noDuplo)); // Aloca memória para o novo nó
+    novoNo->valor = x; // Define o valor do novo nó
+    novoNo->prox = *l; // O próximo nó do novo nó é o atual primeiro nó da lista
+    novoNo->ant = NULL; // O novo nó não tem nó anterior, pois será o primeiro nó
+    if (*l != NULL) { // Se a lista não estiver vazia
+        (*l)->ant = novoNo; // O nó que era o primeiro agora aponta para o novo nó como anterior
     }
-    *l = novoNo;
+    *l = novoNo; // O novo nó se torna o primeiro nó da lista
 }
 
+// Função para inserir um novo nó no final da lista
 void inserirNoFinal(intItem x, LISTA *l) {
-    LISTA novoNo = (LISTA)malloc(sizeof(struct noDuplo));
-    novoNo->valor = x;
-    novoNo->prox = NULL;
-    novoNo->ant = NULL;
+    LISTA novoNo = (LISTA)malloc(sizeof(struct noDuplo)); // Aloca memória para o novo nó
+    novoNo->valor = x; // Define o valor do novo nó
+    novoNo->prox = NULL; // O próximo nó do novo nó é NULL, pois será o último nó
+    novoNo->ant = NULL; // Inicialmente, o novo nó não tem nó anterior
 
-    if (*l == NULL) {
-        *l = novoNo;
+    if (*l == NULL) { // Se a lista estiver vazia
+        *l = novoNo; // O novo nó se torna o primeiro nó da lista
     } else {
-        LISTA aux = *l;
-        while (aux->prox != NULL) {
+        LISTA aux = *l; // Cria um ponteiro auxiliar para percorrer a lista
+        while (aux->prox != NULL) { // Percorre a lista até o último nó
             aux = aux->prox;
         }
-        aux->prox = novoNo;
-        novoNo->ant = aux;
+        aux->prox = novoNo; // O último nó atual aponta para o novo nó como próximo
+        novoNo->ant = aux; // O novo nó aponta para o último nó atual como anterior
     }
 }
 
+// Função para remover um item específico da lista
 void removerItemEspecifico(intItem x, LISTA *l) {
-    if (*l == NULL) {
-        return;
+    if (*l == NULL) { // Se a lista estiver vazia
+        return; // Não há nada para remover
     }
-    LISTA ant = NULL, novoNo = *l;
-    while (novoNo != NULL && novoNo->valor != x) {
-        ant = novoNo;
-        novoNo = novoNo->prox;
+    LISTA ant = NULL, novoNo = *l; // Declara ponteiros para o nó anterior e o nó atual
+    while (novoNo != NULL && novoNo->valor != x) { // Percorre a lista até encontrar o valor ou chegar ao final
+        ant = novoNo; // Atualiza o nó anterior
+        novoNo = novoNo->prox; // Avança para o próximo nó
     }
-    if (novoNo == NULL) {
-        return;
+    if (novoNo == NULL) { // Se o valor não foi encontrado
+        return; // Não há nada para remover
     }
-    if (novoNo == *l) {
-        *l = novoNo->prox;
-        if (*l != NULL) {
-            (*l)->ant = NULL;
+    if (novoNo == *l) { // Se o nó a ser removido é o primeiro nó da lista
+        *l = novoNo->prox; // O próximo nó se torna o primeiro nó da lista
+        if (*l != NULL) { // Se a lista não estiver vazia após a remoção
+            (*l)->ant = NULL; // O novo primeiro nó não tem nó anterior
         }
     } else {
-        ant->prox = novoNo->prox;
-        if(novoNo->prox != NULL) {
-            novoNo->prox->ant = ant;
+        ant->prox = novoNo->prox; // O nó anterior aponta para o próximo nó do nó a ser removido
+        if (novoNo->prox != NULL) { // Se o nó a ser removido não é o último nó
+            novoNo->prox->ant = ant; // O próximo nó aponta para o nó anterior como anterior
         }
     }
-    free(novoNo);
+    free(novoNo); // Libera a memória alocada para o nó removido
 }
 
 void mostrarInicioAoFim(LISTA l) {
