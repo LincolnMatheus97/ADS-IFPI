@@ -9,6 +9,7 @@ int main() {
     inserirNoFinal(40, &listinha);
     mostrarInicioAoFim(listinha);
     printf("\n");
+    removerItemEspecifico(20, &listinha);
     mostrarFimAoInicio(listinha);
     printf("\n");
 }

@@ -52,7 +52,7 @@ void removerItemEspecifico(intItem x, LISTA *l) {
     if (*l == NULL) {
         return;
     }
-    LISTA ant, novoNo = *l;
+    LISTA ant = NULL, novoNo = *l;
     while (novoNo != NULL && novoNo->valor != x) {
         ant = novoNo;
         novoNo = novoNo->prox;
@@ -62,8 +62,14 @@ void removerItemEspecifico(intItem x, LISTA *l) {
     }
     if (novoNo == *l) {
         *l = novoNo->prox;
+        if (*l != NULL) {
+            (*l)->ant = NULL;
+        }
     } else {
         ant->prox = novoNo->prox;
+        if(novoNo->prox != NULL) {
+            novoNo->prox->ant = ant;
+        }
     }
     free(novoNo);
 }
