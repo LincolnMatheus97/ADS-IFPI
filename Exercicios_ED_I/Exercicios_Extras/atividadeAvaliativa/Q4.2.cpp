@@ -15,7 +15,7 @@ int main() {
     lista.mostrarFimAoInicio();
 
     cout << "Removendo o aluno com matricula 1003 (Lucas)..." << endl;
-    lista.removerItemEspecifico(2);
+    lista.removerItemEspecifico(1003);
 
     cout << "Lista do inicio ao fim apos remocao:" << endl;
     lista.mostrarInicioAoFim();
