@@ -1,28 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef int intItem;
+typedef char charItem;
 
 struct noDuplo {
-    intItem valor;
+    intItem matricula;
+    charItem nome[23];
     struct noDuplo *prox;
     struct noDuplo *ant;
 };
 
 typedef struct noDuplo* LISTA;
 
-LISTA criarLista(intItem x) {
+LISTA criarLista(intItem x, const charItem n[23]) {
     LISTA listinha = (LISTA)malloc(sizeof(struct noDuplo));
-    listinha->valor = x;
+    listinha->matricula = x;
+    strncpy(listinha->nome, n, 23);
     listinha->prox = NULL;
     listinha->ant = NULL;
     return listinha;
 }
 
 // Função para inserir um novo nó no início da lista
-void inserirNoInicio(intItem x, LISTA *l) {
+void inserirNoInicio(intItem x, const charItem n[23], LISTA *l) {
     LISTA novoNo = (LISTA)malloc(sizeof(struct noDuplo)); // Aloca memória para o novo nó
-    novoNo->valor = x; // Define o valor do novo nó
+    novoNo->matricula = x; // Define o matricula do novo nó
+    strncpy(novoNo->nome, n, 23); // Define o nome do novo nó
     novoNo->prox = *l; // O próximo nó do novo nó é o atual primeiro nó da lista
     novoNo->ant = NULL; // O novo nó não tem nó anterior, pois será o primeiro nó
     if (*l != NULL) { // Se a lista não estiver vazia
@@ -32,11 +37,11 @@ void inserirNoInicio(intItem x, LISTA *l) {
 }
 
 // Função para inserir um novo nó no final da lista
-void inserirNoFinal(intItem x, LISTA *l) {
+void inserirNoFinal(intItem x, const charItem n[23], LISTA *l) {
     LISTA novoNo = (LISTA)malloc(sizeof(struct noDuplo)); // Aloca memória para o novo nó
-    novoNo->valor = x; // Define o valor do novo nó
+    novoNo->matricula = x; // Define o matricula do novo nó
+    strncpy(novoNo->nome, n, 23); // Define o nome do novo nó
     novoNo->prox = NULL; // O próximo nó do novo nó é NULL, pois será o último nó
-    novoNo->ant = NULL; // Inicialmente, o novo nó não tem nó anterior
 
     if (*l == NULL) { // Se a lista estiver vazia
         *l = novoNo; // O novo nó se torna o primeiro nó da lista
@@ -56,11 +61,11 @@ void removerItemEspecifico(intItem x, LISTA *l) {
         return; // Não há nada para remover
     }
     LISTA ant = NULL, novoNo = *l; // Declara ponteiros para o nó anterior e o nó atual
-    while (novoNo != NULL && novoNo->valor != x) { // Percorre a lista até encontrar o valor ou chegar ao final
+    while (novoNo != NULL && novoNo->matricula != x) { // Percorre a lista até encontrar a matricula ou chegar ao final
         ant = novoNo; // Atualiza o nó anterior
         novoNo = novoNo->prox; // Avança para o próximo nó
     }
-    if (novoNo == NULL) { // Se o valor não foi encontrado
+    if (novoNo == NULL) { // Se o matricula não foi encontrado
         return; // Não há nada para remover
     }
     if (novoNo == *l) { // Se o nó a ser removido é o primeiro nó da lista
@@ -77,13 +82,15 @@ void removerItemEspecifico(intItem x, LISTA *l) {
     free(novoNo); // Libera a memória alocada para o nó removido
 }
 
+// Função para mostrar a lista do início ao fim
 void mostrarInicioAoFim(LISTA l) {
     while (l != NULL) {
-        printf("%d ", l->valor);
+        printf("%d %s\n", l->matricula, l->nome);
         l = l->prox;
     }
 }
 
+// Função para mostrar a lista do fim ao início
 void mostrarFimAoInicio(LISTA l) {
     if (l == NULL) {
         return;
@@ -92,7 +99,7 @@ void mostrarFimAoInicio(LISTA l) {
         l = l->prox;
     }
     while (l != NULL) {
-        printf("%d ", l->valor);
+        printf("%d %s\n", l->matricula, l->nome);
         l = l->ant;
     }
 }
