@@ -77,21 +77,21 @@ public:
 
     void mostrarInicioAoFim() const {
         No* l = head;
-        while (l != nullptr) {
+        while (l != NULL) {
             cout << l->mat << " " << l->nome << endl;
             l = l->prox;
         }
     }
 
     void mostrarFimAoInicio() const {
-        if (head == nullptr) {
+        if (head == NULL) {
             return;
         }
         No* l = head;
-        while (l->prox != nullptr) {
+        while (l->prox != NULL) {
             l = l->prox;
         }
-        while (l != nullptr) {
+        while (l != NULL) {
             cout << l->mat << " " << l->nome << endl;
             l = l->ant;
         }
