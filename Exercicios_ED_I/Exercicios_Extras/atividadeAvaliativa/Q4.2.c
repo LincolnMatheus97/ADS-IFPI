@@ -3,7 +3,7 @@
 #include "Q4.2.h"
 
 int main() {
-    LISTA listinha = criarLista(1003, "Lincoln");
+    LISTA listinha = criarNo(1003, "Lincoln");
     inserirNoInicio(1022, "Lucas", &listinha);
     inserirNoInicio(1056, "Natiele", &listinha);
     inserirNoFinal(1088,"Thalisson", &listinha);

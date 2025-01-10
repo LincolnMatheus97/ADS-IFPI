@@ -14,7 +14,7 @@ struct noDuplo {
 
 typedef struct noDuplo* LISTA;
 
-LISTA criarLista(intItem x, const charItem n[23]) {
+LISTA criarNo(intItem x, const charItem n[23]) {
     LISTA listinha = (LISTA)malloc(sizeof(struct noDuplo));
     listinha->matricula = x;
     strncpy(listinha->nome, n, 23);
@@ -25,23 +25,19 @@ LISTA criarLista(intItem x, const charItem n[23]) {
 
 // Função para inserir um novo nó no início da lista
 void inserirNoInicio(intItem x, const charItem n[23], LISTA *l) {
-    LISTA novoNo = (LISTA)malloc(sizeof(struct noDuplo)); // Aloca memória para o novo nó
-    novoNo->matricula = x; // Define o matricula do novo nó
-    strncpy(novoNo->nome, n, 23); // Define o nome do novo nó
-    novoNo->prox = *l; // O próximo nó do novo nó é o atual primeiro nó da lista
-    novoNo->ant = NULL; // O novo nó não tem nó anterior, pois será o primeiro nó
+    LISTA novoNo = criarNo(x, n); // Cria um novo nó
+
     if (*l != NULL) { // Se a lista não estiver vazia
+        novoNo->prox = *l; // O novo nó aponta para o primeiro nó da lista como próximo
         (*l)->ant = novoNo; // O nó que era o primeiro agora aponta para o novo nó como anterior
     }
+    
     *l = novoNo; // O novo nó se torna o primeiro nó da lista
 }
 
 // Função para inserir um novo nó no final da lista
 void inserirNoFinal(intItem x, const charItem n[23], LISTA *l) {
-    LISTA novoNo = (LISTA)malloc(sizeof(struct noDuplo)); // Aloca memória para o novo nó
-    novoNo->matricula = x; // Define o matricula do novo nó
-    strncpy(novoNo->nome, n, 23); // Define o nome do novo nó
-    novoNo->prox = NULL; // O próximo nó do novo nó é NULL, pois será o último nó
+    LISTA novoNo = criarNo(x, n); // Cria um novo nó
 
     if (*l == NULL) { // Se a lista estiver vazia
         *l = novoNo; // O novo nó se torna o primeiro nó da lista
