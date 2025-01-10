@@ -11,11 +11,11 @@ class Calculator {
         return this._operando1 + this._operando2;
     }
 
-    get operando1(): number {
+    public get operando1(): number {
         return this._operando1;
     }
 
-    get operando2(): number {
+    public get operando2(): number {
         return this._operando2;
     }
 }
