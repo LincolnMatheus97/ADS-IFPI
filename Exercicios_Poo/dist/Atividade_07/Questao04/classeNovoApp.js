@@ -1,15 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
-const classNewClient_1 = require("../Questao04/classNewClient");
-const classNewCont_1 = require("../Questao04/classNewCont");
-const newUtils_1 = require("./newUtils");
+const classeNovoCliente_1 = require("./classeNovoCliente");
+const classeNovaConta_1 = require("./classeNovaConta");
+const classePoupanca_1 = require("./classePoupanca");
+const novaUtils_1 = require("./novaUtils");
 class App {
     constructor(banquinho) {
         this._banco = banquinho;
     }
     inserirConta(numeroConta) {
-        let conta = new classNewCont_1.Cont(numeroConta, 0);
+        let conta = new classeNovaConta_1.Cont(numeroConta, 0);
         if (conta) {
             this._banco.inserirConta(conta);
         }
@@ -91,32 +92,32 @@ class App {
         }
     }
     mudarTitularidade() {
-        let numeroConta = (0, newUtils_1.get_text)(`\n\rDigite o numero da conta: `);
+        let numeroConta = (0, novaUtils_1.get_text)(`\n\rDigite o numero da conta: `);
         let contaProcurada = this._banco.consultarConta(numeroConta);
         if (contaProcurada) {
             if (contaProcurada.cliente) {
-                (0, newUtils_1.print)(`${contaProcurada.toString()}`);
-                let escolha = (0, newUtils_1.get_number)(`\n\rDeseja alterar o titular da Conta? (1) - SIM, (2) - NAO: `);
+                (0, novaUtils_1.print)(`${contaProcurada.toString()}`);
+                let escolha = (0, novaUtils_1.get_number)(`\n\rDeseja alterar o titular da Conta? (1) - SIM, (2) - NAO: `);
                 if (escolha === 1) {
-                    let numeroCpf = (0, newUtils_1.get_text)(`\n\rDigite o numero de CPF do novo Cliente Titular: `);
+                    let numeroCpf = (0, novaUtils_1.get_text)(`\n\rDigite o numero de CPF do novo Cliente Titular: `);
                     let clienteProcurado = this._banco.consultarCliente(numeroCpf);
                     if (clienteProcurado) {
                         contaProcurada.cliente.contas = this.listaContas(numeroCpf);
                         contaProcurada.cliente = clienteProcurado;
                         clienteProcurado.contas.push(contaProcurada);
-                        (0, newUtils_1.print)(`\n\rMudança realizada com sucesso...`);
-                        (0, newUtils_1.print)(`${contaProcurada.toString()}`);
+                        (0, novaUtils_1.print)(`\n\rMudança realizada com sucesso...`);
+                        (0, novaUtils_1.print)(`${contaProcurada.toString()}`);
                     }
                     else {
-                        (0, newUtils_1.print)(`\n\rCliente não encontrado...`);
+                        (0, novaUtils_1.print)(`\n\rCliente não encontrado...`);
                         contaProcurada.cliente.contas = this.listaContas(numeroCpf);
-                        let nomeCliente = (0, newUtils_1.get_text)(`\n\rDigite o nome do cliente: `);
-                        let dataNasci = (0, newUtils_1.get_date)(`\n\rDigite a data de aniversario do cliente. EX: (ano, mes, dia): `);
+                        let nomeCliente = (0, novaUtils_1.get_text)(`\n\rDigite o nome do cliente: `);
+                        let dataNasci = (0, novaUtils_1.get_date)(`\n\rDigite a data de aniversario do cliente. EX: (ano, mes, dia): `);
                         let novoCliente = this.inserirCliente(nomeCliente, numeroCpf, dataNasci);
                         novoCliente.contas.push(contaProcurada);
                         contaProcurada.cliente = novoCliente;
-                        (0, newUtils_1.print)(`\n\rMudança realizada com sucesso...`);
-                        (0, newUtils_1.print)(`${contaProcurada.toString()}`);
+                        (0, novaUtils_1.print)(`\n\rMudança realizada com sucesso...`);
+                        (0, novaUtils_1.print)(`${contaProcurada.toString()}`);
                     }
                 }
                 else {
@@ -124,10 +125,10 @@ class App {
                 }
             }
             else {
-                (0, newUtils_1.print)(`${contaProcurada.toString()}`);
-                let escolha = (0, newUtils_1.get_number)(`\n\rA conta nao possui cliente associado. Deseja associar um cliente? (1) - SIM, (2) - NAO: `);
+                (0, novaUtils_1.print)(`${contaProcurada.toString()}`);
+                let escolha = (0, novaUtils_1.get_number)(`\n\rA conta nao possui cliente associado. Deseja associar um cliente? (1) - SIM, (2) - NAO: `);
                 if (escolha === 1) {
-                    this.associarContaCliente(numeroConta, (0, newUtils_1.get_text)(`\n\rDigite o numero de CPF do Cliente: `));
+                    this.associarContaCliente(numeroConta, (0, novaUtils_1.get_text)(`\n\rDigite o numero de CPF do Cliente: `));
                 }
                 else {
                     return;
@@ -135,11 +136,24 @@ class App {
             }
         }
         else {
-            (0, newUtils_1.print)(`\n\rConta de número ${numeroConta}, não encontrada...`);
+            (0, novaUtils_1.print)(`\n\rConta de número ${numeroConta}, não encontrada...`);
         }
     }
+    renderJuros(numeroConta) {
+        let confirmacao = false;
+        let contaProcurada = this._banco.consultarConta(numeroConta);
+        if (contaProcurada) {
+            if (contaProcurada instanceof classePoupanca_1.Poupanca) {
+                contaProcurada.renderJuros();
+                confirmacao = true;
+                return confirmacao;
+            }
+            return confirmacao;
+        }
+        return confirmacao;
+    }
     inserirCliente(nomeCliente, numeroCpf, dataNasci) {
-        let cliente = new classNewClient_1.Client(nomeCliente, numeroCpf, dataNasci);
+        let cliente = new classeNovoCliente_1.Client(nomeCliente, numeroCpf, dataNasci);
         if (cliente) {
             this._banco.inserirCliente(cliente);
         }
@@ -181,4 +195,4 @@ class App {
     }
 }
 exports.App = App;
-//# sourceMappingURL=classNewApp.js.map
+//# sourceMappingURL=classeNovoApp.js.map

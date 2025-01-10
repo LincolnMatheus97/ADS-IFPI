@@ -1,57 +1,60 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.App = void 0;
-const classNewClient_1 = require("../Questao04/classNewClient");
-const classNewCont_1 = require("../Questao04/classNewCont");
-const newUtils_1 = require("./newUtils");
-class App {
-    constructor(banquinho) {
+import { Bank } from "./classeNovoBanco";
+import { Client } from "./classeNovoCliente";
+import { Cont } from "./classeNovaConta";
+import { Poupanca } from "./classePoupanca";
+import { get_date, get_number, get_text, print } from "./novaUtils";
+
+export class App {
+    private _banco: Bank;
+
+    constructor(banquinho: Bank) {
         this._banco = banquinho;
     }
-    inserirConta(numeroConta) {
-        let conta = new classNewCont_1.Cont(numeroConta, 0);
+
+    public inserirConta(numeroConta: string): void {
+        let conta: Cont = new Cont(numeroConta, 0);
         if (conta) {
             this._banco.inserirConta(conta);
         }
     }
-    consultarConta(numeroConta) {
+
+    public consultarConta(numeroConta: string): string {
         let contaProcurada = this._banco.consultarConta(numeroConta);
         if (contaProcurada) {
             return `Conta encontrada, dados: ${contaProcurada.toString()}`;
-        }
-        else {
+        } else {
             return `Conta de número ${numeroConta}, não encontrada...`;
         }
     }
-    sacarConta(numeroConta, valorSacar) {
+
+    public sacarConta(numeroConta: string, valorSacar: number): string {
         let contaProcurada = this._banco.consultarConta(numeroConta);
         if (contaProcurada) {
-            if (contaProcurada.consultarSaldo() >= valorSacar && valorSacar > 0) {
+            if(contaProcurada.consultarSaldo() >= valorSacar && valorSacar > 0) {
                 contaProcurada.sacar(valorSacar);
                 return `Valor sacado com sucesso...`;
-            }
-            else {
+            } else {
                 return `Saldo insuficiente para sacar...`;
             }
-        }
-        else {
+        } else {
             return `Conta de número ${numeroConta}, não encontrada...`;
         }
     }
-    depositarConta(numeroConta, valorDeposito) {
+
+    public depositarConta(numeroConta: string, valorDeposito: number): string {
         let contaProcurada = this._banco.consultarConta(numeroConta);
         if (contaProcurada) {
             contaProcurada.depositar(valorDeposito);
             return `Valor depositado com sucesso...`;
-        }
-        else {
+        } else {
             return `Conta de número ${numeroConta}, não encontrada...`;
         }
     }
-    excluirConta(numeroConta) {
+
+    public excluirConta(numeroConta: string): string {
         let contaProcurada = this._banco.consultarConta(numeroConta);
-        if (contaProcurada) {
-            if (contaProcurada.cliente) {
+        if(contaProcurada) {
+            if(contaProcurada.cliente) {
                 let listaContas = this._banco.listarContasCliente(contaProcurada.cliente.cpf);
                 if (listaContas.length == 1) {
                     this._banco.excluirCliente(contaProcurada.cliente.cpf);
@@ -60,125 +63,137 @@ class App {
             }
             this._banco.excluirConta(contaProcurada.numero);
             return `Conta excluida com sucesso...`;
-        }
-        else {
+        } else {
             return `Conta de número ${numeroConta}, não encontrada...`;
         }
     }
-    transferirEntreContas(numContaRemetente, contasDestino, valorDesejado) {
+
+    public transferirEntreContas(numContaRemetente: string, contasDestino: string[], valorDesejado: number): string {
         let remetenteProcurada = this._banco.consultarConta(numContaRemetente);
-        if (remetenteProcurada) {
+        if(remetenteProcurada) {
             if (remetenteProcurada.saldo >= valorDesejado * contasDestino.length) {
                 this._banco.transferir(valorDesejado, remetenteProcurada, ...contasDestino);
                 return `Transferência realizada com sucesso...`;
-            }
-            else {
+            } else {
                 return `Saldo insuficiente para transferir...`;
             }
-        }
-        else {
+        } else {
             return `Conta de número ${numContaRemetente}, não encontrada...`;
         }
     }
-    totalizarSaldos(cpf) {
+    
+    public totalizarSaldos(cpf: string): string {
         let clienteProcurado = this._banco.consultarCliente(cpf);
         if (clienteProcurado) {
-            let saldoTotal = this._banco.totalizarSaldoCliente(clienteProcurado.cpf);
+            let saldoTotal: number = this._banco.totalizarSaldoCliente(clienteProcurado.cpf);
             return `\n\rO cliente possui um total em suas contas de R$: ${saldoTotal.toFixed(2)}.`;
-        }
-        else {
+        } else {
             return `\n\rO cliente de CPF: ${cpf} não foi encontrado...`;
         }
     }
-    mudarTitularidade() {
-        let numeroConta = (0, newUtils_1.get_text)(`\n\rDigite o numero da conta: `);
+
+    public mudarTitularidade(): void {
+        let numeroConta = get_text(`\n\rDigite o numero da conta: `);
         let contaProcurada = this._banco.consultarConta(numeroConta);
         if (contaProcurada) {
             if (contaProcurada.cliente) {
-                (0, newUtils_1.print)(`${contaProcurada.toString()}`);
-                let escolha = (0, newUtils_1.get_number)(`\n\rDeseja alterar o titular da Conta? (1) - SIM, (2) - NAO: `);
-                if (escolha === 1) {
-                    let numeroCpf = (0, newUtils_1.get_text)(`\n\rDigite o numero de CPF do novo Cliente Titular: `);
+                print(`${contaProcurada.toString()}`);
+                let escolha = get_number(`\n\rDeseja alterar o titular da Conta? (1) - SIM, (2) - NAO: `);
+                if(escolha ===  1) {
+                    let numeroCpf = get_text(`\n\rDigite o numero de CPF do novo Cliente Titular: `);
                     let clienteProcurado = this._banco.consultarCliente(numeroCpf);
+                       
                     if (clienteProcurado) {
                         contaProcurada.cliente.contas = this.listaContas(numeroCpf);
                         contaProcurada.cliente = clienteProcurado;
                         clienteProcurado.contas.push(contaProcurada);
-                        (0, newUtils_1.print)(`\n\rMudança realizada com sucesso...`);
-                        (0, newUtils_1.print)(`${contaProcurada.toString()}`);
-                    }
-                    else {
-                        (0, newUtils_1.print)(`\n\rCliente não encontrado...`);
+                        print(`\n\rMudança realizada com sucesso...`);
+                        print(`${contaProcurada.toString()}`);
+                    } else {
+                        print(`\n\rCliente não encontrado...`);
                         contaProcurada.cliente.contas = this.listaContas(numeroCpf);
-                        let nomeCliente = (0, newUtils_1.get_text)(`\n\rDigite o nome do cliente: `);
-                        let dataNasci = (0, newUtils_1.get_date)(`\n\rDigite a data de aniversario do cliente. EX: (ano, mes, dia): `);
+                        let nomeCliente = get_text(`\n\rDigite o nome do cliente: `);
+                        let dataNasci = get_date(`\n\rDigite a data de aniversario do cliente. EX: (ano, mes, dia): `);
                         let novoCliente = this.inserirCliente(nomeCliente, numeroCpf, dataNasci);
                         novoCliente.contas.push(contaProcurada);
                         contaProcurada.cliente = novoCliente;
-                        (0, newUtils_1.print)(`\n\rMudança realizada com sucesso...`);
-                        (0, newUtils_1.print)(`${contaProcurada.toString()}`);
+                        print(`\n\rMudança realizada com sucesso...`);
+                        print(`${contaProcurada.toString()}`);
                     }
+                } else {
+                    return; 
                 }
-                else {
-                    return;
-                }
-            }
-            else {
-                (0, newUtils_1.print)(`${contaProcurada.toString()}`);
-                let escolha = (0, newUtils_1.get_number)(`\n\rA conta nao possui cliente associado. Deseja associar um cliente? (1) - SIM, (2) - NAO: `);
+            } else {
+                print(`${contaProcurada.toString()}`);
+                let escolha = get_number(`\n\rA conta nao possui cliente associado. Deseja associar um cliente? (1) - SIM, (2) - NAO: `);
                 if (escolha === 1) {
-                    this.associarContaCliente(numeroConta, (0, newUtils_1.get_text)(`\n\rDigite o numero de CPF do Cliente: `));
-                }
-                else {
+                    this.associarContaCliente(numeroConta, get_text(`\n\rDigite o numero de CPF do Cliente: `));
+                } else {
                     return;
                 }
             }
-        }
-        else {
-            (0, newUtils_1.print)(`\n\rConta de número ${numeroConta}, não encontrada...`);
+        } else {
+            print(`\n\rConta de número ${numeroConta}, não encontrada...`);
         }
     }
-    inserirCliente(nomeCliente, numeroCpf, dataNasci) {
-        let cliente = new classNewClient_1.Client(nomeCliente, numeroCpf, dataNasci);
-        if (cliente) {
+
+    public renderJuros(numeroConta: string): boolean {
+        let confirmacao: boolean = false;
+        let contaProcurada = this._banco.consultarConta(numeroConta);
+        if (contaProcurada) {
+            if (contaProcurada instanceof Poupanca) {
+                contaProcurada.renderJuros();
+                confirmacao = true;
+                return confirmacao;
+            }
+            return confirmacao;
+        }
+        return confirmacao;
+    }
+
+    public inserirCliente(nomeCliente: string, numeroCpf: string, dataNasci: Date): Client {
+        let cliente: Client = new Client(nomeCliente, numeroCpf, dataNasci);
+        if(cliente) {
             this._banco.inserirCliente(cliente);
         }
+
         return cliente;
     }
-    consultarCliente(numeroCpf) {
+
+    public consultarCliente(numeroCpf: string): string {
         let clienteProcurado = this._banco.consultarCliente(numeroCpf);
         if (clienteProcurado) {
             return `Cliente encontrado, dados: ${clienteProcurado.toString()}`;
-        }
-        else {
+        } else {
             return `Cliente não encontrado...`;
         }
     }
-    excluirCliente(numeroCpf) {
+
+    public excluirCliente(numeroCpf: string): string {
         let clienteProcurado = this._banco.consultarCliente(numeroCpf);
         if (clienteProcurado) {
-            if (clienteProcurado.contas) {
-                let contasAssociadas = [];
-                for (let i = 0; i < clienteProcurado.contas.length; i++) {
+            if(clienteProcurado.contas) {
+                let contasAssociadas: Cont[] = [];
+                for(let i = 0; i < clienteProcurado.contas.length; i++) {
                     contasAssociadas.push(clienteProcurado.contas[i]);
                 }
+    
                 for (let i = 0; i < contasAssociadas.length; i++) {
                     this._banco.excluirConta(contasAssociadas[i].numero);
                 }
             }
             this._banco.excluirCliente(clienteProcurado.cpf);
             return `Cliente excluido com sucesso...`;
-        }
-        else {
+        } else {
             return `Cliente não encontrado...`;
         }
     }
-    associarContaCliente(numeroConta, numeroCpf) {
+
+    public associarContaCliente(numeroConta: string, numeroCpf: string): void {
         this._banco.associarContaCliente(numeroConta, numeroCpf);
     }
-    listaContas(cpfCliente) {
+
+    public listaContas(cpfCliente: string): Cont[] {
         return this._banco.listarContasCliente(cpfCliente);
     }
 }
-exports.App = App;
-//# sourceMappingURL=classNewApp.js.map
