@@ -8,19 +8,24 @@
 #define LED_B 12
 #define BT_A 5
 
-void ligarLed(int led) {
-    if (led == LED_G) {
+void ligarLed(int *contador) {
+    if (*contador == 1) {
         gpio_put(LED_G, 1);
-        sleep_ms(500);
-        gpio_put(LED_G, 0);
-    } else if (led == LED_R) {
-        gpio_put(LED_R, 1);
-        sleep_ms(500);
         gpio_put(LED_R, 0);
-    } else if (led == LED_B) {
-        gpio_put(LED_B, 1);
-        sleep_ms(500);
         gpio_put(LED_B, 0);
+    } else if (*contador == 2) {
+        gpio_put(LED_G, 0);
+        gpio_put(LED_R, 1);
+        gpio_put(LED_B, 0);
+    } else if (*contador == 3) {
+        gpio_put(LED_G, 0);
+        gpio_put(LED_R, 0);
+        gpio_put(LED_B, 1);
+    } else if (*contador == 4) {
+        gpio_put(LED_G, 1);
+        gpio_put(LED_R, 1);
+        gpio_put(LED_B, 1);
+        *contador = 0;
     }
 }
 
@@ -38,19 +43,19 @@ int main() {
     gpio_pull_up(BT_A);
     gpio_set_dir(BT_A, false);
 
+    int contador = 0;
+
     while (true) {
         bool bt_A_Acionado = (gpio_get(BT_A) == 0);
-        int ledAnterior = 0;
+        
         if (bt_A_Acionado) {
-            // Sorteia um LED para acender e acende
-            int led = rand() % 3 + 11;
-            // Evita que o mesmo LED seja sorteado duas vezes seguidas
-            while (led == ledAnterior) {
-                led = rand() % 3 + 11;
+            sleep_ms(50); // Debounce
+            if (gpio_get(BT_A) == 0) { // Verifica se o botão ainda está pressionado
+                contador++;
+                ligarLed(&contador);
+                while (gpio_get(BT_A) == 0); // Aguarda o botão ser solto
             }
-            ligarLed(led);
-            ledAnterior = led;
-        } 
+        }
     }
     return 0;
 }
