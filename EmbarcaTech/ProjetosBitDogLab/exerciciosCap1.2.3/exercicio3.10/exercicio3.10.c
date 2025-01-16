@@ -7,6 +7,17 @@
 #define LED_R 13
 #define LED_B 12
 #define BT_A 5
+#define BT_B 6
+
+// Função de callback para a interrupção do botão B
+void minhaCallback(uint gpio, uint32_t events, int *contador) {
+    if (gpio == BT_B && events == GPIO_IRQ_EDGE_RISE) {
+        gpio_put(LED_G, 0);
+        gpio_put(LED_R, 0);
+        gpio_put(LED_B, 0);
+        *contador = 0;
+    }
+}
 
 void ligarLed(int *contador) {
     if (*contador == 1) {
@@ -38,12 +49,18 @@ int main() {
     gpio_set_dir(LED_R, true);
     gpio_set_dir(LED_B, true);
 
-    // Inicializa o pino do botão como entrada
+    // Inicializa os pinos dos botões como entrada
     gpio_init(BT_A);
     gpio_pull_up(BT_A);
     gpio_set_dir(BT_A, false);
+    gpio_init(BT_B);
+    gpio_pull_up(BT_B);
+    gpio_set_dir(BT_B, false);
 
     int contador = 0;
+
+    // Configura a interrupção do botão B
+    gpio_set_irq_enabled_with_callback(BT_B, GPIO_IRQ_EDGE_RISE, true, &minhaCallback);
 
     while (true) {
         bool bt_A_Acionado = (gpio_get(BT_A) == 0);
