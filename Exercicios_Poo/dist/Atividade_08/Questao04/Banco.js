@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Bank = void 0;
+const Cliente_1 = require("./Cliente");
+const Conta_1 = require("./Conta");
+const Utils_1 = require("./Utils");
 class Bank {
     constructor() {
         this._contas = [];
@@ -20,23 +23,21 @@ class Bank {
     }
     inserirConta(conta) {
         for (let ct of this._contas) {
-            if (ct.idConta === conta.idConta || ct.numero === conta.numero) {
-                console.log("\n\t\rO ID ou numero da Conta ja estao cadastrados no sistema...");
+            if (ct.numero === conta.numero) {
+                console.log("\n\t\rO numero da Conta ja esta cadastrado no sistema...");
                 return;
             }
         }
         this._contas.push(conta);
-        console.log("\n\t\rConta Inserida com sucesso...");
     }
     inserirCliente(cliente) {
         for (let cl of this._clientes) {
-            if (cl.cpf === cliente.cpf || cl.idCliente === cliente.idCliente) {
-                console.log("\n\t\rO CPF ou ID ja estao cadastrados no sistema...");
+            if (cl.cpf === cliente.cpf) {
+                console.log("\n\t\rO CPF ja esta cadastrado no sistema...");
                 return;
             }
         }
         this._clientes.push(cliente);
-        console.log("\n\t\rCliente Inserido com sucesso...");
     }
     consultarCliente(cpfCliente) {
         let clienteProcurado;
@@ -59,36 +60,19 @@ class Bank {
         return contaProcurada;
     }
     associarContaCliente(numeroConta, cpfCliente) {
-        let conta = this.consultarConta(numeroConta);
-        let cliente = this.consultarCliente(cpfCliente);
-        if (!conta) {
-            console.log(`\n\t\rConta com número ${numeroConta} não encontrada.`);
-            return;
-        }
-        if (!cliente) {
-            console.log(`\n\t\rCliente com CPF ${cpfCliente} não encontrado.`);
-            return;
-        }
-        if (conta.cliente) {
-            console.log(`\n\t\rA conta ${numeroConta} já está associada ao cliente ${conta.cliente.nome}.`);
-            return;
-        }
-        for (let conta of cliente.contas) {
-            if (conta.numero === numeroConta) {
-                console.log("\n\t\rA conta ja esta associada a um cliente...");
-                return;
-            }
-        }
-        conta.cliente = cliente;
-        cliente.contas.push(conta);
-        console.log("\n\t\rA conta foi associada ao cliente...");
+        let contaProcurada = this.consultarConta(numeroConta);
+        let clienteProcurado = this.consultarCliente(cpfCliente);
+        contaProcurada.cliente = clienteProcurado;
+        clienteProcurado.adicionarConta(contaProcurada);
     }
     listarContasCliente(cpfCliente) {
-        let listaContas = this.consultarCliente(cpfCliente);
-        if (!listaContas) {
+        let clienteProcurado = this.consultarCliente(cpfCliente);
+        let listaContasCliente = [];
+        if (!clienteProcurado) {
             throw new Error(`\n\t\rCliente com CPF ${cpfCliente} não encontrado.`);
         }
-        return listaContas.contas;
+        listaContasCliente = clienteProcurado.listarContas();
+        return listaContasCliente;
     }
     totalizarSaldoCliente(cpfCliente) {
         let valorTotalContas = 0;
@@ -173,6 +157,56 @@ class Bank {
         let totalDinheiro = this.totalDinheiro();
         let mediaSaldo = totalDinheiro / quantidadeContas;
         return mediaSaldo.toFixed(2);
+    }
+    renderJuros(numeroConta) {
+        let contaProcurada = this.consultarConta(numeroConta);
+        if (contaProcurada) {
+            if (contaProcurada instanceof Conta_1.Poupanca) {
+                //Uso diretamente o metodo renderJuros sem precisar do cast pois seria redundante, pois instante of ja verifica se é do tipo poupança.
+                contaProcurada.renderJuros();
+            }
+        }
+    }
+    lerArquivo(nomeArquivo) {
+        let dados = (0, Utils_1.read_file)(nomeArquivo);
+        let linhas = dados.split('\n');
+        for (let linha of linhas) {
+            let dados = linha.split(';');
+            let cliente = new Cliente_1.Client(dados[3], dados[4], new Date(dados[5]));
+            this.inserirCliente(cliente);
+            if (dados[0] === 'CC') {
+                let conta = new Conta_1.Corrente(dados[1], parseFloat(dados[2]));
+                this.inserirConta(conta);
+                this.associarContaCliente(dados[1], dados[4]);
+            }
+            else if (dados[0] === 'CP') {
+                let conta = new Conta_1.Poupanca(dados[1], parseFloat(dados[2]));
+                this.inserirConta(conta);
+                this.associarContaCliente(dados[1], dados[4]);
+            }
+            else if (dados[0] === 'CI') {
+                let conta = new Conta_1.ContaImposto(dados[1], parseFloat(dados[2]));
+                this.inserirConta(conta);
+                this.associarContaCliente(dados[1], dados[4]);
+            }
+        }
+    }
+    salvarArquivo(nomeArquivo) {
+        let dados = '';
+        for (let conta of this._contas) {
+            dados += `Contas cadastradas\n`;
+            dados += `Tipo -- Numero -- Saldo -- CPF -- Nome -- Data de Nascimento\n`;
+            if (conta instanceof Conta_1.Corrente) {
+                dados += `CC (Conta Corrente) -- ${conta.numero} -- ${conta.saldo} -- ${conta.cliente.cpf} -- ${conta.cliente.nome} -- ${conta.cliente.dataNascimento}\n`;
+            }
+            else if (conta instanceof Conta_1.Poupanca) {
+                dados += `CP (Conta Poupanca)-- ${conta.numero} -- ${conta.saldo} -- ${conta.cliente.cpf} -- ${conta.cliente.nome} -- ${conta.cliente.dataNascimento}\n`;
+            }
+            else if (conta instanceof Conta_1.ContaImposto) {
+                dados += `CI (Conta Imposto)-- ${conta.numero} -- ${conta.saldo} -- ${conta.cliente.cpf} -- ${conta.cliente.nome} -- ${conta.cliente.dataNascimento}\n`;
+            }
+        }
+        (0, Utils_1.write_file)(nomeArquivo, dados);
     }
 }
 exports.Bank = Bank;

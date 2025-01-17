@@ -14,8 +14,11 @@ exports.get_random_number = get_random_number;
 exports.porcentagem = porcentagem;
 exports.reverse = reverse;
 exports.hideInput = hideInput;
+exports.read_file = read_file;
+exports.write_file = write_file;
 const readline_sync_1 = require("readline-sync");
 const readline_sync_2 = __importDefault(require("readline-sync"));
+const fs_1 = __importDefault(require("fs"));
 function get_number(texto) {
     return Number((0, readline_sync_1.question)(texto));
 }
@@ -56,5 +59,17 @@ function hideInput(texto) {
     return readline_sync_2.default.question(texto, {
         hideEchoBack: true,
     });
+}
+function read_file(nomeArquivo) {
+    if (fs_1.default.existsSync(nomeArquivo)) {
+        return fs_1.default.readFileSync(nomeArquivo, 'utf8');
+    }
+    else {
+        console.error(`Erro: Arquivo não encontrado em ${nomeArquivo}`);
+        return '';
+    }
+}
+function write_file(nomeArquivo, conteudo) {
+    fs_1.default.writeFileSync(nomeArquivo, conteudo);
 }
 //# sourceMappingURL=Utils.js.map

@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Client = void 0;
+const Conta_1 = require("./Conta");
 class Client {
-    constructor(iD, nomeCliente, cpfCliente, dataNasci) {
+    constructor(nomeCliente, cpfCliente, dataNasci) {
         this._contas = [];
-        this._idCliente = iD;
+        this._idCliente = 0;
         this._nome = nomeCliente;
         this._cpf = cpfCliente;
         this._dataNascimento = dataNasci;
@@ -38,6 +39,19 @@ class Client {
     }
     set contas(valor) {
         this._contas = valor;
+    }
+    adicionarConta(contaProcurada) {
+        this._contas.push(contaProcurada);
+    }
+    listarContas() {
+        let copiaContas = [];
+        for (let conta of this._contas) {
+            let contaCopiada = new Conta_1.Cont(conta.numero, conta.saldo);
+            contaCopiada.idConta = conta.idConta;
+            contaCopiada.cliente = conta.cliente;
+            copiaContas.push(contaCopiada);
+        }
+        return copiaContas;
     }
     toString() {
         let contasInfo = this._contas.map(conta => `  - ${conta.numero} (Saldo: ${conta.saldo})`).join('\n');

@@ -1,5 +1,6 @@
 import { question } from "readline-sync";
 import readlineSync from "readline-sync";
+import fs from 'fs';
 
 export function get_number(texto: string) {
     return Number(question(texto));
@@ -54,4 +55,17 @@ export function hideInput(texto: string) {
     return readlineSync.question(texto, {
         hideEchoBack: true,
     });
+}
+
+export function read_file(nomeArquivo: string) {
+    if (fs.existsSync(nomeArquivo)) {
+        return fs.readFileSync(nomeArquivo, 'utf8');
+    } else {
+        console.error(`Erro: Arquivo não encontrado em ${nomeArquivo}`);
+        return '';
+    }
+}
+
+export function write_file(nomeArquivo: string, conteudo: any) {
+    fs.writeFileSync(nomeArquivo, conteudo);
 }
