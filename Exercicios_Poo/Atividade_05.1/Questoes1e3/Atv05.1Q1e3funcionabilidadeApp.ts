@@ -1,5 +1,5 @@
-import { Client, Bank, Cont } from "./classBank";
-import { get_date, get_number, get_text, print } from "./utils";
+import { Client, Bank, Cont } from "./Atv05.1Q1e3classBank";
+import { get_date, get_number, get_text, print } from "./Atv05.1Q1e3utils";
 
 export function inserirConta(banco: Bank): any {
     let idConta = get_number(`\n\rDigite o numero de identificacao(ID) da conta: `);

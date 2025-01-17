@@ -1,5 +1,5 @@
-import { Client } from "../Questao04/classNewClient";
-import { Cont } from "../Questao04/classNewCont";
+import { Client } from "../Questao04/Atv06Q04classNewClient";
+import { Cont } from "../Questao04/Atv06Q04classNewCont";
 
 export class Bank {
     private _contas: Cont[];

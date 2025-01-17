@@ -1,7 +1,7 @@
 import { question } from 'readline-sync';
-import { Bank } from "../Questao03/classNewBank";
-import { App } from './classNewApp';
-import { get_date, get_number, get_text } from './newUtils';
+import { Bank } from "../Questao03/Atv06Q03";
+import { App } from './Atv06Q05classNewApp';
+import { get_date, get_number, get_text } from './Atv06Q05newUtils';
 
 function main() {
     let b: Bank = new Bank();

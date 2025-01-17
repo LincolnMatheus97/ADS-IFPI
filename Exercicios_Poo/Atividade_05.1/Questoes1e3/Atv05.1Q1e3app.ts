@@ -1,6 +1,6 @@
 import { question } from 'readline-sync';
-import { Bank } from "./classBank";
-import { associarContaCliente, consultarCliente, consultarConta, depositarConta, excluirConta, inserirCliente, inserirConta, sacarConta, totalizarSaldos, transferirEntreContas } from './funcionabilidadeApp';
+import { Bank } from "./Atv05.1Q1e3classBank";
+import { associarContaCliente, consultarCliente, consultarConta, depositarConta, excluirConta, inserirCliente, inserirConta, sacarConta, totalizarSaldos, transferirEntreContas } from './Atv05.1Q1e3funcionabilidadeApp';
 
 function main() {
     let b: Bank = new Bank();

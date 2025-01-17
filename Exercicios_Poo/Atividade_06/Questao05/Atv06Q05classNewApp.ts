@@ -1,7 +1,7 @@
-import { Bank } from "../Questao03/classNewBank";
-import { Client } from "../Questao04/classNewClient";
-import { Cont } from "../Questao04/classNewCont";
-import { get_date, get_number, get_text, print } from "./newUtils";
+import { Bank } from "../Questao03/Atv06Q03";
+import { Client } from "../Questao04/Atv06Q04classNewClient";
+import { Cont } from "../Questao04/Atv06Q04classNewCont";
+import { get_date, get_number, get_text, print } from "./Atv06Q05newUtils";
 
 export class App {
     private _banco: Bank;

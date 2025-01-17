@@ -1,4 +1,4 @@
-import { Cont } from "./novaConta";
+import { Cont } from "./Atv05.2novaConta";
 
 export class Client {
     idCliente: number;

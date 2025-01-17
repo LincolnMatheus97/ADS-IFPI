@@ -1,12 +1,12 @@
-import { question } from 'readline-sync';
-import { Bank } from "./Classes/novoBanco";
-import { App } from './Classes/novoApp';
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const readline_sync_1 = require("readline-sync");
+const Atv05_2novoBanco_1 = require("./Classes/Atv05.2novoBanco");
+const Atv05_2novoApp_1 = require("./Classes/Atv05.2novoApp");
 function main() {
-    let b: Bank = new Bank();
-    let app: App = new App(b);
-    let escolha: number = -1;
-
+    let b = new Atv05_2novoBanco_1.Bank();
+    let app = new Atv05_2novoApp_1.App(b);
+    let escolha = -1;
     while (escolha != 0) {
         console.log(`\n
         \t\rBem Vindo
@@ -20,9 +20,8 @@ function main() {
         \t\r12 - Excluir
         \n\t\rPara Sair:
         \t\r0 - Sair do Programa`);
-        escolha = Number(question(`\n\t\rOpcao Desejada: `));
-
-        switch(escolha) {
+        escolha = Number((0, readline_sync_1.question)(`\n\t\rOpcao Desejada: `));
+        switch (escolha) {
             case 1:
                 app.inserirConta();
                 break;
@@ -63,10 +62,10 @@ function main() {
                 console.log(`Encerrando Programa...`);
                 break;
             default:
-                console.log(`Opção Invalida...`)
+                console.log(`Opção Invalida...`);
         }
-        question(`Operacao finalizada...Digite Enter`);
+        (0, readline_sync_1.question)(`Operacao finalizada...Digite Enter`);
     }
 }
-
 main();
+//# sourceMappingURL=Atv05.2main.js.map

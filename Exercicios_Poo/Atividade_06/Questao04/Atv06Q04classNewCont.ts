@@ -1,4 +1,4 @@
-import { Client } from "./classNewClient";
+import { Client } from "./Atv06Q04classNewClient";
 
 export class Cont { 
     private _idConta: number;

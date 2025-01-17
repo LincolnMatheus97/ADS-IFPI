@@ -1,40 +1,32 @@
-import { Client } from "./novoCliente";
-
-export class Cont { 
-    idConta: number;
-    numero: string;
-    saldo: number;
-    cliente: Client | null;
-
-    constructor(idConta: number, numeroConta: string, valorSaldo: number, nossoCliente: Client | null) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Cont = void 0;
+class Cont {
+    constructor(idConta, numeroConta, valorSaldo, nossoCliente) {
         this.idConta = idConta;
         this.numero = numeroConta;
         this.saldo = valorSaldo;
         this.cliente = nossoCliente;
-
-        if(nossoCliente) {
+        if (nossoCliente) {
             nossoCliente.contas.push(this);
         }
     }
-
-    sacar(valor: number): void {
+    sacar(valor) {
         this.saldo = this.saldo - valor;
     }
-
-    depositar(valor: number): void {
+    depositar(valor) {
         this.saldo = this.saldo + valor;
     }
-
-    consultarSaldo(): number {
+    consultarSaldo() {
         return this.saldo;
     }
-
-    transferir(contaDestino: Cont, contaRemetente: Cont, valor: number): void {
+    transferir(contaDestino, contaRemetente, valor) {
         contaRemetente.sacar(valor);
         contaDestino.depositar(valor);
     }
-
-    toString(): string {
+    toString() {
         return `Conta: ${this.numero}, Saldo: ${this.saldo}, Cliente: ${this.cliente ? this.cliente.nome : 'Nenhum'}`;
     }
 }
+exports.Cont = Cont;
+//# sourceMappingURL=Atv05.2novaConta.js.map
