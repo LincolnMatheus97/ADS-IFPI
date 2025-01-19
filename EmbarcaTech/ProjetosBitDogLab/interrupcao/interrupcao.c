@@ -9,7 +9,7 @@
 #define BT_B 6
 
 // Define a variável que armazena o tempo de piscar do led
-int piscarMs = 1000;
+volatile int piscarMs = 1000;
 
 // Função de interrupção que é chamada quando o botão é pressionado
 void minhaIRQ(uint gpio, uint32_t events) {
