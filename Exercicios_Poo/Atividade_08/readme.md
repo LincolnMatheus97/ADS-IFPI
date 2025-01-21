@@ -75,4 +75,3 @@ Error: Saldo insuficiente para transferir...
     at App.transferirEntreContas (...)
     at main (...)
 Esse tipo de tratamento evita a propagação para outras classes, mas exige cuidado para garantir uma implementação confiável.
-
