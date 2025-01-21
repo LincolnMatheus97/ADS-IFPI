@@ -93,6 +93,40 @@ int getIndex(int x, int y) {
     }
 }
 
+void coracaoVermelho() {
+  int matriz[5][5][3] = {
+    {{0, 0, 0}, {182, 0, 253}, {0, 0, 0}, {182, 0, 253}, {0, 0, 0}},
+    {{182, 0, 253}, {0, 0, 0}, {182, 0, 253}, {0, 0, 0}, {182, 0, 253}},
+    {{182, 0, 253}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {182, 0, 253}},
+    {{0, 0, 0}, {182, 0, 253}, {0, 0, 0}, {182, 0, 253}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {182, 0, 253}, {0, 0, 0}, {0, 0, 0}}
+    };
+    // Desenhando Sprite contido na matriz.c
+    for(int linha = 0; linha < 5; linha++){
+      for(int coluna = 0; coluna < 5; coluna++){
+        int posicao = getIndex(linha, coluna);
+        npSetLED(posicao, matriz[coluna][linha][0], matriz[coluna][linha][1], matriz[coluna][linha][2]);
+      }
+    }
+}
+
+void coracaoRoxo() {
+  int matriz[5][5][3] = {
+    {{0, 0, 0}, {238, 11, 11}, {0, 0, 0}, {238, 11, 11}, {0, 0, 0}},    
+    {{238, 11, 11}, {0, 0, 0}, {238, 11, 11}, {0, 0, 0}, {238, 11, 11}},
+    {{238, 11, 11}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {238, 11, 11}},    
+    {{0, 0, 0}, {238, 11, 11}, {0, 0, 0}, {238, 11, 11}, {0, 0, 0}},    
+    {{0, 0, 0}, {0, 0, 0}, {238, 11, 11}, {0, 0, 0}, {0, 0, 0}}
+    };
+    // Desenhando Sprite contido na matriz.c
+    for(int linha = 0; linha < 5; linha++){
+      for(int coluna = 0; coluna < 5; coluna++){
+        int posicao = getIndex(linha, coluna);
+        npSetLED(posicao, matriz[coluna][linha][0], matriz[coluna][linha][1], matriz[coluna][linha][2]);
+      }
+    }
+}
+
 int main() {
 
   // Inicializa entradas e saídas.
@@ -108,23 +142,11 @@ int main() {
 
   // Não faz mais nada. Loop infinito.
   while (true) {
-    int matriz[5][5][3] = {
-    {{3, 157, 28}, {3, 157, 28}, {3, 157, 28}, {3, 157, 28}, {3, 157, 28}},       
-    {{3, 157, 28}, {0, 0, 0}, {3, 157, 28}, {0, 0, 0}, {3, 157, 28}},
-    {{3, 157, 28}, {3, 157, 28}, {0, 0, 0}, {3, 157, 28}, {3, 157, 28}},
-    {{3, 157, 28}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {3, 157, 28}},
-    {{3, 157, 28}, {0, 0, 0}, {3, 157, 28}, {0, 0, 0}, {3, 157, 28}}
-    };
-    // Desenhando Sprite contido na matriz.c
-    for(int linha = 0; linha < 5; linha++){
-      for(int coluna = 0; coluna < 5; coluna++){
-        int posicao = getIndex(linha, coluna);
-        npSetLED(posicao, matriz[coluna][linha][0], matriz[coluna][linha][1], matriz[coluna][linha][2]);
-      }
-    }
+    coracaoVermelho();
     npWrite();
     sleep_ms(2000);
     npClear();
+    coracaoRoxo();
     npWrite();
     sleep_ms(2000);
   }
