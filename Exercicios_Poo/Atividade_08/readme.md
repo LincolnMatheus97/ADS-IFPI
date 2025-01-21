@@ -1,5 +1,4 @@
-Tipos Comuns de Tratamento de Erros
-
+Tipos Comuns de Tratamento de Erros!
 1.  
 1.1)
 O primeiro tipo comum de tratamento de erros é desconsiderar que o erro possa existir.
