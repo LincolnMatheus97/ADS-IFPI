@@ -80,3 +80,4 @@ Tipos Comuns de Tratamento de Erros
     at node:internal/main/run_main_module:28:49
     ```
     É um pouco confiavel, já que não se propaga para outras classes, mas tenho que tratar do como correto esse tipo de erro.
+    
