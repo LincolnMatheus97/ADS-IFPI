@@ -110,6 +110,7 @@ int main() {
         npSetLED(posicao, matriz[coluna][linha][0], matriz[coluna][linha][1], matriz[coluna][linha][2]);
       }
     }
+    
     sleep_ms(1000);
   }
 }
