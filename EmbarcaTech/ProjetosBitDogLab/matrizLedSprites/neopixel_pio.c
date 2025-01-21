@@ -103,6 +103,13 @@ int main() {
     {{3, 157, 28}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {3, 157, 28}},
     {{3, 157, 28}, {0, 0, 0}, {3, 157, 28}, {0, 0, 0}, {3, 157, 28}}
     };
+    // Desenhando Sprite contido na matriz.c
+    for(int linha = 0; linha < 5; linha++){
+      for(int coluna = 0; coluna < 5; coluna++){
+        int posicao = getIndex(linha, coluna);
+        npSetLED(posicao, matriz[coluna][linha][0], matriz[coluna][linha][1], matriz[coluna][linha][2]);
+      }
+    }
     sleep_ms(1000);
   }
 }
