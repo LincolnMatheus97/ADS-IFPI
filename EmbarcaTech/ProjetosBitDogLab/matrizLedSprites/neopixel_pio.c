@@ -9,6 +9,8 @@
 // Definição do número de LEDs e pino.
 #define LED_COUNT 25
 #define LED_PIN 7
+#define BT_A 5
+#define BT_B 6
 
 // Definição de pixel GRB
 struct pixel_t {
@@ -131,6 +133,12 @@ int main() {
 
   // Inicializa entradas e saídas.
   stdio_init_all();
+  gpio_init(BT_A);
+  gpio_set_dir(BT_A, GPIO_IN);
+  gpio_pull_up(BT_A);
+  gpio_init(BT_B);
+  gpio_set_dir(BT_B, GPIO_IN);
+  gpio_pull_up(BT_B);
 
   // Inicializa matriz de LEDs NeoPixel.
   npInit(LED_PIN);
