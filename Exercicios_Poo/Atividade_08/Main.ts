@@ -67,10 +67,6 @@ function main() {
                     contasDestino.push(contaDestino);
                 }
                 valor = get_number(`Digite o valor que deseja transferir: `);
-                if (valor * contasDestino.length > b.consultarConta(contaOrigem).saldo) {
-                    console.log(`Saldo insuficiente...`);
-                    break;
-                }
                 app.transferirEntreContas(contaOrigem, contasDestino, valor);
                 break;
             case 7:

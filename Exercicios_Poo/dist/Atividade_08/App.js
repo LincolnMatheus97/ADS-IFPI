@@ -86,13 +86,8 @@ class App {
     transferirEntreContas(numContaRemetente, contasDestino, valorDesejado) {
         let remetenteProcurada = this._banco.consultarConta(numContaRemetente);
         if (remetenteProcurada) {
-            if (remetenteProcurada.saldo >= valorDesejado * contasDestino.length) {
-                this._banco.transferir(valorDesejado, remetenteProcurada, ...contasDestino);
-                return `Transferência realizada com sucesso...`;
-            }
-            else {
-                return `Saldo insuficiente para transferir...`;
-            }
+            this._banco.transferir(valorDesejado, remetenteProcurada, ...contasDestino);
+            return `Transferência realizada com sucesso...`;
         }
         else {
             return `Conta de número ${numContaRemetente}, não encontrada...`;

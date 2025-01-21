@@ -39,12 +39,12 @@ export class App {
         }
     }
 
-    public consultarConta(numeroConta: string): void {
+    public consultarConta(numeroConta: string): { sucesso: boolean, mensagem: string } {
         let contaProcurada = this._banco.consultarConta(numeroConta);
         if (contaProcurada) {
-            print(`Conta encontrada, dados: ${contaProcurada.toString()}`);
+            return { sucesso: true, mensagem: `Conta encontrada, dados: ${contaProcurada.toString()}` };
         } else {
-            print(`Conta de número ${numeroConta}, não encontrada...`);
+            return { sucesso: false, mensagem: `Conta de número ${numeroConta}, não encontrada...` };
         }
     }
 
@@ -113,48 +113,25 @@ export class App {
         }
     }
 
-    public mudarTitularidade(): void {
-        let numeroConta = get_text(`\n\rDigite o numero da conta: `);
+    public mudarTitularidade(numeroConta: string, novoCpf: string): string {
         let contaProcurada = this._banco.consultarConta(numeroConta);
         if (contaProcurada) {
             if (contaProcurada.cliente) {
-                print(`${contaProcurada.toString()}`);
-                let escolha = get_number(`\n\rDeseja alterar o titular da Conta? (1) - SIM, (2) - NAO: `);
-                if (escolha === 1) {
-                    let numeroCpf = get_text(`\n\rDigite o numero de CPF do novo Cliente Titular: `);
-                    let clienteProcurado = this._banco.consultarCliente(numeroCpf);
-
-                    if (clienteProcurado) {
-                        contaProcurada.cliente.contas = this.listaContas(numeroCpf);
-                        contaProcurada.cliente = clienteProcurado;
-                        clienteProcurado.adicionarConta(contaProcurada);
-                        print(`\n\rMudança realizada com sucesso...`);
-                        print(`${contaProcurada.toString()}`);
-                    } else {
-                        print(`\n\rCliente não encontrado...`);
-                        contaProcurada.cliente.contas = this.listaContas(numeroCpf);
-                        let nomeCliente = get_text(`\n\rDigite o nome do cliente: `);
-                        let dataNasci = get_date(`\n\rDigite a data de aniversario do cliente. EX: (ano, mes, dia): `);
-                        let novoCliente = this.inserirCliente(nomeCliente, numeroCpf, dataNasci);
-                        novoCliente.adicionarConta(contaProcurada);
-                        contaProcurada.cliente = novoCliente;
-                        print(`\n\rMudança realizada com sucesso...`);
-                        print(`${contaProcurada.toString()}`);
-                    }
+                let clienteAnterior = contaProcurada.cliente;
+                let clienteProcurado = this._banco.consultarCliente(novoCpf);
+                if (clienteProcurado) {
+                    clienteAnterior.removerConta(contaProcurada.numero);
+                    contaProcurada.cliente = clienteProcurado;
+                    clienteProcurado.adicionarConta(contaProcurada);
+                    return `Mudança realizada com sucesso.`;
                 } else {
-                    return;
+                    return `Cliente não encontrado. Necessário criar novo cliente.`;
                 }
             } else {
-                print(`${contaProcurada.toString()}`);
-                let escolha = get_number(`\n\rA conta nao possui cliente associado. Deseja associar um cliente? (1) - SIM, (2) - NAO: `);
-                if (escolha === 1) {
-                    this.associarContaCliente(numeroConta, get_text(`\n\rDigite o numero de CPF do Cliente: `));
-                } else {
-                    return;
-                }
+                return `Conta não possui cliente associado. Necessário associar um cliente.`;
             }
         } else {
-            print(`\n\rConta de número ${numeroConta}, não encontrada...`);
+            return `Conta de número ${numeroConta}, não encontrada.`;
         }
     }
 
