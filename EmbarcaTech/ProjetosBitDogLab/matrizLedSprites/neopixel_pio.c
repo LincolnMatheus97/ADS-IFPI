@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "hardware/pio.h"
+#include "hardware/gpio.h"
 #include "hardware/clocks.h"
 
 // Biblioteca gerada pelo arquivo .pio durante compilação.
@@ -129,6 +130,16 @@ void coracaoRoxo() {
     }
 }
 
+volatile int desenho = -1;
+
+void minhaIRQ(uint gpio, uint32_t events) {
+  if (gpio == BT_A) {
+    desenho = 1;
+  } else if (gpio == BT_B) {
+    desenho = 0;
+  }
+}
+
 int main() {
 
   // Inicializa entradas e saídas.
@@ -140,6 +151,9 @@ int main() {
   gpio_set_dir(BT_B, GPIO_IN);
   gpio_pull_up(BT_B);
 
+  gpio_set_irq_enabled_with_callback(BT_A, GPIO_IRQ_EDGE_RISE, true, &minhaIRQ);
+  gpio_set_irq_enabled_with_callback(BT_B, GPIO_IRQ_EDGE_RISE, true, &minhaIRQ);
+
   // Inicializa matriz de LEDs NeoPixel.
   npInit(LED_PIN);
   npClear();
@@ -150,12 +164,19 @@ int main() {
 
   // Não faz mais nada. Loop infinito.
   while (true) {
-    coracaoVermelho();
-    npWrite();
-    sleep_ms(2000);
+    if (desenho == 1) {
+      coracaoRoxo();
+      npWrite();
+      npClear();
+      sleep_ms(1000);
+    } else if (desenho == 0) {
+      coracaoVermelho();
+      npWrite();
+      npClear();
+      sleep_ms(1000);
+    } 
     npClear();
-    coracaoRoxo();
     npWrite();
-    sleep_ms(2000);
+    sleep_ms(1000);
   }
 }
