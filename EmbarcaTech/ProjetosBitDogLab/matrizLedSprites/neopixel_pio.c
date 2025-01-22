@@ -14,7 +14,8 @@
 #define BT_B 6
 
 // Definição de pixel GRB
-struct pixel_t {
+struct pixel_t
+{
   uint8_t G, R, B; // Três valores de 8-bits compõem um pixel.
 };
 typedef struct pixel_t pixel_t;
@@ -30,7 +31,8 @@ uint sm;
 /**
  * Inicializa a máquina PIO para controle da matriz de LEDs.
  */
-void npInit(uint pin) {
+void npInit(uint pin)
+{
 
   // Cria programa PIO.
   uint offset = pio_add_program(pio0, &ws2818b_program);
@@ -38,7 +40,8 @@ void npInit(uint pin) {
 
   // Toma posse de uma máquina PIO.
   sm = pio_claim_unused_sm(np_pio, false);
-  if (sm < 0) {
+  if (sm < 0)
+  {
     np_pio = pio1;
     sm = pio_claim_unused_sm(np_pio, true); // Se nenhuma máquina estiver livre, panic!
   }
@@ -47,7 +50,8 @@ void npInit(uint pin) {
   ws2818b_program_init(np_pio, sm, offset, pin, 800000.f);
 
   // Limpa buffer de pixels.
-  for (uint i = 0; i < LED_COUNT; ++i) {
+  for (uint i = 0; i < LED_COUNT; ++i)
+  {
     leds[i].R = 0;
     leds[i].G = 0;
     leds[i].B = 0;
@@ -57,7 +61,8 @@ void npInit(uint pin) {
 /**
  * Atribui uma cor RGB a um LED.
  */
-void npSetLED(const uint index, const uint8_t r, const uint8_t g, const uint8_t b) {
+void npSetLED(const uint index, const uint8_t r, const uint8_t g, const uint8_t b)
+{
   leds[index].R = r;
   leds[index].G = g;
   leds[index].B = b;
@@ -66,7 +71,8 @@ void npSetLED(const uint index, const uint8_t r, const uint8_t g, const uint8_t 
 /**
  * Limpa o buffer de pixels.
  */
-void npClear() {
+void npClear()
+{
   for (uint i = 0; i < LED_COUNT; ++i)
     npSetLED(i, 0, 0, 0);
 }
@@ -74,9 +80,11 @@ void npClear() {
 /**
  * Escreve os dados do buffer nos LEDs.
  */
-void npWrite() {
+void npWrite()
+{
   // Escreve cada dado de 8-bits dos pixels em sequência no buffer da máquina PIO.
-  for (uint i = 0; i < LED_COUNT; ++i) {
+  for (uint i = 0; i < LED_COUNT; ++i)
+  {
     pio_sm_put_blocking(np_pio, sm, leds[i].G);
     pio_sm_put_blocking(np_pio, sm, leds[i].R);
     pio_sm_put_blocking(np_pio, sm, leds[i].B);
@@ -86,23 +94,160 @@ void npWrite() {
 
 // Modificado do github: https://github.com/BitDogLab/BitDogLab-C/tree/main/neopixel_pio
 // Função para converter a posição do matriz para uma posição do vetor.
-int getIndex(int x, int y) {
-    // Se a linha for par (0, 2, 4), percorremos da esquerda para a direita.
-    // Se a linha for ímpar (1, 3), percorremos da direita para a esquerda.
-    if (y % 2 == 0) {
-        return 24-(y * 5 + x); // Linha par (esquerda para direita).
-    } else {
-        return 24-(y * 5 + (4 - x)); // Linha ímpar (direita para esquerda).
+int getIndex(int x, int y)
+{
+  // Se a linha for par (0, 2, 4), percorremos da esquerda para a direita.
+  // Se a linha for ímpar (1, 3), percorremos da direita para a esquerda.
+  if (y % 2 == 0)
+  {
+    return 24 - (y * 5 + x); // Linha par (esquerda para direita).
+  }
+  else
+  {
+    return 24 - (y * 5 + (4 - x)); // Linha ímpar (direita para esquerda).
+  }
+}
+
+void letraI()
+{
+  int matriz[5][5][3] = {
+      {{0, 0, 0}, {100, 0, 0}, {100, 0, 0}, {100, 0, 0}, {0, 0, 0}},
+      {{0, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+      {{0, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+      {{0, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+      {{0, 0, 0}, {100, 0, 0}, {100, 0, 0}, {100, 0, 0}, {0, 0, 0}}};
+  // Desenhando Sprite contido na matriz.c
+  for (int linha = 0; linha < 5; linha++)
+  {
+    for (int coluna = 0; coluna < 5; coluna++)
+    {
+      int posicao = getIndex(linha, coluna);
+      npSetLED(posicao, matriz[coluna][linha][0], matriz[coluna][linha][1], matriz[coluna][linha][2]);
     }
+  }
+}
+
+void letraL()
+{
+  int matriz[5][5][3] = {
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},   
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},   
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},   
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},   
+    {{0, 0, 0}, {100, 0, 0}, {100, 0, 0}, {100, 0, 0}, {0, 0, 0}}};
+  // Desenhando Sprite contido na matriz.c
+  for (int linha = 0; linha < 5; linha++)
+  {
+    for (int coluna = 0; coluna < 5; coluna++)
+    {
+      int posicao = getIndex(linha, coluna);
+      npSetLED(posicao, matriz[coluna][linha][0], matriz[coluna][linha][1], matriz[coluna][linha][2]);
+    }
+  }
+}
+
+void letraO()
+{
+  int matriz[5][5][3] = {
+    {{0, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
+  // Desenhando Sprite contido na matriz.c
+  for (int linha = 0; linha < 5; linha++)
+  {
+    for (int coluna = 0; coluna < 5; coluna++)
+    {
+      int posicao = getIndex(linha, coluna);
+      npSetLED(posicao, matriz[coluna][linha][0], matriz[coluna][linha][1], matriz[coluna][linha][2]);
+    }
+  }
+}
+
+void letraV()
+{
+  int matriz[5][5][3] = {
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
+  // Desenhando Sprite contido na matriz.c
+  for (int linha = 0; linha < 5; linha++)
+  {
+    for (int coluna = 0; coluna < 5; coluna++)
+    {
+      int posicao = getIndex(linha, coluna);
+      npSetLED(posicao, matriz[coluna][linha][0], matriz[coluna][linha][1], matriz[coluna][linha][2]);
+    }
+  }
+}
+
+void letraE()
+{
+  int matriz[5][5][3] = {
+    {{0, 0, 0}, {100, 0, 0}, {100, 0, 0}, {100, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {100, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {100, 0, 0}, {100, 0, 0}, {100, 0, 0}, {0, 0, 0}}};
+  // Desenhando Sprite contido na matriz.c
+  for (int linha = 0; linha < 5; linha++)
+  {
+    for (int coluna = 0; coluna < 5; coluna++)
+    {
+      int posicao = getIndex(linha, coluna);
+      npSetLED(posicao, matriz[coluna][linha][0], matriz[coluna][linha][1], matriz[coluna][linha][2]);
+    }
+  }
+}
+
+void letraY()
+{
+  int matriz[5][5][3] = {
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
+  // Desenhando Sprite contido na matriz.c
+  for (int linha = 0; linha < 5; linha++)
+  {
+    for (int coluna = 0; coluna < 5; coluna++)
+    {
+      int posicao = getIndex(linha, coluna);
+      npSetLED(posicao, matriz[coluna][linha][0], matriz[coluna][linha][1], matriz[coluna][linha][2]);
+    }
+  }
+}
+
+void letraU()
+{
+  int matriz[5][5][3] = {
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {100, 0, 0}, {100, 0, 0}, {100, 0, 0}, {0, 0, 0}}};
+  // Desenhando Sprite contido na matriz.c
+  for (int linha = 0; linha < 5; linha++)
+  {
+    for (int coluna = 0; coluna < 5; coluna++)
+    {
+      int posicao = getIndex(linha, coluna);
+      npSetLED(posicao, matriz[coluna][linha][0], matriz[coluna][linha][1], matriz[coluna][linha][2]);
+    }
+  }
 }
 
 void coracaoVermelho() {
   int matriz[5][5][3] = {
-    {{0, 0, 0}, {255, 0, 0}, {0, 0, 0}, {255, 0, 0}, {0, 0, 0}},  
-    {{255, 0, 0}, {0, 0, 0}, {255, 0, 0}, {0, 0, 0}, {255, 0, 0}},
-    {{255, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {255, 0, 0}},  
-    {{0, 0, 0}, {255, 0, 0}, {0, 0, 0}, {255, 0, 0}, {0, 0, 0}},  
-    {{0, 0, 0}, {0, 0, 0}, {255, 0, 0}, {0, 0, 0}, {0, 0, 0}}  
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}},  
+    {{100, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {100, 0, 0}},
+    {{100, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {100, 0, 0}},  
+    {{0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}},  
+    {{0, 0, 0}, {0, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0}}  
     };
     // Desenhando Sprite contido na matriz.c
     for(int linha = 0; linha < 5; linha++){
@@ -111,48 +256,12 @@ void coracaoVermelho() {
         npSetLED(posicao, matriz[coluna][linha][0], matriz[coluna][linha][1], matriz[coluna][linha][2]);
       }
     }
-}
-
-void coracaoRoxo() {
-  int matriz[5][5][3] = {
-    {{0, 0, 0}, {182, 0, 253}, {0, 0, 0}, {182, 0, 253}, {0, 0, 0}},
-    {{182, 0, 253}, {0, 0, 0}, {182, 0, 253}, {0, 0, 0}, {182, 0, 253}},
-    {{182, 0, 253}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {182, 0, 253}},
-    {{0, 0, 0}, {182, 0, 253}, {0, 0, 0}, {182, 0, 253}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 0}, {182, 0, 253}, {0, 0, 0}, {0, 0, 0}}
-    };
-    // Desenhando Sprite contido na matriz.c
-    for(int linha = 0; linha < 5; linha++){
-      for(int coluna = 0; coluna < 5; coluna++){
-        int posicao = getIndex(linha, coluna);
-        npSetLED(posicao, matriz[coluna][linha][0], matriz[coluna][linha][1], matriz[coluna][linha][2]);
-      }
-    }
-}
-
-volatile int desenho = -1;
-
-void minhaIRQ(uint gpio, uint32_t events) {
-  if (gpio == BT_A) {
-    desenho = 1;
-  } else if (gpio == BT_B) {
-    desenho = 0;
-  }
 }
 
 int main() {
 
   // Inicializa entradas e saídas.
   stdio_init_all();
-  gpio_init(BT_A);
-  gpio_set_dir(BT_A, GPIO_IN);
-  gpio_pull_up(BT_A);
-  gpio_init(BT_B);
-  gpio_set_dir(BT_B, GPIO_IN);
-  gpio_pull_up(BT_B);
-
-  gpio_set_irq_enabled_with_callback(BT_A, GPIO_IRQ_EDGE_RISE, true, &minhaIRQ);
-  gpio_set_irq_enabled_with_callback(BT_B, GPIO_IRQ_EDGE_RISE, true, &minhaIRQ);
 
   // Inicializa matriz de LEDs NeoPixel.
   npInit(LED_PIN);
@@ -164,19 +273,46 @@ int main() {
 
   // Não faz mais nada. Loop infinito.
   while (true) {
-    if (desenho == 1) {
-      coracaoRoxo();
-      npWrite();
-      npClear();
-      sleep_ms(1000);
-    } else if (desenho == 0) {
-      coracaoVermelho();
-      npWrite();
-      npClear();
-      sleep_ms(1000);
-    } 
-    npClear();
+    letraI();
     npWrite();
-    sleep_ms(1000);
+    npClear();
+    sleep_ms(1500);
+    letraL();
+    npWrite();
+    npClear();
+    sleep_ms(1500);
+    letraL();
+    npWrite();
+    npClear();
+    sleep_ms(1500);
+    letraO();
+    npWrite();
+    npClear();
+    sleep_ms(1500);
+    letraV();
+    npWrite();
+    npClear();
+    sleep_ms(1500);
+    letraE();
+    npWrite();
+    npClear();
+    sleep_ms(1500);
+    letraY();
+    npWrite();
+    npClear();
+    sleep_ms(1500);
+    letraO();
+    npWrite();
+    npClear();
+    sleep_ms(1500);
+    letraU();
+    npWrite();
+    npClear();
+    sleep_ms(1500);
+    coracaoVermelho();
+    npWrite();
+    npClear();
+    sleep_ms(1500);
+
   }
 }
