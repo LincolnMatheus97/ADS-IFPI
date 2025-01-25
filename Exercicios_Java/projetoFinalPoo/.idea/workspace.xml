@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0488db18-f06d-4bab-ae88-dde643af3a3c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/AtCap01_05.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/AtvCap01_03.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/AtvCap01_04.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_Extra2Cap1/listaOrdenada.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_Extra2Cap1/listaOrdenada_2.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_Extra2Cap1/listaSequencial.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_Extra2Cap1/output/listaOrdenada.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_Extra2Cap1/output/listaSequencial.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_Extra2Cap1/output/tda.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_Extra2Cap1/tda.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/Atividade - CAP1 versao 2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/AtvExtQ01.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/AtvExtQ02.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/AtvExtQ03.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/AtvExtQ04.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/AtvExtQ05.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/AtvExtQ06.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/AtvExtQ07.1.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/AtvExtQ07.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/AtvExtQ08.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/AtvExtQ09.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/AtvExtQ10.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/output/AtvExtQ01.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/output/AtvExtQ02.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/output/AtvExtQ03.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/output/AtvExtQ04.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/output/AtvExtQ05.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/output/AtvExtQ06.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/output/AtvExtQ07.1.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/output/AtvExtQ07.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/output/AtvExtQ08.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/output/AtvExtQ09.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/exercicio_ExtraCap1/output/AtvExtQ10.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/modelo1.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/modelo2.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/output/AtCap01_05.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/output/AtvCap01_04.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/output/AtvCap01_3.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/output/modelo2.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap1/teste1.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2.1/Q2.1.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2.1/Q2.2.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2.1/Q2.3.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2.1/Q2.4.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2.1/Q2.5.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2.1/Q2.6.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2.1/Q2.7.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2.1/output/Q2.1.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2.1/output/Q2.2.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2.1/output/Q2.3.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2.1/output/Q2.4.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2.1/output/Q2.5.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2.1/output/Q2.6.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2.1/output/Q2.7.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2.1/pilha.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2.1/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/Q9.1.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/Q9.10.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/Q9.2.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/Q9.3.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/Q9.4.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/Q9.5.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/Q9.6.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/Q9.7.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/Q9.8.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/Q9.9.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/lista.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/novaLista.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/output/Q9.1.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/output/Q9.10.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/output/Q9.2.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/output/Q9.3.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/output/Q9.4.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/output/Q9.5.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/output/Q9.6.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/output/Q9.7.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/output/Q9.8.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/output/Q9.9.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap2/output/lista.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap3/Q3.1.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap3/Q3.2.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap3/Q3.3.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap3/novapilha.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap3/output/Q3.1.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap3/output/Q3.2.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap3/output/Q3.3.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap4/Q4.1.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap4/Q4.2.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap4/fila.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap4/output/Q4.1.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Exercicios_ED_I/exercicios_Cap4/output/Q4.2.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/interacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/interacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/perfil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/perfil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/perfilAvancado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/perfilAvancado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/publicacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/publicacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/publicacaoAvancada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/publicacaoAvancada.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/tipoInteracao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/tipoInteracao.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2s61QnfENKeSTwrWKwktcrFgE1g" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17890.1" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17890.1" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0488db18-f06d-4bab-ae88-dde643af3a3c" name="Changes" comment="" />
+      <created>1737761197661</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1737761197661</updated>
+      <workItem from="1737761199608" duration="25000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

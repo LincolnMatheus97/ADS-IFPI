@@ -1,13 +1,15 @@
 package classes;
 
-public class interacao {
+public class Interacao {
+    // Atributos
+    private static int contadorId = 0;
     private int _id;
-    private tipoInteracao _tipo;
-    private perfil _perfilAutor;
+    private TipoInteracao _tipo;
+    private Perfil _perfilAutor;
 
     // Construtor
-    public interacao(int id, tipoInteracao tipo, perfil perfilAutor) {
-        this._id = id;
+    public Interacao(TipoInteracao tipo, Perfil perfilAutor) {
+        this._id = ++contadorId;
         this._tipo = tipo;
         this._perfilAutor = perfilAutor;
     }
@@ -21,19 +23,19 @@ public class interacao {
         this._id = id;
     }
 
-    public tipoInteracao getTipo() {
+    public TipoInteracao getTipo() {
         return _tipo;
     }
 
-    public void setTipo(tipoInteracao tipo) {
+    public void setTipo(TipoInteracao tipo) {
         this._tipo = tipo;
     }
 
-    public perfil getPerfilAutor() {
+    public Perfil getPerfilAutor() {
         return _perfilAutor;
     }
 
-    public void setPerfilAutor(perfil perfilAutor) {
+    public void setPerfilAutor(Perfil perfilAutor) {
         this._perfilAutor = perfilAutor;
     }
 }

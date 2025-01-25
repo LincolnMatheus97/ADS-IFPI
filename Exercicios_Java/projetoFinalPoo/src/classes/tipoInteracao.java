@@ -1,6 +1,6 @@
 package classes;
 
-public enum tipoInteracao {
+public enum TipoInteracao {
     CURTIR,
     NAO_CURTIR,
     RISO,

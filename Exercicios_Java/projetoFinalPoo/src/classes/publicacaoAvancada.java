@@ -2,27 +2,39 @@ package classes;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-public class publicacaoAvancada extends publicacao {
-    private List<Integer> _interacoes;
+public class PublicacaoAvancada extends Publicacao {
+    // Atributos
+    private ArrayList<Interacao> _interacoes;
 
-    public publicacaoAvancada(int id, String conteudo, Date dataPublicacao, int perfilAssociado, List<Integer> interacoes) {
-        super(id, conteudo, dataPublicacao, perfilAssociado); 
+    public PublicacaoAvancada(String conteudo, Perfil perfilAssociado, ArrayList<Interacao> interacoes) {
+        super(conteudo, perfilAssociado);
         this._interacoes = interacoes;
     }
 
-    public void adicionarInteracao(int idPerfil) {
-        this._interacoes.add(idPerfil);
+    public PublicacaoAvancada(int id, String conteudo, Perfil perfilAssociado, Date dataPublicacao, ArrayList<Interacao> interacoes) {
+        super(conteudo, perfilAssociado);
+        this.setId(id); 
+        this.setDataPublicacao(dataPublicacao); 
+        this._interacoes = interacoes;
     }
 
-    public List<Integer> listarInteracoes(int idPerfil) {
-        List<Integer> interacoesPerfil = new ArrayList<>();
-        for (int interacao : this._interacoes) {
-            if (interacao == idPerfil) {
-                interacoesPerfil.add(interacao);
+    public void adicionarInteracao(Interacao interacao) {
+        if(!this.jaInteragiu(interacao.getPerfilAutor())) {
+            this._interacoes.add(interacao);
+        }
+    }
+
+    public ArrayList<Interacao> listarInteracoes() {
+        return new ArrayList<>(this._interacoes);
+    }
+
+    public boolean jaInteragiu(Perfil perfil) {
+        for (Interacao interacao : this._interacoes) {
+            if (interacao.getPerfilAutor().equals(perfil)) {
+                return true;
             }
         }
-        return interacoesPerfil;
+        return false;
     }
 }

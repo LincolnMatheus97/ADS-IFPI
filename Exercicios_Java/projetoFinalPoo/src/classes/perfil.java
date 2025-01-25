@@ -1,29 +1,27 @@
 package classes;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
-public class perfil {
-
+public class Perfil {
     // Atributos
+    private static int contadorId = 0;
     private int _id;
     private String _apelido;
-    private tipoInteracao _emoji;
+    private EmojiConverter _emoji;
     private String _email;
     private boolean _status;
-    private ArrayList<perfil> _amigos;
-    private ArrayList<String> _postagens;
+    private ArrayList<Perfil> _amigos;
+    private ArrayList<Publicacao> _postagens;
 
     // Construtor
-    public perfil(int id, String apelido, tipoInteracao emoji, String email, boolean status, ArrayList<perfil> amigos, ArrayList<String> postagens) {
-        this._id = id;
+    public Perfil(String apelido, EmojiConverter emoji, String email) {
+        this._id = ++contadorId;
         this._apelido = apelido;
         this._emoji = emoji;
         this._email = email;
-        this._status = status;
-        this._amigos = amigos;
-        this._postagens = postagens;
+        this._status = true;
+        this._amigos = new ArrayList<Perfil>();
+        this._postagens = new ArrayList<Publicacao>();
     }
 
     // Getters e Setters
@@ -43,11 +41,11 @@ public class perfil {
         this._apelido = apelido;
     }
 
-    public tipoInteracao getEmoji() {
+    public EmojiConverter getEmoji() {
         return this._emoji;
     }
 
-    public void setEmoji(tipoInteracao emoji) {
+    public void setEmoji(EmojiConverter emoji) {
         this._emoji = emoji;
     }
 
@@ -68,29 +66,28 @@ public class perfil {
     }
     
     // Métodos
-    public void adicionarAmigo(perfil amigo) {
+    public void adicionarAmigo(Perfil amigo) {
         this._amigos.add(amigo);
     }
 
-    public void removerAmigo(perfil amigo) {
+    public void removerPostagem(Publicacao postagem) {
+        this._postagens.remove(postagem);
+    }
+
+    public void removerAmigo(Perfil amigo) {
         this._amigos.remove(amigo);
     }
 
-    public void adicionarPostagem(String postagem) {
+    public void adicionarPostagem(Publicacao postagem) {
         this._postagens.add(postagem);
     }
 
-    public List<perfil> listarAmigos(perfil perfilEspecifico) {
-        return this._amigos.stream()
-                .filter(amigo -> amigo.equals(perfilEspecifico))
-                .collect(Collectors.toList());
+    public ArrayList<Perfil> listarAmigos() {
+        return new ArrayList<>(this._amigos);
     }
 
-    public List<String> listarPostagens(perfil perfilEspecifico) {
-        if (this.equals(perfilEspecifico)) {
-            return new ArrayList<>(this._postagens);
-        }
-        return new ArrayList<>();
+    public ArrayList<Publicacao> listarPostagens() {
+        return new ArrayList<>(this._postagens);
     }
 
     public void ativarPerfil() {

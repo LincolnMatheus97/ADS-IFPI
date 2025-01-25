@@ -2,18 +2,19 @@ package classes;
 
 import java.util.Date;
 
-public class publicacao {
+public class Publicacao {
     // Atributos
+    private static int contadorId = 0;
     private int _id;
     private String _conteudo;
     private Date _dataPublicacao;
-    private int _perfilAssociado;
+    private Perfil _perfilAssociado;
 
     // Construtor
-    public publicacao(int id, String conteudo, Date dataPublicacao, int perfilAssociado) {
-        this._id = id;
+    public Publicacao(String conteudo, Perfil perfilAssociado) {
+        this._id = ++contadorId;
         this._conteudo = conteudo;
-        this._dataPublicacao = dataPublicacao;
+        this._dataPublicacao = new Date();
         this._perfilAssociado = perfilAssociado;
     }
 
@@ -42,11 +43,11 @@ public class publicacao {
         this._dataPublicacao = dataPublicacao;
     }
 
-    public int getPerfilAssociado() {
+    public Perfil getPerfilAssociado() {
         return _perfilAssociado;
     }
 
-    public void setPerfilAssociado(int perfilAssociado) {
+    public void setPerfilAssociado(Perfil perfilAssociado) {
         this._perfilAssociado = perfilAssociado;
     }
 }
