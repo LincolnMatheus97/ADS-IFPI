@@ -8,8 +8,6 @@
 // bubbleSort
 
 void bubbleSort(int v[], int tamanhoVetor, int *comparacoes, int *trocas) {
-    *comparacoes = 0;
-    *trocas = 0;
     for (int i = 0; i < tamanhoVetor; i++) {
         for (int j = 0; j < tamanhoVetor - 1; j++) {
             (*comparacoes)++; // Contagem da comparação
@@ -35,8 +33,6 @@ int seleciona(int v[], int tamanhoVetor, int *comparacoes) {
 }
 
 void selectSort(int v[], int tamanhoVetor, int *comparacoes, int *selecao) {
-    *comparacoes = 0;
-    *selecao = 0;
     while (tamanhoVetor > 1) {
         int maxIndex = seleciona(v, tamanhoVetor, comparacoes);
         troca(v[maxIndex], v[tamanhoVetor - 1]);
@@ -59,8 +55,6 @@ void insere(int x, int v[], int indexVetor, int *comparacoes, int *insercao) {
 }
 
 void insertSort(int v[], int tamVetor, int *comparacoes, int *insercao) {
-    *comparacoes = 0;
-    *insercao = 0;
     for (int i = 0; i < tamVetor; i++) {
         insere(v[i], v, i, comparacoes, insercao);
     }
@@ -90,7 +84,7 @@ void intercala(int v[], int indInicio, int m, int indFinal, int *comparacoes, in
     }
     for (k = 0; k <= indFinal - indInicio; k++) {
         v[indInicio + k] = w[k];
-        (*intercalar)++; // Contagem da troca
+        (*intercalar)++; // Contagem da intercalacao
     }
     free(w);
 }
@@ -107,33 +101,33 @@ void mergeSort(int v[], int indexInicial, int indexFinal, int *comparacoes, int 
 
 // quickSort
 
-int particiona(int v[], int p, int indFinal, int *comparacoes, int *particionar) {
-    int x = v[p];
-    p--;
+int particiona(int v[], int indInicial, int indFinal, int *comparacoes, int *particionar) {
+    int x = v[indInicial];
+    indInicial--;
     indFinal++;
-    while (p < indFinal) {
+    while (indInicial < indFinal) {
         do {
             indFinal--;
             (*comparacoes)++; // Contagem da comparação
         } while (v[indFinal] > x);
         do {
-            p++;
+            indInicial++;
             (*comparacoes)++; // Contagem da comparação
-        } while (v[p] < x);
-        if (p < indFinal) {
-            troca(v[p], v[indFinal]);
-            (*particionar)++; // Contagem da troca
+        } while (v[indInicial] < x);
+        if (indInicial < indFinal) {
+            troca(v[indInicial], v[indFinal]);
+            (*particionar)++; // Contagem da particao
         }
     }
     return indFinal;
 }
 
-void quickSort(int v[], int p, int indFinal, int *comparacoes, int *particionar) {
-    if (p >= indFinal) {
+void quickSort(int v[], int indInicial, int indFinal, int *comparacoes, int *particionar) {
+    if (indInicial >= indFinal) {
         return;
     }
-    int m = particiona(v, p, indFinal, comparacoes, particionar);
-    quickSort(v, p, m, comparacoes, particionar);
+    int m = particiona(v, indInicial, indFinal, comparacoes, particionar);
+    quickSort(v, indInicial, m, comparacoes, particionar);
     quickSort(v, m + 1, indFinal, comparacoes, particionar);
 }
 

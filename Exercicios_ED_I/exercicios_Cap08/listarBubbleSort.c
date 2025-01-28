@@ -4,7 +4,7 @@
 
 int main() {
     int v[3] = {5, 3, 1};
-    int comparacoes, trocas;
+    int comparacoes = 0, trocas = 0;
 
     bubbleSort(v, 3, &comparacoes, &trocas);
     mostrarVetor(v, 3);

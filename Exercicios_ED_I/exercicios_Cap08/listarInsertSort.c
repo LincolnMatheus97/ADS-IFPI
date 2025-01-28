@@ -4,7 +4,7 @@
 
 int main() {
     int v[3] = {13, 10, 5};
-    int comparacao, insercao;
+    int comparacao = 0, insercao = 0;
 
     insertSort(v, 3, &comparacao, &insercao);
     mostrarVetor(v, 3);

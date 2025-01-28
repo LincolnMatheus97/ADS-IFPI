@@ -4,7 +4,7 @@
 
 int main() {
     int v[3] = {22, 8, 2};
-    int comparacao, intercalacao;
+    int comparacao = 0, intercalacao = 0;
 
     mergeSort(v, 0, 2, &comparacao, &intercalacao);
     mostrarVetor(v, 3);
