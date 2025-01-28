@@ -48,5 +48,6 @@
         "xutility": "cpp",
         "vector": "cpp",
         "pilha.h": "c"
-    }
+    },
+    "cmake.ignoreCMakeListsMissing": true
 }
