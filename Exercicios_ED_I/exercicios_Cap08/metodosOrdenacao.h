@@ -68,13 +68,13 @@ void insertSort(int v[], int tamVetor, int *comparacoes, int *insercao) {
 
 // mergeSort
 
-void intercala(int v[], int p, int m, int u, int *comparacoes, int *trocas) {
-    int *w = (int*)malloc((u - p + 1) * sizeof(int));
+void intercala(int v[], int indInicio, int m, int indFinal, int *comparacoes, int *intercalar) {
+    int *w = (int*)malloc((indFinal - indInicio + 1) * sizeof(int));
     if (w == NULL) {
         abort();
     }
-    int i = p, j = m + 1, k = 0;
-    while (i <= m && j <= u) {
+    int i = indInicio, j = m + 1, k = 0;
+    while (i <= m && j <= indFinal) {
         (*comparacoes)++; // Contagem da comparação
         if (v[i] < v[j]) {
             w[k++] = v[i++];
@@ -85,56 +85,56 @@ void intercala(int v[], int p, int m, int u, int *comparacoes, int *trocas) {
     while (i <= m) {
         w[k++] = v[i++];
     }
-    while (j <= u) {
+    while (j <= indFinal) {
         w[k++] = v[j++];
     }
-    for (k = 0; k <= u - p; k++) {
-        v[p + k] = w[k];
-        (*trocas)++; // Contagem da troca
+    for (k = 0; k <= indFinal - indInicio; k++) {
+        v[indInicio + k] = w[k];
+        (*intercalar)++; // Contagem da troca
     }
     free(w);
 }
 
-void mergeSort(int v[], int p, int u, int *comparacoes, int *trocas) {
-    if (p == u) {
+void mergeSort(int v[], int indexInicial, int indexFinal, int *comparacoes, int *intercalar) {
+    if (indexInicial == indexFinal) {
         return;
     }
-    int m = (p + u) / 2;
-    mergeSort(v, p, m, comparacoes, trocas);
-    mergeSort(v, m + 1, u, comparacoes, trocas);
-    intercala(v, p, m, u, comparacoes, trocas);
+    int m = (indexInicial + indexFinal) / 2;
+    mergeSort(v, indexInicial, m, comparacoes, intercalar);
+    mergeSort(v, m + 1, indexFinal, comparacoes, intercalar);
+    intercala(v, indexInicial, m, indexFinal, comparacoes, intercalar);
 }
 
 // quickSort
 
-int particiona(int v[], int p, int u, int *comparacoes, int *trocas) {
+int particiona(int v[], int p, int indFinal, int *comparacoes, int *particionar) {
     int x = v[p];
     p--;
-    u++;
-    while (p < u) {
+    indFinal++;
+    while (p < indFinal) {
         do {
-            u--;
+            indFinal--;
             (*comparacoes)++; // Contagem da comparação
-        } while (v[u] > x);
+        } while (v[indFinal] > x);
         do {
             p++;
             (*comparacoes)++; // Contagem da comparação
         } while (v[p] < x);
-        if (p < u) {
-            troca(v[p], v[u]);
-            (*trocas)++; // Contagem da troca
+        if (p < indFinal) {
+            troca(v[p], v[indFinal]);
+            (*particionar)++; // Contagem da troca
         }
     }
-    return u;
+    return indFinal;
 }
 
-void quickSort(int v[], int p, int u, int *comparacoes, int *trocas) {
-    if (p >= u) {
+void quickSort(int v[], int p, int indFinal, int *comparacoes, int *particionar) {
+    if (p >= indFinal) {
         return;
     }
-    int m = particiona(v, p, u, comparacoes, trocas);
-    quickSort(v, p, m, comparacoes, trocas);
-    quickSort(v, m + 1, u, comparacoes, trocas);
+    int m = particiona(v, p, indFinal, comparacoes, particionar);
+    quickSort(v, p, m, comparacoes, particionar);
+    quickSort(v, m + 1, indFinal, comparacoes, particionar);
 }
 
 // BUSCAS
@@ -153,14 +153,14 @@ int buscaLinear(int x, int v[], int n) {
 
 int buscaBinaria(int x, int v[], int n) {
     int p = 0;
-    int u = n - 1;
-    while (p <= u) {
-        int m = (p + u) / 2;
+    int indFinal = n - 1;
+    while (p <= indFinal) {
+        int m = (p + indFinal) / 2;
         if (x == v[m]) {
             return 1;
         }
         if (x < v[m]) {
-            u = m - 1;
+            indFinal = m - 1;
         } else {
             p = m + 1;
         }

@@ -47,7 +47,8 @@
         "xtr1common": "cpp",
         "xutility": "cpp",
         "vector": "cpp",
-        "pilha.h": "c"
+        "pilha.h": "c",
+        "metodosordenacao.h": "c"
     },
     "cmake.ignoreCMakeListsMissing": true
 }
