@@ -104,7 +104,7 @@ void mergeSort(int v[], int indexInicial, int indexFinal, int *comparacoes, int 
 int particiona(int v[], int indInicial, int indFinal, int *comparacoes, int *particionar) {
     int pivo = v[indInicial];
     int i = indInicial - 1;
-    int j = indFinal - 1;
+    int j = indFinal + 1;
     while (i < j) {
         do {
             j--;
@@ -126,9 +126,9 @@ void quickSort(int v[], int indInicial, int indFinal, int *comparacoes, int *par
     if (indInicial >= indFinal) {
         return;
     }
-    int p = particiona(v, indInicial, indFinal, comparacoes, particionar);
-    quickSort(v, indInicial, p, comparacoes, particionar);
-    quickSort(v, p + 1, indFinal, comparacoes, particionar);
+    int pivo = particiona(v, indInicial, indFinal, comparacoes, particionar);
+    quickSort(v, indInicial, pivo, comparacoes, particionar);
+    quickSort(v, pivo + 1, indFinal, comparacoes, particionar);
 }
 
 // BUSCAS
