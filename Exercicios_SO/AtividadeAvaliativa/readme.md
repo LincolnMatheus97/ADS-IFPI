@@ -14,5 +14,5 @@ Função verificar_seguranca:
     - O loop while continua até que todos os processos sejam finalizados (count < PROCESSOS).
     - Dentro do loop, a função verifica se há algum processo que pode ser executado com os recursos disponíveis.
     - Se um processo pode ser executado (pode_executar), os recursos alocados a ele são liberados e adicionados aos recursos disponíveis.
-    - Se nenhum processo pode ser executado, a função retorna false, indicando um deadlock.
-    - Se todos os processos são finalizados sem problemas, a função retorna true.
+    - Se nenhum processo pode ser executado, a função retorna "Deadlock detectado!", indicando um deadlock.
+    - Se todos os processos são finalizados sem problemas, a função retorna a mensagem "Nenhum deadlock detectado".
