@@ -18,10 +18,28 @@ int C[PROCESSOS][RECURSOS] = {
 int R[PROCESSOS][RECURSOS] = {
     {2, 0, 0, 1},
     {1, 0, 1, 0},
-    {2, 1, 0, 1}
+    {2, 1, 0, 0}
 };
 
-bool verificar_seguranca() {
+// Função para mostrar vetores
+void mostrarVetor(int vetor[RECURSOS]) {
+    for (int i = 0; i < RECURSOS; i++) {
+        printf("%d ", vetor[i]);
+    }
+    printf("\n");
+}
+
+// Função para mostrar matrizes
+void mostrarMatriz(int matriz[PROCESSOS][RECURSOS]) {
+    for (int i = 0; i < PROCESSOS; i++) {
+        for (int j = 0; j < RECURSOS; j++) {
+            printf("%d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void verificar_seguranca() {
     bool finalizado[PROCESSOS] = {false};
     int recursos_disp[RECURSOS];
     for (int i = 0; i < RECURSOS; i++) {
@@ -44,6 +62,10 @@ bool verificar_seguranca() {
                     for (int j = 0; j < RECURSOS; j++) {
                         recursos_disp[j] += C[i][j];
                     }
+                    printf("Processo %d executado\n", i);
+                    printf("Recursos disponiveis: ");
+                    mostrarVetor(recursos_disp);
+                    printf("\n");
                     finalizado[i] = true;
                     encontrou = true;
                     count++;
@@ -51,17 +73,23 @@ bool verificar_seguranca() {
             }
         }
         if (!encontrou) {
-            return false; // Deadlock detectado
+            printf("Deadlock detectado!\n"); // Deadlock detectado
+            return;
         }
     }
-    return true; // Nenhum deadlock encontrado
+    printf("Nenhum deadlock detectado.\n"); // Nenhum deadlock encontrado
 }
 
 int main() {
-    if (verificar_seguranca()) {
-        printf("Nenhum deadlock detectado.\n");
-    } else {
-        printf("Deadlock detectado!\n");
-    }
+    printf("Recursos existentes:\n");
+    mostrarVetor(E);
+    printf("\n\nRecursos disponiveis:\n");
+    mostrarVetor(A);
+    printf("\n\nMatriz de alocacao:\n");
+    mostrarMatriz(C);
+    printf("\nMatriz de requisicoes:\n");
+    mostrarMatriz(R);
+    printf("\n");
+    verificar_seguranca();
     return 0;
 }
