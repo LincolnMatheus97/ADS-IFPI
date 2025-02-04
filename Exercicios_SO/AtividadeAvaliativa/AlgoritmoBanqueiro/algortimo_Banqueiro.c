@@ -39,44 +39,48 @@ void mostrarMatriz(int matriz[PROCESSOS][RECURSOS]) {
     }
 }
 
+// Função para verificar segurança do sistema
 void verificar_seguranca() {
-    bool finalizado[PROCESSOS] = {false};
-    int recursos_disp[RECURSOS];
+    bool finalizado[PROCESSOS] = {false}; // Processos finalizados 
+    int recursos_disp[RECURSOS]; // Recursos disponíveis
+
+    // Inicializa recursos disponíveis
     for (int i = 0; i < RECURSOS; i++) {
         recursos_disp[i] = A[i];
     }
 
-    int count = 0;
-    while (count < PROCESSOS) {
-        bool encontrou = false;
-        for (int i = 0; i < PROCESSOS; i++) {
-            if (!finalizado[i]) {
-                bool pode_executar = true;
-                for (int j = 0; j < RECURSOS; j++) {
-                    if (R[i][j] > recursos_disp[j]) {
-                        pode_executar = false;
-                        break;
+    int count = 0; // Contador de processos
+    while (count < PROCESSOS) { // Enquanto houver processos
+        bool encontrou = false; // Verifica se encontrou processo
+        for (int i = 0; i < PROCESSOS; i++) { // Para cada processo
+            if (!finalizado[i]) { // Se o processo não foi finalizado
+                bool pode_executar = true; // Verifica se o processo pode ser executado
+                for (int j = 0; j < RECURSOS; j++) { // Para cada recurso
+                    if (R[i][j] > recursos_disp[j]) { // Se a requisição é maior que o recurso disponível
+                        pode_executar = false; // Não pode executar
+                        break; // Sai do loop
                     }
                 }
-                if (pode_executar) {
-                    for (int j = 0; j < RECURSOS; j++) {
-                        recursos_disp[j] += C[i][j];
+                if (pode_executar) { // Se pode executar 
+                    for (int j = 0; j < RECURSOS; j++) { // Atualiza recursos disponíveis
+                        recursos_disp[j] += C[i][j]; // Recurso disponível = Recurso disponível + Recurso alocado
                     }
                     printf("Processo %d executado\n", i);
                     printf("Recursos disponiveis: ");
                     mostrarVetor(recursos_disp);
                     printf("\n");
-                    finalizado[i] = true;
-                    encontrou = true;
-                    count++;
+                    finalizado[i] = true; // Processo finalizado
+                    encontrou = true; // Encontrou processo
+                    count++; // Incrementa contador
                 }
             }
         }
-        if (!encontrou) {
+        if (!encontrou) { // Se não encontrou processo
             printf("Deadlock detectado!\n"); // Deadlock detectado
             return;
         }
     }
+    // Se não houver deadlock
     printf("Nenhum deadlock detectado.\n"); // Nenhum deadlock encontrado
 }
 
