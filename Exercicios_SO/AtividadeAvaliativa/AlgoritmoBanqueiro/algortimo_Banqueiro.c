@@ -17,8 +17,8 @@ int C[PROCESSOS][RECURSOS] = {
 // Matriz de requisições
 int R[PROCESSOS][RECURSOS] = {
     {2, 0, 0, 1},
-    {1, 0, 1, 0},
-    {2, 1, 0, 0}
+    {2, 1, 0, 0},
+    {1, 0, 1, 0}
 };
 
 // Função para mostrar vetores
@@ -65,7 +65,7 @@ void verificar_seguranca() {
                     for (int j = 0; j < RECURSOS; j++) { // Atualiza recursos disponíveis
                         recursos_disp[j] += C[i][j]; // Recurso disponível = Recurso disponível + Recurso alocado
                     }
-                    printf("Processo %d executado\n", i);
+                    printf("Processo %d executado\n", i + 1);
                     printf("Recursos disponiveis: ");
                     mostrarVetor(recursos_disp);
                     printf("\n");
