@@ -279,7 +279,7 @@ public class App {
                     while (true) {
                         respostaInteracao = io.lerString("\n\t\rDeseja: CURTIR, NAO_CURTIR, SURPRESA ou RISO ?").toUpperCase();
 
-                        if (respostaInteracao.isEmpty() || !respostaInteracao.matches("CURTIR|NAO-CURTIR|SURPRESA|RISO")) {
+                        if (respostaInteracao.isEmpty() || !respostaInteracao.matches("CURTIR|NAO_CURTIR|SURPRESA|RISO")) {
                             io.mostrarMensagem("\n\t\rEntrada inválida! Por favor, insira uma opção válida (CURTIR, NAO_CURTIR, SURPRESA ou RISO).");
                         } else {
                             break;
@@ -373,8 +373,8 @@ public class App {
                     }
                 }
                 if(solicitanteEncontrado) {
-                    String respostaAceitar = io.lerString("\n\t\rDeseja aceitar a solicitação de amizade? (A/R): ").toUpperCase();
-                    if (respostaAceitar.equals("A")) {
+                    String respostaAceitar = io.lerString("\n\t\rDeseja aceitar a solicitação de amizade? (S/N): ").toUpperCase();
+                    if (respostaAceitar.equals("S")) {
                         PerfilAvancado perfilSolicitante = redeSocial.buscarPerfilPorNome(nomeSolicitante);
                         if (io.verificarPerfil(perfilSolicitante)) {
                             redeSocial.aceitarSolicitacaoAmizade(perfilSolicitante, perfilAtualLogado.getPerfilAtual());

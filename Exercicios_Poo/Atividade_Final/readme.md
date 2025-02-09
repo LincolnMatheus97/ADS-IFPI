@@ -56,7 +56,7 @@ Os dados da rede social são armazenados no arquivo **`sistema_rede_social.json`
   "perfil": [
     {
       "apelido": "Lincoln",
-      "email": "lin@email.com",
+      "email": "lin@gmail.com",
       "status": true,
       "emoji": "😞",
       "amigos": ["Thalisson"],
@@ -64,7 +64,7 @@ Os dados da rede social são armazenados no arquivo **`sistema_rede_social.json`
     },
     {
       "apelido": "Thalisson",
-      "email": "tha@email.com",
+      "email": "tha@gmail.com",
       "status": true,
       "emoji": "😍",
       "amigos": ["Lincoln"],
@@ -112,12 +112,10 @@ Os dados da rede social são armazenados no arquivo **`sistema_rede_social.json`
 ---
 
 ## Link Video Demostrativo
-    ```
     https://youtu.be/pexVjD5l8l0
-    ```
 
 ---
 
 ## Autores
 
-Feito com por Lincoln Matheus e Thalisson Moura
+Feito por Lincoln Matheus e Thalisson Moura.
