@@ -95,7 +95,7 @@ Os dados da rede social são armazenados no arquivo **`sistema_rede_social.json`
 ## Como Executar o Projeto
 1. Clone este repositório:
    ```sh
-   git clone 
+   git clone https://github.com/LincolnMatheus97/ADS-IFPI/tree/2a4260bf02d1caf639be3e8fc59cb240aa37612f/Exercicios_Poo/Atividade_Final
    ```
 
 2. Abra o projeto em sua IDE favorita (Eclipse, IntelliJ, VS Code...)
@@ -110,5 +110,14 @@ Os dados da rede social são armazenados no arquivo **`sistema_rede_social.json`
 5. O sistema criará automaticamente o arquivo **`sistema_rede_social.json`** caso ele não exista.
 
 ---
+
+## Link Video Demostrativo
+    ```sh
+    https://youtu.be/pexVjD5l8l0
+    ```
+
+---
+
+## Autores
 
 Feito com por Lincoln Matheus e Thalisson Moura
