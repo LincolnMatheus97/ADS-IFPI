@@ -112,7 +112,7 @@ Os dados da rede social são armazenados no arquivo **`sistema_rede_social.json`
 ---
 
 ## Link Video Demostrativo
-    ```sh
+    ```
     https://youtu.be/pexVjD5l8l0
     ```
 
