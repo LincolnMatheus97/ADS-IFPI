@@ -1,3 +1,6 @@
+/*
+Crie uma função nos(A), que devolve o total de nós na arvore binaria A.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "arvore.h"
@@ -12,6 +15,5 @@ int main() {
     ins_arv_busca_binaria(4, &arvore);
     ins_arv_busca_binaria(6, &arvore);
 
-    int numero_nos = nos(arvore);
-    printf("%d\n", numero_nos);
+    printf("%d\n", nos(arvore));
 }

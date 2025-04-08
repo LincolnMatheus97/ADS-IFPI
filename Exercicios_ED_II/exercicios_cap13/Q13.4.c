@@ -1,3 +1,6 @@
+/*
+Crie uma função altura(A), que devolve o total da altura da arvore binaria A.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "arvore.h"

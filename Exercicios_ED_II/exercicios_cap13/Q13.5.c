@@ -1,3 +1,6 @@
+/*
+Crie uma função tem(A), que informa a arvore binaria A tem o item x;
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "arvore.h"

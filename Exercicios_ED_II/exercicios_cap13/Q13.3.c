@@ -1,3 +1,6 @@
+/*
+Crie uma função folhas(A), que devolve o total de folhas na arvore binaria A.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "arvore.h"
