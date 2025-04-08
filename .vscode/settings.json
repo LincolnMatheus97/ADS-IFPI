@@ -56,7 +56,8 @@
         "ratio": "cpp",
         "sstream": "cpp",
         "stop_token": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "arvore.h": "c"
     },
     "cmake.ignoreCMakeListsMissing": true
 }
