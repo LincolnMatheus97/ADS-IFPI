@@ -191,7 +191,8 @@ int eb(Arv arv) {
 int iguais(Arv a, Arv b) {
     if (a == NULL && b == NULL) return 1;
     if (a == NULL || b == NULL) return 0;
-    if (a->num != b->num) return 0;
+    if (a->item != b->item) return 0;
 
-    return iguais(a->esq,b->esq) && iguais(a->dir, b->dir);
+    return iguais(a->esq, b->esq) && iguais(a->dir, b->dir);
 }
+
