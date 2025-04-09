@@ -187,3 +187,11 @@ int eb(Arv arv) {
 
     return eb(arv->esq) && eb(arv->dir);
 }
+
+int iguais(Arv a, Arv b) {
+    if (a == NULL && b == NULL) return 1;
+    if (a == NULL || b == NULL) return 0;
+    if (a->num != b->num) return 0;
+
+    return iguais(a->esq,b->esq) && iguais(a->dir, b->dir);
+}
