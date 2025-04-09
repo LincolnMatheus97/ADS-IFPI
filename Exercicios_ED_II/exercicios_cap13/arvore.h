@@ -168,3 +168,22 @@ int tem(ITEM valor_x, Arv arvore) {
     }
     return tem(valor_x, arvore->esq) || tem(valor_x, arvore->dir);
 }
+
+int estritamenteBin(Arv arv) {
+    if (arv == NULL) return 1;
+
+    int temEsq = (arv->esq != NULL);
+    int temDir = (arv->dir != NULL);
+
+    return (temEsq && temDir) || (!temEsq && !temDir);
+}
+
+int eb(Arv arv) {
+    if (arv == NULL) return 1;
+
+    if (!estritamenteBin(arv)) {
+        return 0;
+    }
+
+    return eb(arv->esq) && eb(arv->dir);
+}
