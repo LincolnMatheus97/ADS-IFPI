@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 
-typedef int ITEM;
+typedef char* ITEM;
 
 // Definindo a estrutura da árvore binária
 typedef struct arvore
@@ -26,7 +28,7 @@ void em_ordem(Arv arvore) {
         return;
     }
     em_ordem(arvore->esq);
-    printf("%d ", arvore->item);
+    printf("%s ", arvore->item);
     em_ordem(arvore->dir);
 }
 
@@ -196,3 +198,43 @@ int iguais(Arv a, Arv b) {
     return iguais(a->esq, b->esq) && iguais(a->dir, b->dir);
 }
 
+// Função para exibir a arvore de busca binaria de forma decrescente
+void exibe_de(Arv arvore) {
+    if (arvore == NULL) return;
+    exibe_de(arvore->dir);
+    printf("%d ", arvore->item);
+    exibe_de(arvore->esq);
+}
+
+// Para uma possivel solução da Q.13.8
+
+int valor(Arv arvore) {
+    // Se o no for nulo retorna 0;
+    if (arvore == NULL) return 0;
+    /*Percebi que os valores em si, estão em folhas, logo faço
+    a verificação se é uma folha, se for. Retorno o valor dela transformado
+    usando a função atoi da biblioteca ctype.
+    */
+    if (arvore->esq == NULL && arvore->dir == NULL) {  
+        return atoi(arvore->item);
+    }
+    /*Percebi que os operadores, estão em nós com filhos, logo faço
+    a verificação se esse nó tem filhos, se for. Pego recursivamente os
+    valores do filhos a esquerda e a direita e uso a função da biblioteca strcmp para
+    identificar qual o operador e retorno o valor daquela operação.
+    */
+    if (arvore->esq != NULL && arvore->dir != NULL) {
+        int valor_esq = valor(arvore->esq);
+        int valor_dir = valor(arvore->dir);
+
+        if (strcmp(arvore->item, "+") == 0) {
+            return valor_esq + valor_dir;
+        } else if (strcmp(arvore->item, "-") == 0) {
+            return valor_esq - valor_dir;
+        } else if (strcmp(arvore->item, "*") == 0) {
+            return valor_esq * valor_dir;
+        } else if (strcmp(arvore->item, "/") == 0) {
+            return valor_esq / valor_dir;
+        }
+    }
+}
