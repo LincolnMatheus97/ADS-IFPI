@@ -1,7 +1,7 @@
 @startuml - Casos de Uso "Sistema Basico de Saude"
 title Casos de Uso - RF03 - Cadastrar Pacientes
 
-"Funcionário da Unidade" as Fun
+actor Fun as "Funcionário da Unidade"
 
 Fun -> (Acessar Sistema)
 (Acessar Sistema) -> (Cadastrar Paciente)

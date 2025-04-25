@@ -1,7 +1,7 @@
 @startuml - Casos de Uso "Sistema Basico de Saude"
 title Casos de Uso - RF02 - Cadastrar Unidades de Atendimento
 
-"Secretário Municipal de Saúde" as Sec
+actor Sec as "Secretário Municipal de Saúde"
 
 Sec -> (Acessar Sistema)
 (Acessar Sistema) -> (Cadastrar Unidade de Atendimento)
