@@ -1,0 +1,12 @@
+@startuml - Casos de Uso "Sistema Basico de Saude"
+title Casos de Uso - RF01 - Cadastrar Medicos
+
+"Secretário Municipal de Saúde" as Sec
+
+Sec -> (Acessar Sistema)
+(Acessar Sistema) -> (Cadastrar Médico)
+
+(Cadastrar Médico) -> (Validar Dados) : <<include>>
+(Validar Dados) --> (Confirmar Cadastro) : <<include>>
+
+@enduml

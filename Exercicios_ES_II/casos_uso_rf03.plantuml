@@ -1,0 +1,12 @@
+@startuml - Casos de Uso "Sistema Basico de Saude"
+title Casos de Uso - RF03 - Cadastrar Pacientes
+
+"Funcionário da Unidade" as Fun
+
+Fun -> (Acessar Sistema)
+(Acessar Sistema) -> (Cadastrar Paciente)
+
+(Cadastrar Paciente) -up-> (Validar Dados) : <<include>>
+(Validar Dados) -> (Confirmar Cadastro) : <<include>>
+
+@enduml
