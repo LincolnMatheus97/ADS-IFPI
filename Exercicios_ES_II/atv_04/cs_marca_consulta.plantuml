@@ -1,0 +1,13 @@
+@startuml - Atividade 4 -
+title Atividade 4 - CS - Marca Consulta
+
+actor Pac as "Usuário"
+
+Pac -> (Acessar Sistema)
+(Acessar Sistema) -> (Marcar Consulta)
+(Marcar Consulta) -up-> (Preencher Dados da Consulta) : <<include>>
+(Preencher Dados da Consulta) .up.> (Validar Dados) : <<extend>>
+(Preencher Dados da Consulta) -> (Confirmar Consulta) : <<include>>
+(Confirmar Consulta) ..> (Exibir Confirmação) : <<extend>>
+
+@enduml
