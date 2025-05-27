@@ -109,23 +109,23 @@ diminuirTam.addEventListener('click', function() {
     corpo.style.fontSize = novoTamanho + 'px';
 })
 
-// ----------------------------------------------------------
+// -----------------------------------------------------------
 
 // ---------------- Questão 10 -------------------------------
 
-const inputNumero1 = getById("numero1");
-const inputNumero2 = getById("numero2");
-const selectOperacoes = getById("operacoes");
-const botaoCalcular = getById("botaoCalcular");
-const pResultado = getById("resultadoCalculado");
+let inputNumero1 = getById("numero1");
+let inputNumero2 = getById("numero2");
+let selectOperacoes = getById("operacoes");
+let botaoCalcular = getById("botaoCalcular");
+let pResultado = getById("resultadoCalculado");
 
 botaoCalcular.addEventListener("click", function() {
-    const valor1 = inputNumero1.value;
-    const valor2 = inputNumero2.value;
-    const operacao = selectOperacoes.value;
+    let valor1 = inputNumero1.value;
+    let valor2 = inputNumero2.value;
+    let operacao = selectOperacoes.value;
 
-    const num1 = parseFloat(valor1);
-    const num2 = parseFloat(valor2);
+    let num1 = parseFloat(valor1);
+    let num2 = parseFloat(valor2);
 
     let resultado; 
     if (isNaN(num1) || isNaN(num2)) {
@@ -157,3 +157,55 @@ botaoCalcular.addEventListener("click", function() {
 });
 
 // ----------------------------------------------------------
+
+// ---------------- Questão 11 -------------------------------
+
+let inputItem = getById("novoItemInput");
+let botaoAdd = getById("botao05");
+let listaUl = getById("minhaLista");
+
+botaoAdd.addEventListener("click", function() {
+    let textoDoItem = inputItem.value;
+    if (textoDoItem.trim() === "") {
+        alert("Digite algo para adicionar!");
+        inputItem.focus();
+        return;
+    }
+
+    let novoItem = document.createElement("li");
+    novoItem.textContent = textoDoItem;
+    listaUl.appendChild(novoItem);
+
+    inputItem.value = "";
+    inputItem.focus();
+});
+
+// -----------------------------------------------------------
+
+// ---------------- Questão 12 -------------------------------
+
+let inputItemSelect = getById("itemParaSelect");
+let botaoAdicionar = getById("botaoAddOption");
+let meuSelect = getById("meuSelect");
+
+botaoAdicionar.addEventListener("click", function() {
+    let textoDoItem = inputItemSelect.value.trim();
+
+    if (textoDoItem === "") {
+        alert("Digite algo!");
+        inputItemSelect.focus();
+        return;
+    }
+
+    let novaOpcao = document.createElement("option");
+
+    novaOpcao.textContent = textoDoItem;
+    novaOpcao.value = textoDoItem;
+
+    meuSelect.appendChild(novaOpcao);
+
+    inputItemSelect.value = "";
+    inputItemSelect.focus();
+});
+
+// -----------------------------------------------------------
