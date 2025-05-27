@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Atividade D.O.M. -- Exer. 01</h1>
+    <hr>
+    <section id="questao03">
+        <h2>Questão 3:</h2>
+        <div id="divParagrafo">
+            <p>Olá Mundo!</p>
+            <p>Hello Word!</p>
+            <p>`Kon'nichiwa sekai'</p>
+        </div>
+        <div id="contParagrafo"><strong></strong></div>
+    </section>
+    <hr>
+    <section id="questao04">
+        <h2>Questão 4:</h2>
+        <p id="paragrafoAlt">Clique no botão abaixo para alterar o texto deste parágrafo:</p>
+        <button id="botao01">Clique Aqui</button>
+        <p id="paragrafoDel">Clique no botão abaixo para apagar o texto deste parágrafo:</p>
+        <button id="botao02">Clique Aqui</button>
+    </section>
+    <hr>
+    <section id="questao05">
+        <h2>Questão 5:</h2>
+        <h3>Diferenças Rápidas: innerHTML vs. innerText vs. textContent</h3>
+        <ul>
+        <li>
+            <code>innerHTML:</code>
+            <strong>O que faz</strong>: Acessa ou define todo o conteúdo HTML (tags + texto) dentro de um elemento.
+            <strong>Ponto Chave</strong>: Interpreta as tags HTML. <strong>Cuidado</strong>: Usar para definir conteúdo de fontes não confiáveis pode ser um risco de segurança (XSS)
+        </li>
+        <li>
+            <code>innerText:</code>
+            <strong>O que faz</strong>: Acessa ou define o texto visível ao usuário.
+            <strong>Ponto Chave</strong>: Leva em conta o CSS (ignora texto oculto) e tenta simular a aparência renderizada. Pode ser mais lento.
+        </li>
+        <li>
+            <code>textContent:</code>
+            <strong>O que faz</strong>: Acessa ou define todo o conteúdo de texto (incluindo o oculto), ignorando tags HTML.
+            <strong>Ponto Chave</strong>: É a forma mais rápida e segura para manipular apenas texto, pois não analisa HTML nem CSS.
+        </li>
+        </ul>
+    </section>
+    <hr>
+    <section id="questao06">
+        <h2>Questão 6:</h2>
+        <p id="paragrafoColor">Clique no botão abaixo para alterar a cor deste parágrafo para verde:</p>
+        <button id="botao03">Clique Aqui</button>
+    </section>
+    <hr>
+    <section id="questao07">
+        <h2>Questão 7:</h2>
+        <p>Digite um texto abaixo:</p>
+        <input id="texto">
+        <button id="botao04">Copiar texto</button>
+        <p>Texto copiado em caixa alta abaixo:</p>
+        <div id="copiaCaixaAlta"></div>
+    </section>
+    <hr>
+    <section id="questao08">
+        <h2>Questão 8:</h2>
+        <p>Clique no botão abaixo para mudar cor do fundo e o texto da página:</p>
+        <input id="mudarCor" type="button" value="Mudar">
+        <p>Clique no botão abaixo para retornar ao estado anterior:</p>
+        <input id="retornarCor" type="button" value="Retornar">
+    </section>
+    <hr>
+    <section id="questao09">
+        <h2>Questão 9:</h2>
+        <p>Clique no botão abaixo para aumentar o tamanho do texto da pagina:</p>
+        <input id="aumentarTam" type="button" value="Aumentar">
+        <p>Clique no botão abaixo para diminuir o tamanho do texto da pagina:</p>
+        <input id="diminuirTam" type="button" value="Diminuir">
+    </section>
+    <hr>
+    <section id="questao10">
+        <h2>Questão 10:</h2>
+        <h3>Calculadora Simples:</h3>
+        <label for="numero1">Número 1:</label>
+        <input id="numero1" value="">
+        <label for="numero2">Número 2:</label>
+        <input id="numero2" value="">
+        <p>Selecione a operação:
+        <select id="operacoes">
+            <option value="Somar">Somar</option>
+            <option value="Diminuir">Diminuir</option>
+            <option value="Multiplicar">Multiplicar</option>
+            <option value="Dividir">Dividir</option>
+        </select>
+        </p>
+        <button id="botaoCalcular">Calcular</button>
+        <p id="resultadoCalculado">Resultado: </p>
+    </section>
+    <hr>
+    <section id="questao11">
+        <h2>Questão 11:</h2>
+        <h3>Adicionar Itens á Lista:</h3>
+        <label for="novoItemInput">Digite um novo item: </label>
+        <input type="text" id="novoItemInput" placeholder="Ex: Comprar Pão">
+        <button id="botao05">Adicionar</button>
+
+        <h4>Sua Lista:</h4>
+        <ul id="minhaLista">
+
+        </ul>
+    </section>
+    <hr>
+    <section id="questao12">
+        <h2>Questão 12:</h2>
+        <h3>Adicionar Itens á Lista selecionavel:</h3>
+        <label for="itemParaSelect">Novo Item:</label>
+        <input type="text" id="itemParaSelect" placeholder="Ex: Comidas Favoritas">
+        <button id="botaoAddOption">Adicionar</button>
+
+        <br><br>
+
+        <label for="meuSelect">Minha Lista Selecionável:</label>
+        <select id="meuSelect">
+        <option value="">-- Selecione --</option>
+    </select>
+
+    </section>
+</body>
+</html>
