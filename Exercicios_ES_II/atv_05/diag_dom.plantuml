@@ -1,0 +1,108 @@
+@startuml Diagrama de Dominio - Sistema Hospitalar
+
+
+class Hospital {
+   + nome: String
+   + endereco: String
+}
+
+
+class Setor {
+   + nome: String
+}
+
+
+abstract class Sala {
+   + identificacao: String
+   + tipo: String
+}
+
+
+class SalaCirurgia extends Sala {}
+
+class Consultorio extends Sala {}
+
+class QuartoOuEnfermaria extends Sala {}
+
+class Apartamento extends Sala {}
+
+abstract class Funcionario {
+   + nome: String
+   + matricula: String
+}
+
+
+class Medico extends Funcionario {
+   + crm: String
+   + especialidade: String
+}
+
+
+class Enfermeiro extends Funcionario {
+   + coren: String
+}
+
+
+class PessoalAdministrativo extends Funcionario {
+   + cargo: String
+}
+
+
+class Equipe {
+   + nomeEquipe: String
+}
+
+
+class Paciente {
+   + nome: String
+   + idPaciente: String
+   + dataNascimento: DateTime
+}
+
+
+abstract class Procedimento {
+   + idProcedimento: String
+   + dataHora: DateTime
+}
+
+
+class Cirurgia extends Procedimento {}
+
+class Internacao extends Procedimento {
+   + tratamento: String
+   + resultados: String
+}
+
+class Consulta extends Procedimento {
+   + diagnostico: String
+   + receitaMedica: String
+}
+
+class Exame extends Procedimento  {
+   + tipoExame: String
+   + resultados: String
+}
+
+class Convenio {
+   + nomeConvenio: String
+   + idConvenio: String
+}
+
+Hospital "1" -- "1..*" Setor : abriga >
+Setor "1" o-- "0..*" Setor : é composto
+Setor "1" -- "1..*" Sala : possui >
+Funcionario "0..*" -- "1..*" Setor : trabalha em
+Equipe "1" -- "1" Medico: supervisionada por <
+Equipe "1" -- "1..*" Medico: possui médico >
+Equipe "1" -- "1..*" Enfermeiro: possui enfermeiro >
+Paciente "1" -- "0..*" Procedimento : é Submetido a >
+Procedimento "1" -- "0..1" Convenio : pago por
+Cirurgia "1" -- "1" SalaCirurgia : ocupa >
+Cirurgia "1" -- "1" Equipe : realizada por >
+Internacao "1" -- "1" QuartoOuEnfermaria : ocupa >
+Consulta "1" -- "1" Consultorio: ocupa >
+Consulta "1" -- "1" Medico: responsavel por <
+Consulta "1" -- "0..*" Exame : solicita >
+
+
+@enduml
