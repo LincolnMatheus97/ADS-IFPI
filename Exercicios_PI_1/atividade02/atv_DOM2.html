@@ -11,33 +11,135 @@
     <h1>Atividade D.O.M. - 2</h1>
     <section>
         <h2>Questão 1:</h2>
-        <button id="botaoErro">Mostrar Erro</button>
+        <button id="botaoErro">
+            Mostrar Erro
+        </button>
         <div id="mensagemErro" class="oculto"></div>
     </section>
     <hr>
     <section>
         <h2>Questão 2:</h2>
-        <label for="caixaDeTexto">Digite o texto</label>
+        <label for="caixaDeTexto">
+            Digite o texto
+        </label>
         <input type="text" id="caixaDeTexto">
-        <button id="botaoExibir">Exibir</button>
+        <button id="botaoExibir">
+            Exibir
+        </button>
         <div id="conteudo"></div>
     </section>
     <hr>
     <section>
         <h2>Questão 3:</h2>
-        <label for="numInteracoes">Digite o total de interações da Postagem:</label>
+        <label for="numInteracoes">
+            Digite o total de interações da Postagem:
+        </label>
         <input type="text" id="numInteracoes">
         <br>
-        <label for="numVisualizacao">Digite o total de visualizações da Postagem:</label>
+        <label for="numVisualizacao">
+            Digite o total de visualizações da Postagem:
+        </label>
         <input type="text" id="numVisualizacoes">
         <br>
-        <button id="botaoCalcular">Calcular Engajamento</button>
-        <div id="resultado"></div>
+        <button id="botaoCalcular">
+            Calcular Engajamento
+        </button>
+        <div id="resultado1"></div>
     </section>
     <hr>
     <section>
         <h2>Questão 4:</h2>
-        
+        <input type="file" id="uploadImagem" accept="imagem/*">
+        <button id="botaoImagem">
+            Carregar Imagem
+        </button>
+        <div id="resultado2"></div>
+    </section>
+    <hr>
+    <section>
+        <h2>Questão 5:</h2>
+        <p>Que tipo de Onze Horas você prefere?</p>
+        <label>
+            Selecione sua cor favorita:
+            <select id="imagens">
+                <option value="">Selecione</option>
+                <option value="rosa">Rosa</option>
+                <option value="branca">Branca</option>
+                <option value="amarela">Amarela</option>
+            </select>
+        </label>
+        <div id="resultado3"></div>
+    </section>
+    <hr>
+    <section>
+        <h2>Questão 6:</h2>
+        <p>Selecione suas redes sociais favoritas abaixo:</p>
+        <div>
+            <input type="checkbox" id="facebook" name="redesSociais"
+            value="Facebook"> <label for="facebook">Facebook</label>
+        </div>
+        <div>
+            <input type="checkbox" id="twitter" name="redesSociais"
+            value="Twitter"> <label for="twitter">Twitter</label>
+        </div>
+        <div>
+            <input type="checkbox" id="instagram" name="redesSociais" value="Instagram">
+            <label for="instagram">Instagram</label>
+        </div>
+        <div>
+            <input type="checkbox" id="linkedin" name="redesSociais"
+            value="LinkedIn"> <label for="linkedin">LinkedIn</label>
+        </div>
+        <div>
+            <input type="checkbox" id="tiktok" name="redesSociais"
+            value="TikTok"> <label for="tiktok">TikTok</label>
+        </div>
+        <div class = "oculto" id="mensagemErro2"></div>
+        <div id="redesSelecionadas"></div>
+        <button id="botaoEnviar">Enviar Seleção</button>
+    </section>
+    <hr>
+    <section>
+        <h2>Questão 7, 8 e 9:</h2>
+        <label for="caixaDeHastag">Digite sua Hastag</label>
+        <input type="text" id="caixaDeHastag">
+        <button id="botaoListar">Adicionar Hastag</button>
+        <br>
+        <label for="selectHastag">Lista de Hastags: </label>
+        <select id="selectHastag"></select>
+        <button id="botaoRemover">Remover Hastag</button>
+        <div class = "oculto" id="mensagemErro3"></div>
+    </section>
+    <hr>
+    <section>
+        <h2>Questão 10 e 11:</h2>
+        <h3>Mover Ativos Financeiros entre Carteiras</h3>
+        <div class="container">
+            <div class="ativos">
+                <label for="ativosDisponiveis"> AtivosDisponíveis:</label> 
+                <select id="ativosDisponiveis"size="10" multiple>
+                    <option value="AAPL">Apple (AAPL)</option>
+                    <option value="GOOGL">Google (GOOGL)</option>
+                    <option value="AMZN">Amazon (AMZN)</option>
+                    <option value="MSFT">Microsoft (MSFT)</option>
+                    <option value="TSLA">Tesla (TSLA)</option>
+                    <option value="BRK.B">Berkshire Hathaway(BRK.B)</option> 
+                    <option value="FB">Meta (FB)</option>
+                    <option value="V">Visa (V)</option>
+                    <option value="JNJ">Johnson & Johnson (JNJ)</option>
+                    <option value="WMT">Walmart (WMT)</option>
+                </select>
+            </div>
+            <div class="buttons">
+                <button id="moverParaDireitaBtn">></button>
+                <button id="moverParaEsquerdaBtn"><</button>
+            </div>
+            <div class="carteira">
+                <label for="carteiraInvestimentos">Carteira de Investimentos:</label>
+                <select id="carteiraInvestimentos" size="10"multiple></select> 
+            </div>
+            <div class = "oculto" id="mensagemErro4"></div>
+        </div>
     </section>
 </body>
 </html>
