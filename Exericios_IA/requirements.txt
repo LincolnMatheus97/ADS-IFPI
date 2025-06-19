@@ -1,0 +1,5 @@
+dotenv
+google-generative-ai
+Pillow
+Flask
+gunicorn
