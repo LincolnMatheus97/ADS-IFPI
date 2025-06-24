@@ -87,7 +87,7 @@ button:active {
 }
 
 /* Estilização das Mensagens de Erro */
-#mensagemErro, #mensagemErro2, #mensagemErro3, #mensagemErro4 {
+#mensagemErro, #mensagemErro2, #mensagemErro3, #mensagemErro4, #mensagemErro5, #mensagemErro6 {
     color: #d90429;
     background-color: #ffccd5;
     padding: 10px;
@@ -139,6 +139,7 @@ button:active {
 .buttons button {
     width: 50px;
     height: 50px;
+    margin-right: 20px;
     font-size: 1.5em;
     display: flex;
     justify-content: center;

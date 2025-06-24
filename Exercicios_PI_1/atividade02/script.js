@@ -52,7 +52,7 @@ function exibirConteudo() {
         conteudoExibir.innerHTML = conteudoDigitado;
         conteudoExibir.classList.remove('oculto');
     } else {
-        criarErro('conteudo', 'O campo deve ser preenchido');
+        criarErro('mensagemErro2', 'O campo deve ser preenchido');
     }
 }
 
@@ -72,14 +72,14 @@ function exibirResultado() {
         let numVis = parseFloat(visualizacoes);
 
         if (isNaN(numInt) || isNaN(numVis)) {
-            criarErro('resultado1', 'Digite apenas números. Ex: 235.333');
+            criarErro('mensagemErro3', 'Digite apenas números. Ex: 235.333');
         } else {
             let engajamento = (numInt / numVis) * 100;
             resultado.innerHTML = `Total de Engajamento: ${engajamento}`;
             resultado.classList.remove('oculto');
         }
     } else {
-        criarErro('resultado1', 'Ambos os campos devem ser preenchidos');
+        criarErro('mensagemErro3', 'Ambos os campos devem ser preenchidos');
     }
 }
 
@@ -151,7 +151,7 @@ function exibirMarcados() {
         resultado.innerHTML = `Redes sociais selecionadas: ${redesSelecionadas.join(', ')}`;
         resultado.classList.remove('oculto');
     } else {
-        criarErro('mensagemErro2', 'Por favor, selecione ao menos alguma rede!');
+        criarErro('mensagemErro4', 'Por favor, selecione ao menos alguma rede!');
     }
 }
 
@@ -167,17 +167,17 @@ function criarSelect() {
     let meuSelect = getById('selectHastag');
 
     if (hastag === '') {
-        criarErro('mensagemErro3', 'Digite alguma Hashtag para adicionar a lista!');
+        criarErro('mensagemErro5', 'Digite alguma Hashtag para adicionar a lista!');
         return;
     }
 
     if (hastag.length <= 2) {
-        criarErro('mensagemErro3', 'Digite um Hastag com mais de 2 caracteres!');
+        criarErro('mensagemErro5', 'Digite um Hastag com mais de 2 caracteres!');
         return;
     }
 
     if (meuSelect.options.length >= 5) {
-        criarErro('mensagemErro3', 'A lista de hashtags já atingiu o limite de 5 itens.');
+        criarErro('mensagemErro5', 'A lista de hashtags já atingiu o limite de 5 itens.');
         return;
     }
 
@@ -189,7 +189,7 @@ function criarSelect() {
         }
     }
     if (repetida) {
-        criarErro('mensagemErro3', 'Essa hashtag já foi adicionada. Digite Hastags Diferentes!');
+        criarErro('mensagemErro5', 'Essa hashtag já foi adicionada. Digite Hastags Diferentes!');
         return;
     }
 
@@ -230,10 +230,10 @@ function moverOptions(idTransmissor, idReceptor) {
     let selectReceptor = getById(idReceptor);
 
     if (selectTransmissor.options.length <= 0) {
-        criarErro('mensagemErro4', 'A lista está vazia não pode passar para outra!');
+        criarErro('mensagemErro6', 'A lista está vazia não pode passar para outra!');
         return;
     } else if (selectReceptor.options.length >= 10) {
-        criarErro('mensagemErro4', 'A lista que está tentando passar já está cheia!');
+        criarErro('mensagemErro6', 'A lista que está tentando passar já está cheia!');
         return;
     }
 
