@@ -83,20 +83,20 @@ No inserir(No *no, int valor) {
     // Calculando o fator de balanceamente para ver se precisa rotacionar
     int fb = obter_fator_balanceamento(&(*no));
 
-    // Caso Esq - Esq, rotacao simples
+    // Caso: Esq - Esq, rotacao simples
     if (fb > 1 && valor < (*no)->esquerda->valor) {
         return rotacao_simples_dir(&(*no));
     }
-    // Caso Dir - Dir, rotacao simples
+    // Caso: Dir - Dir, rotacao simples
     if (fb < -1 && valor > (*no)->direita->valor) {
         return rotacao_simples_esq(&(*no));
     }
-    // Caso Esq - Dir, rotacao dupla (uma pra esquerda outra pra direita) >
+    // Caso: Esq - Dir, rotacao dupla (uma pra esquerda outra pra direita) >
     if (fb > 1 && valor > (*no)->esquerda->valor) {
         (*no)->esquerda = rotacao_simples_esq(&(*no)->esquerda);
         return rotacao_simples_dir(&(*no));
     }
-    // Caso Dir - Esq, rotacao dupla (uma pra direita outra pra esquerda) <
+    // Caso: Dir - Esq, rotacao dupla (uma pra direita outra pra esquerda) <
     if (fb < -1 && valor < (*no)->direita->valor) {
         (*no)->direita = rotacao_simples_dir(&(*no)->direita);
         return rotacao_simples_esq(&(*no));
