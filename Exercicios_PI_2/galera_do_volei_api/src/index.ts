@@ -16,7 +16,7 @@ type Jogador = {
 // --- Dados Fake baseados nos meus schemas ---
 let jogadores: Jogador[] = [
     { id: 1, nome: "Thalisson", moderador: true, sexo: "Masculino", categoria: "Amador"},
-    { id: 2, nome: "Natiele", moderador: false, sexo: "Feminino", categoria: "Intermediario"},
+    { id: 2, nome: "Natiele", moderador: false, sexo: "Feminino", categoria: "Intermediario"}
 ];
 let partidas = [];
 let convites = [];
@@ -41,7 +41,7 @@ app.post('/jogadores', (req: Request, res: Response) => {
         const data = criarJogadorSchema.parse(req.body);
 
         const novoJogador = {
-            id: Date.now(),
+            id: jogadores.length + 1,
             nome: data.nome,
             moderador: false,
             sexo: data.sexo,
@@ -53,6 +53,93 @@ app.post('/jogadores', (req: Request, res: Response) => {
 
     } catch (error) {
         res.status(400).json({message: "Dados inválidos", erros: error});
+    }
+});
+
+// [DELETE] /jogadores/:id - Deletar jogador
+app.delete('/jogadores/:id', (req: Request, res: Response) => {
+    const idParam = req.params.id ?? '';
+    const idParaDeletar = parseInt(idParam, 10);
+    
+
+    if (isNaN(idParaDeletar)) {
+        return res.status(400).json({message: "ID inválido. Por favor digite um ID válido"});
+    }
+
+    const jogadorIndex = jogadores.findIndex(jog => jog.id === idParaDeletar);
+
+    if (jogadorIndex === -1) {
+        return res.status(404).json({message: "Jogador não encontrado!"});
+    }
+
+    jogadores.splice(jogadorIndex, 1);
+    console.log(`Jogador com id ${idParaDeletar} deletado`);
+
+    res.status(204).send();
+});
+
+// [PATCH] /jogadores/:id - Atualizar dados do jogador OU moderação (com validação)
+const edtDadosBasicosJogadorSchema = z.object({
+    nome: z.string().min(3).optional(),
+    sexo: z.string().optional(),
+    categoria: z.string().optional()
+});
+
+const edtModeracaoJogadorSchema = z.object({
+    moderador: z.boolean()
+});
+
+app.patch('/jogadores/:id', (req: Request, res: Response) => {
+    const idParam = req.params.id ?? '';
+    const idParaAtualizar = parseInt(idParam, 10);
+
+    if (isNaN(idParaAtualizar)) {
+        return res.status(400).json({message: "ID inválido. Por favor digite um ID válido"});
+    }
+
+    const jogadorIndex = jogadores.findIndex(jog => jog.id === idParaAtualizar);
+
+    if (jogadorIndex === -1) {
+        return res.status(404).json({message: "Jogador não encontrado!"});
+    }
+
+    try {
+        const data = edtDadosBasicosJogadorSchema.parse(req.body);
+        const jogadorAtualizado = jogadores[jogadorIndex]!;
+
+        jogadorAtualizado.nome = data.nome ?? jogadorAtualizado.nome;
+        jogadorAtualizado.sexo = data.sexo ?? jogadorAtualizado.sexo;
+        jogadorAtualizado.categoria = data.categoria ?? jogadorAtualizado.categoria;
+
+        res.status(200).json(jogadorAtualizado);
+    } catch (error) {
+        res.status(400).json({ message: "Dados inválidos", erros: error });
+    }
+});
+
+app.patch('/jogadores/:id/moderador', (req: Request, res: Response) => {
+    const idParam = req.params.id ?? '';
+    const idParaAtualizar = parseInt(idParam, 10);
+
+    if (isNaN(idParaAtualizar)) {
+        return res.status(400).json({message: "ID inválido. Por favor digite um ID válido"});
+    }
+
+    const jogadorIndex = jogadores.findIndex(jog => jog.id === idParaAtualizar);
+
+    if (jogadorIndex === -1) {
+        return res.status(404).json({message: "Jogador não encontrado!"});
+    }
+
+    try {
+        const data = edtModeracaoJogadorSchema.parse(req.body);
+        const jogadorAtualizado = jogadores[jogadorIndex]!;
+
+        jogadorAtualizado.moderador = data.moderador;
+
+        res.status(200).json(jogadorAtualizado);
+    } catch (error) {
+        res.status(400).json({ message: "Dados inválidos", erros: error });
     }
 });
 
