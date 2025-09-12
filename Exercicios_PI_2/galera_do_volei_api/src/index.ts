@@ -199,6 +199,10 @@ app.post('/convites', (req: Request, res: Response) => {
         const destinatarioIndex = jogadores.findIndex(jog => jog.nome === data.nome_destinatario);
         const partidaIndex = partidas.findIndex(part => part.moderador.nome_moderador === data.nome_remetente);
 
+        if(jogadores[remetenteIndex]?.moderador != true) {
+            return res.status(400).json({ message: "Não pode enviar solicitação de convite se não for moderador de uma partida!" });
+        }
+
         if (remetenteIndex === -1 || !jogadores[remetenteIndex]) {
             return res.status(404).json({ message: "Remetente não encontrado." });
         }
