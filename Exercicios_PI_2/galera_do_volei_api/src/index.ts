@@ -31,10 +31,23 @@ type Convite = {
     id_partida: number;
 };
 
+type Inscricao = {
+    id: number;
+    id_partida: number;
+    id_jogador: number;
+    status: string;
+    data: Date;
+};
+
 type Moderador = {
     id_moderador: number;
     nome_moderador: string;
 };
+
+type Participante = {
+    id_jogador: number;
+    nome_jogador: string;
+}
 
 type Partida = {
     id: number;
@@ -42,17 +55,21 @@ type Partida = {
     data: Date;
     situacao: string;
     moderador: Moderador;
-    participantes: object[];
+    participantes: Participante[];
 }
 
 // --- Dados Fakes baseados nos meus schemas ---
 let jogadores: Jogador[] = [
     { id: 1, nome: "Thalisson", moderador: true, sexo: "Masculino", categoria: "Amador"},
-    { id: 2, nome: "Natiele", moderador: false, sexo: "Feminino", categoria: "Intermediario"}
+    { id: 2, nome: "Natiele", moderador: false, sexo: "Feminino", categoria: "Intermediario"},
+    { id: 3, nome: "Marcos", moderador: false, sexo: "Masculino", categoria: "Amador"}
 ];
 let partidas: Partida[] = [
     { id: 1, tipo: "Amador", data: new Date, situacao: "Aberta", 
         moderador: {id_moderador: 1, nome_moderador: "Thalisson"}, participantes: []}
+];
+let inscricoes: Inscricao[] = [
+    { id: 1, id_partida: 1, id_jogador: 3, status: "pendente", data: new Date}
 ];
 let convites: Convite[] = [
     { id: 1, status: false, remetente: {id_remetente: 1, nome_remetente: "Thalisson"}, 
@@ -349,14 +366,18 @@ app.post('/partidas/:id/participantes', (req: Request, res: Response) => {
             jog.id === convites[conviteIndex]?.destinatario.id_destinatario
         );
 
+        if (jogadorConvidadoIndex === -1 || !jogadores[jogadorConvidadoIndex]) {
+             return res.status(404).json({message: `O jogador convidado não encontrado`});
+        }
+
         if (jogadores[jogadorConvidadoIndex]?.categoria != partidas[partidaIndex]?.tipo) {
             return res.status(400).json(
                 {message: `O jogador (${data.nome_jogador}) podera ser participar da partida pois não possui a mesma categoria da partida`}
             );
-        }
+        };
 
         const novoParticipante = {
-            id_jogador: jogadores[jogadorConvidadoIndex]?.id,
+            id_jogador: jogadores[jogadorConvidadoIndex].id,
             nome_jogador: data.nome_jogador
         };
 
@@ -395,6 +416,55 @@ app.patch('/partidas/:id', (req: Request, res: Response) => {
         partidaAtualizada.situacao = data.situacao;
 
         res.status(200).json(partidaAtualizada);
+    } catch (error) {
+        res.status(400).json({message: "Dados inválidos", erros: error});
+    }
+});
+
+// [POST] /partidas/:id/inscricoes - Adicionar uma inscrição a uma partida (com validação)
+const addInscricaoPartidaSchema = z.object({
+    id_jogador: z.number()
+});
+
+app.post('/partidas/:id/inscricoes', (req: Request, res: Response) => {
+    const idParam = req.params.id ?? '';
+    const idParaAdd = parseInt(idParam, 10);
+
+    if (isNaN(idParaAdd)) {
+        return res.status(400).json({message: "ID inválido. Por favor digite um ID válido"});
+    };
+
+    const partidaIndex = partidas.findIndex(part => part.id === idParaAdd);
+
+    if (partidaIndex === -1) {
+        return res.status(404).json({message: "Partida não encontrada!"});
+    };
+
+    try {
+        const data = addInscricaoPartidaSchema.parse(req.body);
+        
+        const jogadorIndex = jogadores.findIndex(jog => jog.id === data.id_jogador);
+
+        if (jogadorIndex === -1 || !jogadores[jogadorIndex]) {
+            return res.status(404).json({ message: "Jogador não encontrado." });
+        };
+
+        const inscricoesIndex = inscricoes.findIndex(ins => ins.id_jogador === data.id_jogador);
+        
+        if (inscricoesIndex != -1 || !partidas[partidaIndex]?.participantes.find(part => part.id_jogador === data.id_jogador)) {
+            return res.status(409).json({message: "Jogaodor já está participando da partida ou já enviou solicitação de inscrição!"});
+        };
+
+        const novaInscricao = {
+            id: inscricoes.length + 1,
+            id_partida: partidaIndex,
+            id_jogador: data.id_jogador,
+            status: "pendente",
+            data: new Date
+        };
+
+        inscricoes.push(novaInscricao);
+        res.status(201).json(novaInscricao);
     } catch (error) {
         res.status(400).json({message: "Dados inválidos", erros: error});
     }
