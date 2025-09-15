@@ -59,6 +59,8 @@ O Jogador é quem busca e participa das partidas.
     * `POST /partidas/{id}/avaliacoes`
 8.  **Recebe feedback sobre sua participação.**
     * *Não implementado*.
+
+### Link da API no Apidog : https://galeradovolei.apidog.io
 ---
 
 # Galera do vôlei 1.0
