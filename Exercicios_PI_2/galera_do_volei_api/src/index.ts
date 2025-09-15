@@ -25,7 +25,7 @@ type Destinatario = {
 
 type Convite = {
     id: number;
-    status: boolean;
+    status: string;
     remetente: Remetente;
     destinatario: Destinatario;
     id_partida: number;
@@ -88,7 +88,7 @@ let partidas: Partida[] = [
 ];
 
 let convites: Convite[] = [
-    { id: 1, status: false, remetente: {id_remetente: 1, nome_remetente: "Thalisson"}, 
+    { id: 1, status: "pendente", remetente: {id_remetente: 1, nome_remetente: "Thalisson"}, 
     destinatario: {id_destinatario: 2, nome_destinatario: "Natiele"}, id_partida: 1}
 ];
 
@@ -246,7 +246,7 @@ app.post('/convites', (req: Request, res: Response) => {
 
         const novoConvite = {
             id: convites.length + 1,
-            status: false,
+            status: "pendente",
             remetente: {
                 id_remetente: jogadores[remetenteIndex].id,
                 nome_remetente: data.nome_remetente
@@ -260,6 +260,74 @@ app.post('/convites', (req: Request, res: Response) => {
 
         convites.push(novoConvite);
         res.status(201).json(novoConvite);
+    } catch (error) {
+        res.status(400).json({message: "Dados inválidos", erros: error});
+    }
+});
+
+// [POST] /convites/:id/aceitar - Aceitar convite para partida (com verificação)
+app.post('/convites/:id/aceitar', (req: Request, res: Response) => {
+    const idParam = req.params.id ?? '';
+    const idConvite = parseInt(idParam, 10);
+
+    if (isNaN(idConvite)) {
+        return res.status(400).json({message: "ID inválido. Por favor digite um ID válido"});
+    };
+
+    try {
+        const convite = convites.find(conv => conv.id === idConvite);
+
+        if (!convite) {
+            return res.status(404).json({ message: "Convite não encontrado." });
+        }
+
+        const partidaDoConvite = partidas.find(part => part.id === convite.id_partida);
+
+        if (!partidaDoConvite) {
+            return res.status(404).json({ message: "A partida associada a este convite não foi encontrada." });
+        }
+
+        if (convite.status !== "pendente") {
+            return res.status(400).json({ message: "Este convite não está mais pendente." });
+        }
+
+        convite.status = "aceita";
+        
+        const novoParticipante = {
+            id_jogador: convite.destinatario.id_destinatario,
+            nome_jogador: convite.destinatario.nome_destinatario
+        }
+
+        partidaDoConvite.participantes.push(novoParticipante);
+        res.status(200).json({ message: `Jogador ${convite.destinatario.nome_destinatario} aceito na partida!` });
+    } catch (error) {
+        res.status(400).json({message: "Dados inválidos", erros: error});
+    }
+});
+
+// [POST] /convites/:id/rejeitar - Rejeitar convite para partida (com verificação)
+app.post('/convites/:id/rejeitar', (req: Request, res: Response) => {
+    const idParam = req.params.id ?? '';
+    const idConvite = parseInt(idParam, 10);
+
+    if (isNaN(idConvite)) {
+        return res.status(400).json({message: "ID inválido. Por favor digite um ID válido"});
+    }
+
+    try {
+        const convite = convites.find(conv => conv.id === idConvite);
+
+        if (!convite) {
+            return res.status(404).json({ message: "Convite não encontrada." });
+        }
+
+        if (convite.status !== "pendente") {
+            return res.status(400).json({ message: "Este convite não está mais pendente." });
+        }
+
+        convite.status = "rejeitada";
+
+        res.status(200).json({ message: `Convite foi rejeitado.`});
     } catch (error) {
         res.status(400).json({message: "Dados inválidos", erros: error});
     }
@@ -527,7 +595,6 @@ app.post('/inscricoes/:id/aceitar', (req: Request, res: Response) => {
     try {
         let partidaDaInscricao: Partida | undefined;
         let inscricao: Inscricao | undefined;
-        let partidaIndex = -1;
 
         for (let i = 0; i < partidas.length; i++) {
             const partidaEncontrada = partidas[i];
@@ -535,7 +602,6 @@ app.post('/inscricoes/:id/aceitar', (req: Request, res: Response) => {
             if (inscricaoEncontrada) {
                 partidaDaInscricao = partidaEncontrada;
                 inscricao = inscricaoEncontrada;
-                partidaIndex = i;
                 break;
             }
         }
