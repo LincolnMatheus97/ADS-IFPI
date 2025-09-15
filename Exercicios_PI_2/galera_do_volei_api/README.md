@@ -1,25 +1,67 @@
----
-title: Galera do vôlei 2.0
-language_tabs:
-  - shell: Shell
-  - http: HTTP
-  - javascript: JavaScript
-  - ruby: Ruby
-  - python: Python
-  - php: PHP
-  - java: Java
-  - go: Go
-toc_footers: []
-includes: []
-search: true
-code_clipboard: true
-highlight_theme: darkula
-headingLevel: 2
-generator: "@tarslib/widdershins v4.0.30"
+# Galera do vôlei 1.0
 
+## Visão Geral e Jornada do Usuário
+
+Este documento apresenta o design de uma API para a atividade acadêmica "Galera do Vôlei". O principal objetivo é a construção e visualização de uma API que vai além das operações básicas de um CRUD (Create, Read, Update, Delete). pensando em "romper a barreira dos CRUDs ordinários", o design foca na modelagem de processos e transações que representam o fluxo real de interações dos usuários. Para guiar o desenvolvimento, essas interações foram mapeadas em duas jornadas principais: a do **Organizador** e a do **Jogador**.
+
+### Jornada do Organizador (Moderador)
+
+O Organizador é responsável por criar e gerenciar os eventos.
+
+1.  **Cria uma nova partida.**
+    * `POST /partidas`
+
+2.  **Divulga a partida, convidando jogadores ou abrindo para inscrições.**
+    * `POST /convites` (para convidar jogadores específicos)
+    * `POST /partidas/{id}/inscricoes` (para que qualquer jogador possa se inscrever)
+
+3.  **Gerencia os pedidos de participação.**
+    * `GET /partidas/{id}/inscricoes` (para listar as solicitações)
+    * `POST /inscricoes/{id}/aceitar` (para aprovar uma solicitação)
+    * `POST /inscricoes/{id}/rejeitar` (para negar uma solicitação)
+
+4.  **Fecha as inscrições e confirma a partida.**
+    * `PATCH /partidas/{id}` (alterando a `situacao` para "Fechada")
+
+5.  **No dia do jogo, registra a presença (check-in) dos participantes.**
+    * *Não implementado*
+
+6.  **Após a partida, avalia os jogadores que compareceram.**
+    * *Não implementado*
+
+7.  **Recebe avaliações sobre sua organização.**
+    * *Não implementado*.
+
+### Jornada do Jogador (Participante)
+
+O Jogador é quem busca e participa das partidas.
+
+1.  **Procura por partidas abertas.**
+    * `GET /partidas`
+
+2.  **Encontra uma interessante e solicita a participação (se candidata) ou aceita um convite.**
+    * `POST /partidas/{id}/inscricoes` (para se candidatar)
+    * `POST /convites/{id}/aceitar` (para aceitar um convite recebido)
+
+3.  **Recebe a confirmação de que foi aceito.**
+    * O status da sua inscrição ou convite é alterado para "aceita".
+
+4.  **Realiza o pagamento (se houver taxa).**
+    * *Não implementado*
+
+5.  **Caso não possa ir, informa a desistência.**
+    * *Não implementado*
+
+6.  **No dia, vai ao jogo e confirma sua presença (check-in).**
+    * *Não implementado*
+
+7.  **Após a partida, avalia a partida e o organizador.**
+    * `POST /partidas/{id}/avaliacoes`
+8.  **Recebe feedback sobre sua participação.**
+    * *Não implementado*.
 ---
 
-# Galera do vôlei 2.0
+# Galera do vôlei 1.0
 
 Base URLs: http://localhost:3333
 
