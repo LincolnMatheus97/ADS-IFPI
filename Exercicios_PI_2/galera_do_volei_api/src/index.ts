@@ -32,7 +32,7 @@ type Convite = {
 };
 
 type Inscricao = {
-    id: number;
+    id_inscricao: number;
     id_jogador: number;
     nome_jogador: string;
     status: string;
@@ -82,7 +82,7 @@ let partidas: Partida[] = [
         situacao: "Aberta", 
         moderador: {id_moderador: 1, nome_moderador: "Thalisson"}, 
         participantes: [], 
-        inscricoes: [{ id: 1, id_jogador: 3, nome_jogador: "Marcos", status: "pendente", data: new Date }],
+        inscricoes: [{ id_inscricao: 1, id_jogador: 3, nome_jogador: "Marcos", status: "pendente", data: new Date }],
         avaliacoes: []
     }
 ];
@@ -501,7 +501,7 @@ app.post('/partidas/:id/inscricoes', (req: Request, res: Response) => {
         }
 
         const novaInscricao = {
-            id: partida.inscricoes.length + 1,
+            id_inscricao: partida.inscricoes.length + 1,
             id_jogador: jogadores[jogadorIndex].id,
             nome_jogador: data.nome_jogador,
             status: "pendente",
@@ -531,7 +531,7 @@ app.post('/inscricoes/:id/aceitar', (req: Request, res: Response) => {
 
         for (let i = 0; i < partidas.length; i++) {
             const partidaEncontrada = partidas[i];
-            const inscricaoEncontrada = partidaEncontrada?.inscricoes.find(ins => ins.id === idInscricao);
+            const inscricaoEncontrada = partidaEncontrada?.inscricoes.find(ins => ins.id_inscricao === idInscricao);
             if (inscricaoEncontrada) {
                 partidaDaInscricao = partidaEncontrada;
                 inscricao = inscricaoEncontrada;
@@ -555,7 +555,7 @@ app.post('/inscricoes/:id/aceitar', (req: Request, res: Response) => {
             nome_jogador: inscricao.nome_jogador
         }
 
-        partidas[partidaIndex]?.participantes.push(novoParticipante);
+        partidaDaInscricao.participantes.push(novoParticipante);
         res.status(200).json({ message: `Jogador ${inscricao.nome_jogador} aceito na partida!` });
     } catch (error) {
         res.status(400).json({message: "Dados inválidos", erros: error});
@@ -576,7 +576,7 @@ app.post('/inscricoes/:id/rejeitar', (req: Request, res: Response) => {
 
         for (let i = 0; i < partidas.length; i++) {
             const partidaProcurada = partidas[i];
-            const inscricaoEncontrada = partidaProcurada?.inscricoes.find(ins => ins.id === idInscricao);
+            const inscricaoEncontrada = partidaProcurada?.inscricoes.find(ins => ins.id_inscricao === idInscricao);
             if (inscricaoEncontrada) {
                 inscricao = inscricaoEncontrada;
                 break;
