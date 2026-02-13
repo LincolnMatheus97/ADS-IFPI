@@ -160,3 +160,64 @@ SELECT A.descricao, COUNT(L.codigo) AS qnt_livros FROM livro L INNER JOIN
 assunto A ON L.assunto_codigo = A.codigo WHERE L.dt_lancamento IS NOT NULL GROUP BY A.descricao;
 -- Nome e passaporte dos autores que possuem a palavra ‘João’ no nome
 SELECT nome, passaporte FROM autor WHERE nome LIKE "%João%";
+-- Nome e passaporte dos autores que nasceram após 1° de janeiro de 1970
+SELECT nome, passaporte FROM autor WHERE dt_nascimento > '1970-01-01';
+-- Nome e passaporte dos autores que não são brasileiros
+SELECT nome, passaporte FROM autor WHERE passaporte NOT LIKE "BRA%";
+-- Quantidade de autores
+SELECT COUNT(autor_codigo) AS qnt_autores FROM autor_livro;
+-- Livros que possuem ao menos 2 autores
+SELECT L.titulo, COUNT(AL.autor_codigo) AS mais_de_um_autor FROM autor_livro AL INNER JOIN
+livro L ON AL.livro_codigo = L.codigo GROUP BY L.titulo HAVING COUNT(AL.autor_codigo) >= 2;
+-- Preço médio dos livros por editora
+SELECT E.nome, AVG(L.preco) AS preco_medio FROM livro L INNER JOIN
+editora E ON L.editora_codigo = E.codigo GROUP BY E.nome;
+-- Preço máximo, preço mínimo e preço médio dos livros cujos códigos do assunto são 1, 2 ou 3, para cada editora
+SELECT E.nome, MAX(L.preco) AS preco_max, 
+MIN(L.preco) AS preco_min, 
+AVG(L.preco) AS preco_medio 
+FROM livro L INNER JOIN editora E
+ON L.editora_codigo = E.codigo WHERE L.assunto_codigo IN (1, 2, 3)
+GROUP BY E.nome;
+-- Quantidade de autores para cada nacionalidade
+SELECT N.pais, COUNT(A.nacionalidade_codigo) AS qnt_por_nacionalidade FROM autor A INNER JOIN
+nacionalidade N ON A.nacionalidade_codigo = N.codigo GROUP BY N.pais;
+-- Quantidade de autores que nasceram antes de 1°de janeiro de 1920, para cada nacionalidade
+SELECT N.pais, COUNT(A.nacionalidade_codigo) AS qnt_por_nacionalidade FROM autor A INNER JOIN
+nacionalidade N ON A.nacionalidade_codigo = N.codigo WHERE A.dt_nascimento < '1920-01-01' GROUP BY N.pais;
+-- A data de nascimento do autor mais velho
+SELECT nome, MIN(dt_nascimento) AS data_do_mais_velho FROM autor WHERE dt_nascimento IN 
+(SELECT MIN(dt_nascimento) FROM autor) GROUP BY nome;
+SELECT MIN(dt_nascimento) FROM autor;
+-- A data de nascimento do autor mais novo
+SELECT nome, MAX(dt_nascimento) AS data_do_mais_velho FROM autor WHERE dt_nascimento IN 
+(SELECT MAX(dt_nascimento) FROM autor) GROUP BY nome;
+SELECT MAX(dt_nascimento) FROM autor;
+-- Os novos preços dos livros se os valores fossem reajustados em 10%
+UPDATE livro SET preco = preco * 1.1;
+-- O dia da publicação do livro de código 1
+SELECT DAY(dt_lancamento) FROM livro WHERE codigo = 1;
+-- O mês e o ano da publicação dos livros cujo assunto tem código 1
+SELECT MONTH(dt_lancamento) AS mes, YEAR(dt_lancamento) AS ano FROM livro WHERE assunto_codigo = 1;
+-- Quantidade de autores distintos que estão associados a livros na tabela AUTOR_LIVRO
+SELECT COUNT(DISTINCT autor_codigo) FROM autor_livro;
+-- Título, assunto e preço, ordenado em ordem crescente por assunto e decrescente por preço
+SELECT L.titulo, A.descricao AS assunto, L.preco FROM livro L INNER JOIN assunto A
+ON L.assunto_codigo = A.codigo ORDER BY A.descricao ASC, L.preco DESC;
+-- Editoras ordenadas alfabeticamente. A coluna de nomes deve ter a palavra ‘Editora’ como título
+SELECT nome AS Editora FROM editora ORDER BY nome ASC;
+-- Preços e os títulos dos livros, em ordem decrescente de preço
+SELECT titulo, preco FROM livro ORDER BY preco DESC;
+-- Editoras que já publicaram livros, sem repetições
+SELECT E.nome as editoras FROM livro L INNER JOIN editora E
+ON L.editora_codigo = E.codigo GROUP BY E.nome;
+-- Autores brasileiros com mês e ano de nascimento, por ordem decrescente de idade e por ordem crescente de nome do autor
+SELECT nome, MONTH(dt_nascimento) AS mes_nascimento, YEAR(dt_nascimento) AS ano_nascimento 
+FROM autor WHERE passaporte LIKE "BRA%" 
+ORDER BY dt_nascimento ASC, nome ASC; 
+-- Editora (nome da editora), assunto (código do assunto) e quantidade (livros publicados pela editora para cada assunto) em ordem decrescente de quantidade
+SELECT E.nome AS editora,
+L.assunto_codigo AS assunto,
+COUNT(L.editora_codigo) AS quantidade
+FROM livro L INNER JOIN editora E
+ON L.editora_codigo = E.codigo GROUP BY E.nome, L.assunto_codigo ORDER BY quantidade DESC;
