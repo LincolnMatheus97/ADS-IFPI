@@ -221,3 +221,18 @@ L.assunto_codigo AS assunto,
 COUNT(L.editora_codigo) AS quantidade
 FROM livro L INNER JOIN editora E
 ON L.editora_codigo = E.codigo GROUP BY E.nome, L.assunto_codigo ORDER BY quantidade DESC;
+-- Títulos cujo título tenha comprimento superior a 15 caracteres
+SELECT titulo FROM livro WHERE LENGTH(titulo) > 15;
+-- Títulos dos livros já lançados e a descrição dos seus assuntos
+SELECT L.titulo AS titulo, A.descricao AS descricao
+FROM livro L INNER JOIN assunto A
+ON L.assunto_codigo = A.codigo WHERE dt_lancamento IS NOT NULL
+GROUP BY L.titulo, A.descricao;
+-- Título do livro, nome da editora que o publicou e a descrição do assunto
+SELECT L.titulo AS titulo, E.nome AS editora, A.descricao AS descricao
+FROM livro L INNER JOIN editora E INNER JOIN assunto A ON L.editora_codigo = E.codigo AND L.assunto_codigo = A.codigo
+GROUP BY L.titulo, E.nome, A.descricao;
+-- Editoras e títulos dos livros lançados pela editora, ordenada por nome da editora e pelo título do livro
+SELECT E.nome AS editora, L.titulo AS titulo
+FROM livro L INNER JOIN editora E ON l.editora_codigo = E.codigo
+GROUP BY E.nome, L.titulo ORDER BY E.nome ASC;
