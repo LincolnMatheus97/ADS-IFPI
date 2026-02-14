@@ -234,5 +234,23 @@ FROM livro L INNER JOIN editora E INNER JOIN assunto A ON L.editora_codigo = E.c
 GROUP BY L.titulo, E.nome, A.descricao;
 -- Editoras e títulos dos livros lançados pela editora, ordenada por nome da editora e pelo título do livro
 SELECT E.nome AS editora, L.titulo AS titulo
-FROM livro L INNER JOIN editora E ON l.editora_codigo = E.codigo
-GROUP BY E.nome, L.titulo ORDER BY E.nome ASC;
+FROM livro L INNER JOIN editora E ON L.editora_codigo = E.codigo
+ORDER BY E.nome ASC, L.titulo ASC;
+-- Editoras cadastradas e para aquelas que possuem livros publicados, relacionar também o título do livro, em ordem de nome da editora e pelo título do livro.
+SELECT E.nome AS editora, L.titulo AS titulo
+FROM editora E LEFT JOIN livro L ON E.codigo = L.editora_codigo
+ORDER BY E.nome ASC, L.titulo ASC;
+-- Assuntos, contendo os títulos dos livros dos respectivos assuntos, ordenada pela descrição do assunto
+SELECT A.descricao AS assunto, L.titulo AS titulo
+FROM livro L INNER JOIN assunto A ON L.assunto_codigo = A.codigo
+ORDER BY A.descricao ASC;
+-- Títulos e editoras, relacionando a obra com a editora que a publica, quando for o caso
+SELECT L.titulo AS titulo, E.nome AS editora
+FROM livro L LEFT JOIN editora E ON L.editora_codigo = E.codigo;
+-- Descrição de todos os assuntos e os títulos dos livros de cada um. Quando não existir um livro associado ao assunto, escrever o texto ‘Sem publicações’
+SELECT A.descricao AS descricao, IFNULL(L.titulo, 'Sem publicações') AS titulo
+FROM assunto A LEFT JOIN livro L ON A.codigo = L.assunto_codigo;
+-- Nomes dos autores e os livros de sua autoria, ordenada pelo nome do autor
+SELECT A.nome AS autor, L.titulo AS autoria
+FROM autor_livro AL INNER JOIN autor A INNER JOIN livro L ON AL.autor_codigo = A.codigo AND AL.livro_codigo = L.codigo
+ORDER BY A.nome ASC;
