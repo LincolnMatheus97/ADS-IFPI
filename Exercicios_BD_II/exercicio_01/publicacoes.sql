@@ -174,7 +174,7 @@ SELECT nome, passaporte FROM autor WHERE passaporte NOT LIKE "BRA%";
 -- 28. Quantidade de autores
 SELECT COUNT(codigo) AS qnt_autores FROM autor;
 -- 29. Quantidade média de autores dos livros
-SELECT AVG(autor_codigo) AS qnt_media_autores FROM autor_livro;
+SELECT (COUNT(autor_codigo) / COUNT(DISTINCT livro_codigo)) AS qnt_media_autores FROM autor_livro;
 -- 30. Livros que possuem ao menos 2 autores
 SELECT L.titulo, COUNT(AL.autor_codigo) AS mais_de_um_autor 
 FROM autor_livro AL INNER JOIN livro L ON AL.livro_codigo = L.codigo 
