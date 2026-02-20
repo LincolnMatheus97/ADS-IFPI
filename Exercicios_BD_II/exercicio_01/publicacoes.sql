@@ -21,7 +21,7 @@ CREATE TABLE autor (
 	codigo INT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     passaporte VARCHAR(30) NOT NULL UNIQUE,
-    dt_nascimento DATE,
+    dataNascimento DATE,
     nacionalidade_codigo INT,
     FOREIGN KEY (nacionalidade_codigo) REFERENCES nacionalidade(codigo)
 );
@@ -31,7 +31,7 @@ CREATE TABLE livro (
     isbn VARCHAR(13) NOT NULL UNIQUE,
     titulo VARCHAR(50) NOT NULL,
     preco DECIMAL(10,2) NOT NULL,
-    dt_lancamento DATE,
+    dataLancamento DATE,
     assunto_codigo INT NOT NULL,
     editora_codigo INT NOT NULL,
     FOREIGN KEY (assunto_codigo) REFERENCES assunto(codigo),
@@ -67,7 +67,7 @@ INSERT INTO EDITORA (codigo, CNPJ, nome) VALUES
 (4, '44444444000144', 'O Reilly Media'),
 (5, '55555555000155', 'Editora Vazia'); 
 
-INSERT INTO AUTOR (codigo, nome, passaporte, dt_nascimento, nacionalidade_codigo) VALUES 
+INSERT INTO AUTOR (codigo, nome, passaporte, dataNascimento, nacionalidade_codigo) VALUES 
 (1, 'Machado de Assis', 'BRA001', '1839-06-21', 1),
 (2, 'João da Silva', 'BRA002', '1985-10-15', 1),
 (3, 'Luis de Camões', 'POR001', '1940-01-01', 2),
@@ -77,7 +77,7 @@ INSERT INTO AUTOR (codigo, nome, passaporte, dt_nascimento, nacionalidade_codigo
 (7, 'Martin Fowler', 'ENG002', '1963-12-18', 4),
 (8, 'João Pires', 'BRA003', '1990-05-20', 1); 
 
-INSERT INTO LIVRO (codigo, ISBN, titulo, preco, dt_lancamento, assunto_codigo, editora_codigo) VALUES 
+INSERT INTO LIVRO (codigo, ISBN, titulo, preco, dataLancamento, assunto_codigo, editora_codigo) VALUES 
 (1, 'ISBN01', 'Banco de Dados Moderno', 120.00, '2020-05-10', 1, 1),
 (2, 'ISBN02', 'Estruturas de Dados em C', 45.00, '2021-02-20', 2, 2),
 (3, 'ISBN03', 'Sistemas Operacionais', 180.00, '2019-03-15', 4, 3),
@@ -113,9 +113,9 @@ SELECT * FROM livro WHERE titulo LIKE "%Dados";
 -- 6. Livros cujos títulos possuem a expressão ‘Banco de Dados’ ou ‘Bancos de Dados’
 SELECT * FROM livro WHERE titulo LIKE "%Banco de Dados%" OR titulo LIKE "%Bancos de Dados%";
 -- 7. Livros que foram lançados há mais de 5 anos
-SELECT titulo FROM livro WHERE dt_lancamento <= DATE_SUB(CURDATE(), INTERVAL 5 YEAR);
+SELECT titulo FROM livro WHERE dataLancamento <= DATE_SUB(CURDATE(), INTERVAL 5 YEAR);
 -- 8. Livros que ainda não foram lançados, ou seja, com a data de lançamento nula
-SELECT * FROM livro WHERE dt_lancamento IS NULL;
+SELECT * FROM livro WHERE dataLancamento IS NULL;
 -- 9. Livros cujo assunto seja ‘Estruturas de Dados’
 SELECT * FROM livro WHERE assunto_codigo IN 
 	(SELECT codigo FROM assunto WHERE descricao LIKE "%Estruturas de Dados%");
@@ -124,7 +124,7 @@ SELECT * FROM livro WHERE assunto_codigo IN (1, 2, 3);
 -- 11. Quantidade de livros
 SELECT COUNT(codigo) FROM livro;
 -- 12. Quantidade de livros que ainda não foram lançados, ou seja, com a data de lançamento nula
-SELECT COUNT(codigo) FROM livro WHERE dt_lancamento IS NULL;
+SELECT COUNT(codigo) FROM livro WHERE dataLancamento IS NULL;
 -- 13. Soma dos preços dos livros
 SELECT SUM(preco) FROM livro;
 -- 14. Média de preços dos livros
@@ -144,11 +144,11 @@ GROUP BY A.descricao;
 -- 19. O preço do livro mais caro de cada assunto, dentre aqueles que já foram lançados
 SELECT A.descricao, MAX(L.preco) AS mais_caro 
 FROM livro L INNER JOIN assunto A ON L.assunto_codigo = A.codigo 
-WHERE L.dt_lancamento IS NOT NULL GROUP BY A.descricao;
+WHERE L.dataLancamento IS NOT NULL GROUP BY A.descricao;
 -- 20. Quantidade de livros lançados por editora
 SELECT E.nome, COUNT(L.codigo) AS qnt_livros 
 FROM livro L INNER JOIN editora E ON L.editora_codigo = E.codigo 
-WHERE L.dt_lancamento IS NOT NULL GROUP BY E.nome;
+WHERE L.dataLancamento IS NOT NULL GROUP BY E.nome;
 -- 21. Assuntos cujo preço médio dos livros ultrapassa R$ 50,00
 SELECT A.descricao 
 FROM livro L INNER JOIN assunto A ON L.assunto_codigo = A.codigo 
@@ -160,15 +160,15 @@ GROUP BY A.descricao HAVING COUNT(L.codigo) >= 2;
 -- 23. Assuntos que possuem pelo menos 2 livros já lançados
 SELECT A.descricao 
 FROM livro L INNER JOIN assunto A ON L.assunto_codigo = A.codigo
-WHERE L.dt_lancamento IS NOT NULL GROUP BY A.descricao HAVING COUNT(L.codigo) >= 2;
+WHERE L.dataLancamento IS NOT NULL GROUP BY A.descricao HAVING COUNT(L.codigo) >= 2;
 -- 24. Quantidade de livros lançados por assunto
 SELECT A.descricao, COUNT(L.codigo) AS qnt_livros 
 FROM livro L INNER JOIN assunto A ON L.assunto_codigo = A.codigo 
-WHERE L.dt_lancamento IS NOT NULL GROUP BY A.descricao;
+WHERE L.dataLancamento IS NOT NULL GROUP BY A.descricao;
 -- 25. Nome e passaporte dos autores que possuem a palavra ‘João’ no nome
 SELECT nome, passaporte FROM autor WHERE nome LIKE "%João%";
 -- 26. Nome e passaporte dos autores que nasceram após 1° de janeiro de 1970
-SELECT nome, passaporte FROM autor WHERE dt_nascimento > '1970-01-01';
+SELECT nome, passaporte FROM autor WHERE dataNascimento > '1970-01-01';
 -- 27. Nome e passaporte dos autores que não são brasileiros
 SELECT nome, passaporte FROM autor WHERE passaporte NOT LIKE "BRA%";
 -- 28. Quantidade de autores
@@ -194,17 +194,17 @@ GROUP BY N.pais;
 -- 34. Quantidade de autores que nasceram antes de 1°de janeiro de 1920, para cada nacionalidade
 SELECT N.pais, COUNT(A.nacionalidade_codigo) AS qnt_por_nacionalidade 
 FROM autor A INNER JOIN nacionalidade N ON A.nacionalidade_codigo = N.codigo 
-WHERE A.dt_nascimento < '1920-01-01' GROUP BY N.pais;
+WHERE A.dataNascimento < '1920-01-01' GROUP BY N.pais;
 -- 35. A data de nascimento do autor mais velho
-SELECT MIN(dt_nascimento) AS dt_mais_velho FROM autor;
+SELECT MIN(dataNascimento) AS dt_mais_velho FROM autor;
 -- 36. A data de nascimento do autor mais novo
-SELECT MAX(dt_nascimento) AS dt_mais_novo FROM autor;
+SELECT MAX(dataNascimento) AS dt_mais_novo FROM autor;
 -- 37. Os novos preços dos livros se os valores fossem reajustados em 10%
 SELECT (preco * 1.1) AS precos_reajustados FROM livro;
 -- 38. O dia da publicação do livro de código 1
-SELECT DAY(dt_lancamento) FROM livro WHERE codigo = 1;
+SELECT DAY(dataLancamento) FROM livro WHERE codigo = 1;
 -- 39. O mês e o ano da publicação dos livros cujo assunto tem código 1
-SELECT MONTH(dt_lancamento) AS mes, YEAR(dt_lancamento) AS ano FROM livro WHERE assunto_codigo = 1;
+SELECT MONTH(dataLancamento) AS mes, YEAR(dataLancamento) AS ano FROM livro WHERE assunto_codigo = 1;
 -- 40. Quantidade de autores distintos que estão associados a livros na tabela AUTOR_LIVRO
 SELECT COUNT(DISTINCT autor_codigo) FROM autor_livro;
 -- 41. Título, assunto e preço, ordenado em ordem crescente por assunto e decrescente por preço
@@ -219,9 +219,9 @@ SELECT titulo, preco FROM livro ORDER BY preco DESC;
 SELECT E.nome as editoras FROM livro L INNER JOIN editora E
 ON L.editora_codigo = E.codigo GROUP BY E.nome;
 -- 45. Autores brasileiros com mês e ano de nascimento, por ordem decrescente de idade e por ordem crescente de nome do autor
-SELECT nome, MONTH(dt_nascimento) AS mes_nascimento, YEAR(dt_nascimento) AS ano_nascimento 
+SELECT nome, MONTH(dataNascimento) AS mes_nascimento, YEAR(dataNascimento) AS ano_nascimento 
 FROM autor WHERE passaporte LIKE "BRA%" 
-ORDER BY dt_nascimento ASC, nome ASC; 
+ORDER BY dataNascimento ASC, nome ASC; 
 -- 46. Editora (nome da editora), assunto (código do assunto) e quantidade (livros publicados pela editora para cada assunto) em ordem decrescente de quantidade
 SELECT E.nome AS editora, L.assunto_codigo AS assunto, COUNT(L.editora_codigo) AS quantidade
 FROM livro L INNER JOIN editora E ON L.editora_codigo = E.codigo 
@@ -231,7 +231,7 @@ SELECT titulo FROM livro WHERE LENGTH(titulo) > 15;
 -- 48. Títulos dos livros já lançados e a descrição dos seus assuntos
 SELECT L.titulo AS titulo, A.descricao AS descricao
 FROM livro L INNER JOIN assunto A ON L.assunto_codigo = A.codigo 
-WHERE dt_lancamento IS NOT NULL GROUP BY L.titulo, A.descricao;
+WHERE dataLancamento IS NOT NULL GROUP BY L.titulo, A.descricao;
 -- 49. Título do livro, nome da editora que o publicou e a descrição do assunto
 SELECT L.titulo AS titulo, E.nome AS editora, A.descricao AS descricao
 FROM livro L 
@@ -273,7 +273,7 @@ WHERE A.nome LIKE "%Machado de Assis%";
 SELECT COUNT(DISTINCT L.codigo) AS qnt_livros
 FROM autor A INNER JOIN autor_livro AL ON A.codigo = AL.autor_codigo
 INNER JOIN livro L ON L.codigo = AL.livro_codigo
-WHERE A.nome LIKE "%Luis%" AND L.dt_lancamento IS NOT NULL;
+WHERE A.nome LIKE "%Luis%" AND L.dataLancamento IS NOT NULL;
 -- 58. O preço do livro mais caro publicado pela editora ‘Books Editora’ sobre banco de dados
 SELECT MAX(L.preco) AS mais_caro
 FROM livro L INNER JOIN editora E ON L.editora_codigo = E.codigo
@@ -291,7 +291,7 @@ WHERE L.preco < 50.0;
 SELECT A.nome AS nome_autor, A.passaporte AS passaporte, L.titulo AS livro
 FROM autor A INNER JOIN autor_livro AL ON AL.autor_codigo = A.codigo
 INNER JOIN livro L ON AL.livro_codigo = L.codigo
-WHERE A.passaporte LIKE "BRA%" AND A.dt_nascimento < "1950-01-01" ORDER BY A.nome ASC, L.titulo ASC;
+WHERE A.passaporte LIKE "BRA%" AND A.dataNascimento < "1950-01-01" ORDER BY A.nome ASC, L.titulo ASC;
 -- 62. Nome e passaporte do autor e o preço máximo dos livros de sua autoria
 SELECT A.nome AS nome_autor, A.passaporte AS passaporte, MAX(L.preco) AS livro
 FROM autor A INNER JOIN autor_livro AL ON AL.autor_codigo = A.codigo
@@ -309,7 +309,7 @@ GROUP BY A.descricao HAVING COUNT(L.codigo) >= 10;
 -- 65. Nomes das editoras que possuem livros lançados
 SELECT E.nome AS editoras
 FROM livro L INNER JOIN editora E ON L.editora_codigo = E.codigo
-WHERE L.dt_lancamento IS NOT NULL GROUP BY E.nome;
+WHERE L.dataLancamento IS NOT NULL GROUP BY E.nome;
 -- 66. Assuntos não foram lançados livros
 SELECT A.descricao AS assunto
 FROM livro L RIGHT JOIN assunto A ON L.assunto_codigo = A.codigo
@@ -317,7 +317,7 @@ WHERE L.codigo IS NULL;
 -- 67. Descrição dos assuntos e quantidade de livros lançados de cada um
 SELECT A.descricao AS descricao, COUNT(L.assunto_codigo) AS qnt_lancados
 FROM livro L INNER JOIN assunto A ON L.assunto_codigo = A.codigo
-WHERE L.dt_lancamento IS NOT NULL GROUP BY A.descricao, L.assunto_codigo;
+WHERE L.dataLancamento IS NOT NULL GROUP BY A.descricao, L.assunto_codigo;
 -- 68. Nome das editoras e o preço médio dos livros de cada uma
 SELECT E.nome AS editoras, AVG(L.preco) AS preco_medio
 FROM livro L INNER JOIN editora E ON L.editora_codigo = E.codigo
@@ -325,7 +325,7 @@ GROUP BY E.nome;
 -- 69. Nome das editoras e os livros das editoras que lançaram ao menos 2 livros, ordenados pelo nome da editora e pelo título da publicação
 SELECT E.nome AS editoras, L.titulo AS livros
 FROM livro L INNER JOIN editora E ON L.editora_codigo = E.codigo
-WHERE L.dt_lancamento IS NOT NULL GROUP BY E.nome, L.titulo 
+WHERE L.dataLancamento IS NOT NULL GROUP BY E.nome, L.titulo 
 HAVING COUNT(L.codigo) >= 2 ORDER BY E.nome ASC;
 -- 70. Títulos dos livros dos assuntos cujo preço médio do livro é superior a R$ 40,00, juntamente com os respectivos assuntos
 SELECT L.titulo AS titulo, A.descricao AS assunto
