@@ -1,0 +1,1 @@
+n = input(); s = float(input()); t = float(input()); qp = (t * 0.15) / 1; print(f"TOTAL = R${(s + qp):.2f}")
