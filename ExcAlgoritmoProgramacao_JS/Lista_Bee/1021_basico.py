@@ -1,0 +1,33 @@
+import math
+
+d = float(input())
+c = int(d * 100)
+
+n100 = math.floor(c / 10000)
+n50 = math.floor((c % 10000) / 5000)
+n20 = math.floor(((c % 10000) % 5000) / 2000)
+n10 = math.floor(((c % 5000) % 2000) / 1000)
+n5 = math.floor(((c % 2000) % 1000) / 500)
+n2 = math.floor(((c % 1000) % 500) / 200)
+
+m1 = math.floor(((c % 500) % 200) / 100)
+m50 = math.floor(((c % 200) % 100) / 50)
+m25 = math.floor(((c % 100) % 50) / 25)
+m10 = math.floor(((c % 50) % 25) / 10)
+m5 = math.floor(((c % 25) % 10) / 5)
+m01 = math.floor(((c % 10) % 5) / 1)
+
+print("NOTAS:")
+print(f"{n100} nota(s) de R$ 100.00")
+print(f"{n50} nota(s) de R$ 50.00")
+print(f"{n20} nota(s) de R$ 20.00")
+print(f"{n10} nota(s) de R$ 10.00")
+print(f"{n5} nota(s) de R$ 5.00")
+print(f"{n2} nota(s) de R$ 2.00")
+print("MOEDAS:")
+print(f"{m1} moeda(s) de R$ 1.00")
+print(f"{m50} moeda(s) de R$ 0.50")
+print(f"{m25} moeda(s) de R$ 0.25")
+print(f"{m10} moeda(s) de R$ 0.10")
+print(f"{m5} moeda(s) de R$ 0.05")
+print(f"{m01} moeda(s) de R$ 0.01")
